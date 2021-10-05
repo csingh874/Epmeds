@@ -1,0 +1,213 @@
+{% extends "provider/base_provider.html" %}
+{% block content %}
+{% load static %}
+{% load widget_tweaks %}
+<style>
+.sendButton {
+    position: absolute;
+    margin: 12px;
+}
+
+.textBoxComment {
+    float: left;
+}
+
+.messageHistory {
+    border: 1px solid black;
+    height: 500px;
+    overflow-y: scroll;
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.containers {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.darker {
+    border-color: #12dc47;
+    background-color: #12dc47;
+}
+
+.container::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.containers img {
+    float: left;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+
+.containers img.right {
+    float: right;
+    margin-left: 20px;
+    margin-right: 0;
+}
+
+.time-right {
+    float: right;
+    /* color: #aaa; */
+}
+
+/* .time-left {
+    /* float: left;
+color: #999;
+}*/
+.rightMessage {
+    float: right
+}
+
+.ui-autocomplete {
+    max-height: 200px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+    /* add padding to account for vertical scrollbar */
+    padding-right: 20px;
+}
+</style>
+<link rel="stylesheet" href="laravel/public/css/jquery-ui.css">
+<div class="fix-section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="main_sec">
+                    <div style=" padding: 20px;background-color: #fff;">
+                        <div class="form-box registration-form mt-40">
+                            <p class="form-head"><img src="{% static 'provider/images/registration.png' %}"/> <strong>Communication
+                                    Log</strong>
+                            </p>
+<!--                            <a href="communicationlogmember.php?member_id=<?=$memid?>">Back to chat history</a>-->
+
+
+                            <div class="messageHistory">
+                                {% for msg in messages %}
+                                {% if msg.sent_by == 'dr' %}
+                                <div class="containers darker">
+                                    <span class="time-left">{{msg.messages}}</span>
+                                    <p class="rightMessage">{{msg.create_date}}</p>
+                                </div>
+                                {% else %}
+                                <div class="containers">
+                                    <span class="time-right">{{msg.create_date}}</span>
+                                    <p class="leftMessage">{{msg.messages}}</p>
+                                </div>
+                                {% endif %}
+                                 {% endfor %}
+                            </div>
+
+                            <form method="POST">
+                                {% csrf_token %}
+                                <div class="row" style="margin: 0 auto; max-width: 800px;  padding: 7px 20px;">
+                                    <div class="col-md-12">
+                                        <textarea placeholder="Message" class="form-control textBoxComment" name="msg" required></textarea>
+<!--                                        <input type="hidden" name="senderId" value="<?php echo $senderId; ?>" />-->
+<!--                                        <input type="hidden" name="receiverId" value="<?php echo $reciverId; ?>" />-->
+<!--                                        <input type="hidden" name="email" value="<?php echo $email; ?>" />-->
+<!--                                        <input type=" text" style="display: none; float: left; margin-top: 11px;"-->
+<!--                                            id="automplete-4" class="form-control prescribeText" autocomplete="off"-->
+<!--                                            placeholder="Please type name of drug" />-->
+<!--                                        <img src="images/loading.gif" width="20" alt="Loading Image" id="loadingImage4"-->
+<!--                                            style="display:none;float: inherit;" />-->
+                                        <input type="submit" class="btn btn-primary sendButton" value="Send" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php require "includes/footer.php";?>
+<script src="js/jquery-ui.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+    $("#messageHistory").scrollBottom($(document).height());
+})
+</script>
+<script>
+$(document).ready(function() {
+    $('.messageHistory').scrollTop($('.messageHistory')[0].scrollHeight);
+    //$("#messageHistory").scrollBottom($(document).height());
+    $("#medician_pres").click(function() {
+        //alert($(this).is(":checked"));
+        if ($(this).is(":checked")) {
+            $(".prescribeText").fadeIn();
+            $(".textBoxComment").fadeOut();
+            $(".prescribeText").attr("name", "msg");
+            $(".textBoxComment").removeAttr("name");
+
+        } else {
+            $(".prescribeText").fadeOut();
+            $(".textBoxComment").fadeIn();
+            $(".textBoxComment").attr("name", "msg");
+            $(".prescribeText").removeAttr("name");
+
+        }
+    });
+
+
+    //Preibe Medication Code
+    $("#automplete-4").autocomplete({
+        source: function(request, response) {
+            var datas = [];
+            $("#loadingImage4").fadeIn();
+            $.ajax({
+                async: true,
+                crossDomain: true,
+                type: 'GET',
+                url: 'FDBAPI.php',
+                dataType: 'json',
+                data: {
+                    name: request.term,
+                    functionCall: 'getMedician'
+                },
+                success: function(result) {
+                    var methodresults = result;
+                    console.log(methodresults.Items);
+                    if (methodresults.status != "500") {
+                        $("#loadingImage4").fadeOut();
+                        response($.map(methodresults.Items, function(item) {
+                            return {
+                                label: item.PicklistDesc,
+                                value: item.PicklistID
+                            };
+                            //return { label: item.DrugNameID +" - "+  item.DrugNameDesc , value: item.DrugNameDesc };
+                        }));
+                    } else {
+                        response({
+                            label: "Server Error",
+                            value: "No Data Found"
+                        });
+                    }
+                }
+            });
+        },
+        minLength: 4
+    }).on('autocompleteselect', function(e, ui) {
+        var t = $(this),
+            details = $('#medician_pres_id'),
+            label = (e.type == 'autocompleteresponse' ? ui.content[0].label : ui.item.label),
+            value = (e.type == 'autocompleteresponse' ? ui.content[0].value : ui.item.value);
+        //var name = label.split('-')[0].trim();
+        t.val(label);
+        details.val(value);
+
+        return false;
+    });
+});
+</script>
+{% endblock %}

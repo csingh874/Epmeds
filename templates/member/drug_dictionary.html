@@ -1,0 +1,171 @@
+{% extends "member/base_member.html" %}
+{% block content %}
+{% load static %}
+{% load widget_tweaks %}
+<style>
+    ul {
+        display:flex;
+    }
+    ul li label{
+        margin-left: 10px;
+    }
+</style>
+<section class="form-sec">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+      	<div class="parent_of_form">
+         {% include "member/tab_header.html" %}
+            <form action="" method="post">
+                {% csrf_token %}
+                 <div class="form-box registration form mt-40">
+                    <p class="form-head"><img src="{% static 'provider/images/registration.png' %}"/> <strong>Drug Dictionary</strong></p>
+                     <div class="row mt-20">
+                         <div class="col-md-12">
+                            <div class="row">
+                            <div class="col-md-2 form-group">
+                                <label><strong>Active:</strong> </label>
+                                {% render_field form.active %}
+                <!--              		   <label class="radio-inline"><input type="radio" name="active" value="y" <?php echo (isset($active) && $active=="y") ? "checked":"checked"; ?>>Yes </label>-->
+                <!--                       <label class="radio-inline"><input type="radio" name="active" value="n" <?php echo (isset($active) && $active=="n") ? "checked":""; ?> >No </label>-->
+                              </div>
+                            <div class="col-md-2 form-group">
+                                <label><strong>Obsolete:</strong> </label>
+                                    {% render_field form.obsolete %}
+                <!--              		   <label class="radio-inline"><input type="radio" name="obsolete" value="y" <?php echo (isset($obsolete) && $obsolete=="y") ? "checked":"checked"; ?>>Yes</label>-->
+                <!--  					   <label class="radio-inline"><input type="radio" name="obsolete" value="n" <?php echo (isset($obsolete) && $obsolete=="n") ? "checked":""; ?> >No</label>-->
+                              </div>
+                            <div class="col-md-4 form-group">
+                            <div class="col-md-4"><label class="control-label">Mnemonic</label></div>
+                            <div class="col-md-8">
+                                {% render_field form.mnemonic class='form-control' %}
+                                {% if form.mnemonic.errors %}
+                                    <small class="text-danger">{{form.mnemonic.errors}}</small>
+                                {% endif %}
+<!--                            <input type="text" name="mnemonic" class="form-control" value="<?php echo (isset($mnemonic))?$mnemonic:"" ?>" >-->
+                            </div>
+                            </div>
+                  <div class="col-md-4 form-group">
+                  <div class="col-md-4"><label class="control-label">Usage Type</label></div>
+                  <div class="col-md-8">
+                      {% render_field form.usage_type class='form-control' %}
+<!--                      <select class="form-control" name="usagetype">-->
+<!--                        <option <?php echo (isset($usagetype) && $usagetype=="f")?"selected":"" ?> value="f">Formulary</option>-->
+<!--                        <option <?php echo (isset($usagetype) && $usagetype=="nf")?"selected":"" ?> value="nf">Non-Formulary</option>-->
+<!--                      </select>-->
+                  </div>
+                    </div>
+
+                    <div class="col-md-4 form-group">
+                          <div class="col-md-4"><label class="control-label">Print Number</label></div>
+                          <div class="col-md-8">
+                              {% render_field form.print_number class='form-control' %}
+                                {% if form.print_number.errors %}
+                                  <small class="text-danger">{{form.print_number.errors}}</small>
+                              {% endif %}
+<!--                              <input type="text" name="printnumber" class="form-control" value="<?php echo (isset($printnumber))?$printnumber:"" ?>" >-->
+                          </div>
+                        </div>
+                        <div class="col-md-4 form-group">
+                          <div class="col-md-4"><label class="control-label">NDC Number</label></div>
+                          <div class="col-md-8">
+                              {% render_field form.ndc_number class='form-control' %}
+                                {% if form.ndc_number.errors %}
+                                  <small class="text-danger">{{form.ndc_number.errors}}</small>
+                              {% endif %}
+<!--                              <input type="text" name="ndcnumber" class="form-control" value="<?php echo (isset($ndcnumber))?$ndcnumber:"" ?>" >-->
+                          </div>
+                        </div>
+                    <div class="col-md-4 form-group">
+                          <div class="col-md-4"><label class="control-label">Generic Name</label></div>
+                          <div class="col-md-8">
+                              {% render_field form.generic_name class='form-control' %}
+                                {% if form.generic_name.errors %}
+                                  <small class="text-danger">{{form.generic_name.errors}}</small>
+                              {% endif %}
+<!--                              <input type="text" name="genericname" class="form-control" value="<?php echo (isset($genericname))?$genericname:""  ?>" >-->
+                          </div>
+                        </div>
+                        <div class="col-md-4 form-group">
+                          <div class="col-md-4"><label class="control-label">Trade Name</label></div>
+                          <div class="col-md-8">
+                              {% render_field form.trade_number class='form-control' %}
+                                {% if form.trade_number.errors %}
+                                  <small class="text-danger">{{form.trade_number.errors}}</small>
+                              {% endif %}
+<!--                              <input type="text" name="tradename" class="form-control" value="<?php echo (isset($tradename))?$tradename:"" ?>" >-->
+                          </div>
+                        </div>
+                        <div class="col-md-4 form-group">
+                          <div class="col-md-4"><label class="control-label">EMR ID</label></div>
+                          <div class="col-md-8">
+                              {% render_field form.emr_id class='form-control' %}
+                                {% if form.emr_id.errors %}
+                                  <small class="text-danger">{{form.emr_id.errors}}</small>
+                              {% endif %}
+<!--                              <input type="text" name="emrid" class="form-control" value="<?php echo (isset($emrid))?$emrid:"" ?>" >-->
+                          </div>
+                        </div>
+
+                    <div class="col-md-4 form-group">
+                          <div class="col-md-4"><label class="control-label">Drug Class</label></div>
+                          <div class="col-md-8">
+                              {% render_field form.drug_class class='form-control' %}
+                                {% if form.drug_class.errors %}
+                                  <small class="text-danger">{{form.drug_class.errors}}</small>
+                              {% endif %}
+<!--                              <input type="text" name="drugclass" class="form-control" value="<?php echo (isset($drugclass))?$drugclass:"" ?>">-->
+                          </div>
+                        </div>
+                        <div class="col-md-4 form-group">
+                          <div class="col-md-4"><label class="control-label">Drug Type</label></div>
+                          <div class="col-md-8">
+                              {% render_field form.drug_type class='form-control' %}
+                                {% if form.drug_type.errors %}
+                                  <small class="text-danger">{{form.drug_type.errors}}</small>
+                              {% endif %}
+<!--                              <input type="text" name="drugtype" class="form-control" value="<?php echo (isset($drugtype))?$drugtype:"" ?>" >-->
+                          </div>
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                          <div class="col-md-4"><label class="control-label">Vendor Mnemonic</label></div>
+                          <div class="col-md-8">
+                              {% render_field form.vendor_mnemonic class='form-control' %}
+                                {% if form.vendor_mnemonic.errors %}
+                                  <small class="text-danger">{{form.vendor_mnemonic.errors}}</small>
+                              {% endif %}
+<!--                              <input type="text" name="vendormnemonic" class="form-control" value="<?php echo (isset($vendormnemonic))?$vendormnemonic:"" ?>">-->
+                          </div>
+                        </div>
+                        <div class="col-md-4 form-group">
+                          <div class="col-md-4"><label class="control-label">Vendor Name</label></div>
+                          <div class="col-md-8">
+                              {% render_field form.vendor_name class='form-control' %}
+                                {% if form.vendor_name.errors %}
+                                  <small class="text-danger">{{form.vendor_name.errors}}</small>
+                              {% endif %}
+<!--                              <input type="text" name="vendorname" class="form-control" value="<?php echo (isset($vendorname))?$vendorname:"" ?>" >-->
+                          </div>
+                        </div>
+
+                        <div class="col-md-12 text-center mt-40">
+                            <div class="add_remove_submit">
+                                <input type="submit" class="btn-submit" name="submit" value="Save" />
+                                <button type="button" class="btn-submit buttonNext"><a style="color:white;" href="{% url 'patients:vendor_dictionary' idx %}">Next Screen</a></button>
+                            </div>
+                        </div>
+                </div>
+         </div>
+         </div>
+         <!--end of form-box-->
+         </div>
+       </form>
+     </div>
+     </div>
+     </div>
+   </div>
+ </section>
+
+
+{% endblock %}

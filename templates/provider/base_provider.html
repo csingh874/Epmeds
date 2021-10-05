@@ -1,0 +1,87 @@
+{# HTML5 declaration #}
+{% load static %}
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ePMEDS</title>
+    <link href="{% static 'provider/css/bootstrap.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'provider/css/font-awesome.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'provider/css/epmeds.css' %}" rel="stylesheet"/>
+    <link href="{% static 'provider/images/favicon.png' %}" rel="icon" />
+    <script src="{% static 'provider/js/jquery-3.0.0.js' %}"></script>
+    <script src="{% static 'provider/js/jquery.validate.js' %} "></script>
+</head>
+
+<body class="inner_page_body">
+    <header>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-1">
+                    <h3 class="header-logo"><a href="/"><span>e</span>PMeds</a></h3>
+                </div>
+                <div class="col-md-9">
+                    <ul class="main-tab">
+                        <li><a href="/"><img src="/static/provider/images/home.png" /><span>Home</span></a></li>
+                        <li><a href="/doctor_dictionary"><img src="/static/provider/images/account.png" /><span>Doctor
+                                    Dictionary</span></a></li>
+                        <!-- <li><a href="#"><img src="images/member.png" /><span>Member Summary</span></a></li> -->
+                        
+                        <li><a href="{% url 'doctors:patient_portal' %}"><img src="/static/provider/images/member.png" /><span>Patient
+                                    Portal</span></a></li>
+                        
+                        <!-- <li><a href="/epmedsaccount/laravel/"><img src="/static/provider/images/member.png" /><span>Patient
+                                    Portal</span></a></li>
+                        Portal</span></a></li> -->
+                        
+                        <li><a href="/search_user"><img src="/static/provider/images/member.png" /><span>Search
+                                    User</span></a></li>
+
+                        <!-- <li><a href="#"><img src="../images/mailbox.png" /><span>Mailbox</span></a></li> -->
+                        <li><a href="/communication_log"><img src="/static/provider/images/mailbox.png" /><span>Communication
+                                    Log</span></a>
+                        </li>
+                        <li>
+                            <a href="{% url 'doctors:user_logout' %}"><img src="/static/provider/images/signout.png" /><span>Log Out</span></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <div class="hello_user">
+                        <p><span>Logged in as:</span>{{user.username}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--end of header-->
+
+    <div>
+        {% block content%} {%endblock%}
+    </div>
+    
+    <footer class="footer_dynamic">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <ul class="foot-social">
+                        <li><a href="javacsript:void(0)">Home Page</a></li>
+                        <li><a href="javacsript:void(0)">Terms and Conditions</a></li>
+                        <li><a href="javacsript:void(0)">Privacy Policy</a></li>
+                        <li><a href="javacsript:void(0)">Contact Us</a></li>
+                    </ul>
+                    <div class="f_copyright">
+                        <p><a href="/">ePMEDS.com</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+<script src="{% static 'provider/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript">
+function  logoutcon(){
+    return confirm("Do You Really Want To Logout ?");
+    }
+</script>
+</html>
+    

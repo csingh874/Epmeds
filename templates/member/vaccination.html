@@ -1,0 +1,140 @@
+{% extends "member/base_member.html" %}
+{% block content %}
+{% load static %}
+{% load widget_tweaks %}
+<section class="form-sec">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+
+      	<div class="parent_of_form">
+       {% include "member/tab_header.html" %}
+
+       <form method="post">
+         {% csrf_token %}
+         <div class="form-box registration-form mt-40">
+           <p class="form-head"><img src="{% static 'provider/images/registration.png' %}"/><strong>Vaccination/Procedure</strong></p>
+           <div class="row mt-20">
+               <div class="row">
+                 <div class="col-md-3 form-group">
+                   <label class="heading-color">Date</label>
+                     {% render_field form.vaccination_date type='date' class='form-control' %}
+                     {% if form.vaccination_date.errors %}
+                        <small class="text-danger">{{form.vaccination_date.errors}}</small>
+                     {% endif  %}
+<!--                   <input type="date" id="procedateid" class="form-control"  />-->
+                 </div>
+               <div class="col-md-3 form-group">
+                 <label class="heading-color">Vaccination/Procedure</label>
+                   {% render_field form.procedure class='form-control' %}
+                     {% if form.procedure.errors %}
+                        <small class="text-danger">{{form.procedure.errors}}</small>
+                     {% endif  %}
+<!--                 <input type="text" id="procecodeid" class="form-control"  />-->
+               </div>
+
+         			<div class="col-md-3 form-group">
+         			<label class="heading-color">Description</label>
+                        {% render_field form.description class='form-control' %}
+                     {% if form.description.errors %}
+                        <small class="text-danger">{{form.description.errors}}</small>
+                     {% endif  %}
+<!--                    <textarea name="name" id="descriptionid" class="form-control"></textarea>-->
+         			</div>
+              <div class="col-md-2 form-group">
+         			<label class="heading-color">Physician</label>
+                  {% render_field form.physician class='form-control' %}
+                     {% if form.physician.errors %}
+                        <small class="text-danger">{{form.physician.errors}}</small>
+                     {% endif  %}
+         			</div>
+            </div>
+           <div class="row">
+               {% if procedure_data %}
+             <div class="col-md-12 table-responsive">
+                 <table class="table datashowproce table-bordered table-hover">
+                   <thead>
+                     <tr>
+                       <th>Date</th>
+                       <th>Vaccination/Procedure</th>
+                       <th>Description</th>
+                       <th>Physician</th>
+                       <th>Delete</th>
+
+                     </tr>
+                   </thead>
+                   <tbody id="rowaddproce">
+                        {% for row in procedure_data %}
+                            <tr>
+                                <td>{{row.vaccination_date}}</td>
+                                <td>{{row.procedure}}</td>
+                                <td>{{row.description}}</td>
+                                <td>{{row.physician}}</td>
+                                <td><button type="button" class="btn btn-sm btn-danger" onclick="ajax_call({{row.id}})">Delete</button></td>
+                            </tr>
+                        {% endfor %}
+                   </tbody>
+                 </table>
+             </div>
+                {% endif %}
+             <!-- <div class="col-md-12 text-center mt-40">
+         <div class="add_remove_submit">
+           <button type="button" class="btn-submit" onclick="subproce()" name="button">Submit and Proceed</button>
+            <input type="submit" class="btn-submit" value="Submit and Proceed" />
+           <input type="submit" class="btn-cancel" value="Cancel" />
+           </div>
+         </div> -->
+         <input type="hidden" value="0" id="DeleteRecordData"/>
+         <div class="col-md-12 text-center mt-40">
+          <button type="submit" class="btn-submit">Save</button>
+          <button type="button" class="btn-submit buttonNext"><a style="color:white;" href="{% url 'patients:family_history' idx %}">Next Screen</a></button>
+          <!-- <img id="addid" src="images/add.jpg" /> -->
+        </div>
+           </div>
+
+         </div>
+
+         <!--end of form-box-->
+
+         </div>
+       </form>
+       </div>
+       </div>
+     </div>
+   </div>
+ </section>
+{% if procedure_data %}
+<script>
+    function ajax_call(id){
+         $.ajax({
+              type: 'post',
+              url: "/delete-procedure",
+              headers: {'X-CSRFToken': getCookie('csrftoken')},
+              data: {'user_idx': id},
+              dataType: 'json',
+              success: function(resp){
+                if (resp.success){
+                    window.location = window.location.href;
+                }
+              }
+            });
+    }
+    function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
+{% endif %}
+
+{% endblock %}

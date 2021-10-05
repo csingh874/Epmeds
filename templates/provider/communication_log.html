@@ -1,0 +1,65 @@
+{% extends "provider/base_provider.html" %}
+{% block content %}
+{% load static %}
+<div class="fix-section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="parent_of_form">
+                    <div class="main_sec">
+                        <div class="form-box registration-form mt-40">
+                            <p class="form-head"><img src="/static/provider/images/registration.png"/> <strong>Communication
+                                    Log</strong>
+                            </p>
+                            <div>
+                                <div class="navbar-form navbar-right">
+                                    <label class="bolder">Search:</label>
+                                    <input type="text" name="search" id="search" onkeyup="myFunction();">
+                                </div>
+                                <table class="table table-striped" id="mytable">
+                                    <thead>
+                                        <tr>
+                                            <th> # </th>
+                                            <th> Patient Name </th>
+                                            <th> Date </th>
+                                            <th> Last Message </th>
+                                            <th> Message Status </th>
+                                            <th> Action </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for msg in msgs %}
+                                        <tr>
+                                            <td>{{forloop.counter}}</td>
+                                            <td>{{msg.first_name}} {{msg.last_name}}</td>
+                                            <td>{{msg.communicationlog__create_date}}</td>
+                                            <td>{{msg.communicationlog__messages}}</td>
+                                            <td>{{msg.communicationlog__status}}</td>
+                                            <td><a href="{% url 'doctors:chat' msg.idx %}">View</a> </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'provider/js/jquery.dataTables.min.js' %}" type="text/javascript"></script>
+<script>
+$(document).ready(function() {
+    $('#mytable').dataTable({
+        "lengthMenu": [
+            [20, 45, 100, -1],
+            [20, 45, 100, "All"]
+        ],
+        "aaSorting": [
+            [2, "desc"]
+        ]
+    });
+});
+</script>
+{% endblock %}

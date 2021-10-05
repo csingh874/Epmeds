@@ -1,0 +1,61 @@
+{% load static %}
+<div class="top-banner">
+    <div class="header">
+        <div class="container">
+            <div class="headr-left">
+                <div class="logo">
+                    <h1><a href="/"><i>e</i>PMeds</a></h1>
+                </div>
+
+                <div class="top-menu">
+                    <span class="menu"></span>
+                    <ul class="nav1">
+                        <li class="active"><a href="/">Home</a></li>
+                        <li><a href="/services">Services</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/what_we_do">What We Do</a></li>
+                                <li><a href="/become_member">Become a Member</a></li>
+                                <li><a href="/career">Career</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/contact_us">Contact</a></li>
+                        <li><a href="{% url 'custom:user_login' 'provider' %}">Provider</a></li>
+                        <li><a href="{%url 'custom:user_login' 'member' %}">Members</a></li>
+                    </ul>
+                </div>
+
+                <!-- script-for-menu -->
+                <script>
+                $("span.menu").click(function() {
+                    $("ul.nav1").slideToggle(300, function() {
+                        // Animation complete.
+                    });
+                });
+                </script>
+                <!-- /script-for-menu -->
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="headr-right">
+                <div class="social">
+                    <a href="#"><img src="{% static 'images/fb.png' %}"></a>
+                    <a href="#"><img src="{% static 'images/g.png' %}"></a>
+                    <a href="#"><img src="{% static 'images/in.png' %}"></a>
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <!--banner-info-->
+    <div class="banner-info">
+        <div class="container">
+
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

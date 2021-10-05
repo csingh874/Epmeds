@@ -1,0 +1,162 @@
+{% extends "member/base_member.html" %}
+{% block content %}
+{% load static %}
+{% load widget_tweaks %}
+<style>
+.ui-autocomplete {
+    max-height: 200px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+    /* add padding to account for vertical scrollbar */
+    padding-right: 20px;
+}
+</style>
+<section class="form-sec">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="parent_of_form">
+                    {% include 'member/tab_header.html' %}
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-box registration-form mt-40">
+                            <p class="form-head"><img src="{% static 'provider/images/registration.png' %}"/> <strong>Patient
+                                    Allergies</strong></p>
+                            <div class="row mt-20">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-12 form-group">
+                                            <label class="checkbox-inline">{% render_field form.no_know_allergy %} No Known Drug Allergies</label>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                        <label class="heading-color">Date</label>
+                                            {% render_field form.rec_date type='date' id='dateid' class='form-control' %}
+<!--                                            <input  type="date" name="date" id="dateid"  class="form-control"  >-->
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label class="heading-color">Food Allergy</label>
+                                            {% render_field form.food_allergy id="allergie_id" name="allergyid" class='form-control' %}
+<!--                                            <input type="hidden" id="allergie_id" name="allergyid"-->
+<!--                                                class="form-control" />-->
+<!--                                            <input type="text" id="automplete-3" name="allergyname" class="form-control"-->
+<!--                                                autocomplete="off" placeholder="Please type the first four characters of food allergy" />-->
+<!--                                            <img src="images/loading.gif" width="20" alt="Loading Image"-->
+<!--                                                id="loadingImage" style="display:none;" />-->
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label class="heading-color">Drug Allergy</label>
+                                            {% render_field form.drug_allergy class='form-control' %}
+<!--                                            <input type="hidden" id="allergie_id_pick" name="allergie_id_pick"-->
+<!--                                                class="form-control" />-->
+<!--                                            <input type="text" id="automplete-4" name="name_of_allergy"-->
+<!--                                                class="form-control" autocomplete="off"-->
+<!--                                                placeholder="Please type the first four characters of drug allergy" />-->
+<!--                                            <img src="images/loading.gif" width="20" alt="Loading Image"-->
+<!--                                                id="loadingImage4" style="display:none;" />-->
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="heading-color">Reactions/Comments</label>
+                                            {% render_field form.comments class='form-control' %}
+                                            <!-- <input type="text" class="form-control" /> -->
+<!--                                            <textarea class="form-control" id="recomid"-->
+<!--                                                name="reactioncommnet"></textarea>-->
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="heading-color">Allergy Type</label>
+                                            {% render_field form.allergy_type class='form-control' %}
+<!--                                            <select class="form-control" id="allergytype" name="allergytype">-->
+<!--                                                <option value="">Select Allergy Type</option>-->
+<!--                                                <option value="Airbone">Airbone</option>-->
+<!--                                                <option value="Food">Food</option>-->
+<!--                                                <option value="Drug">Drug</option>-->
+<!--                                            </select>-->
+                                        </div>
+                                        <!-- <div class="col-md-1">
+         			<label class="heading-color">Add</label>
+         			<a class="add-link" href="javascript:void(0)" onclick="addallergies();"><img src="images/add.jpg" /></a>
+         			</div> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="row mt-5">
+                                {% if allergy_data %}
+                                <div class="col-md-12 table-responsive">
+                                    <table class="table datashowalg table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Food Allergy</th>
+                                                <th>Drug Allergy</th>
+                                                <th>Reactions/Comments</th>
+                                                <th>Allergy Type</th>
+                                                <th>Delete</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for row in allergy_data %}
+                                            <tr>
+                                                <td>{{row.rec_date}}</td>
+                                                <td>{{row.food_allergy}}</td>
+                                                <td>{{row.drug_allergy}}</td>
+                                                <td>{{row.comments}} </td>
+                                                <td>{{row.allergy_type}}</td>
+                                                <td><button class="btn btn-sm btn-danger" onclick="ajax_call({{row.id}})">Delete</button></td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                {% endif %}
+                                <div class="col-md-12 text-center mt-40">
+                                    <button type="submit" class="btn-submit">Save</button>
+                                    <button type="button" class="btn-submit"><a style="color:white;" href="{% url 'patients:medication_prescribed' idx %}" class="text-white text-decoration-none">Next Screen</a></button>
+                                    <!-- <img id="addid" src="images/add.jpg" /> -->
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% if allergy_data %}
+<script>
+    function ajax_call(id){
+         $.ajax({
+              type: 'post',
+              url: "/allergy-delete",
+              headers: {'X-CSRFToken': getCookie('csrftoken')},
+              data: {'user_idx': id },
+              dataType: 'json',
+              success: function(resp){
+                if (resp.success){
+                    window.location = window.location.href;
+                }
+              }
+            });
+    }
+
+    function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
+{% endif %}
+{% endblock %}

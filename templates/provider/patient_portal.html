@@ -1,0 +1,367 @@
+{% extends "provider/base_provider.html" %}
+{% block content %}
+{% load static %}
+{% load widget_tweaks %}
+<style>
+        ul{
+  display: flex;
+}
+ ul li label{
+        margin-left: 10px;
+    }
+</style>
+
+<section class="form-sec">
+   <div class="container-fluid">
+     <div class="row">
+       <div class="col-md-12">
+       	<div class="parent_of_form">
+           <div class="form_body">
+           <form method="post">
+           <div class="form-box registration-form mt-20">
+             <p class="form-head"><img src="{% static 'provider/images/registration.png' %}"/><strong>Patient Portal</strong></p>
+             <!-- <p><img src="../images/edit.png" class="edit-img" /><a href="#">Click here to autofill the main fields below with your default account data.</a></p>
+             <p><strong>Note:</strong> As the account owner, we will continue to send secure communications regarding all members of your account to the email address provided when you set up your account. To change your account settings, <a href="#">please click here.</a></p>
+             <p>Registration information specific to each member you add to your account will only appear in association with their individual patient profiles.</p>-->
+             <div class="row mt-20">
+               <div class="col-md-12">
+                  <div class="row">
+                     <div class="col-md-4 form-group">
+                          <div class="col-md-4">
+                              <label class="control-label"><span>#</span> Account</label>
+                          </div>
+                          <div class="col-md-8">
+                              <input maxlength="100" type="text" name="acount" required="required" class="form-control" value="{{user.account}}" readonly>
+                          </div>
+                     </div>
+                     <div class="form-group col-md-4">
+                       <div class="col-md-4">
+                         <label class="control-label"><span>#</span>Visited Date</label>
+                       </div>
+                       <div class="col-md-8">
+                           {% render_field form.visited_date class="form-control" type="date" required=True %}
+<!--                         <input type="date" name="visited_date" class="form-control"/>-->
+                       </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12">
+               	      <div class="row">
+                           <div class="form-group col-md-4">
+                             <div class="col-md-4">
+                               <label class="control-label"><span>*</span>Doctor Last Name</label>
+                             </div>
+                             <div class="col-md-8">
+                               <input maxlength="100" type="text" name="firstname" required="required" readonly class="form-control" value="{{user.last_name}}" >
+                             </div>
+                           </div>
+                           <div class="form-group col-md-4">
+                             <div class="col-md-4">
+                               <label class="control-label">First Name</label>
+                             </div>
+                             <div class="col-md-8">
+                               <input type="text" name="middlename" class="form-control" readonly value="{{user.first_name}}" >
+                             </div>
+                           </div>
+                           <div class="form-group col-md-4">
+                             <div class="col-md-4">
+                               <label class="control-label"><span>*</span>Middle Initial</label>
+                             </div>
+                             <div class="col-md-8">
+                               <input type="text" name="lastname" readonly class="form-control" value="{{user.middle_initiative}}" >
+                             </div>
+                           </div>
+                      </div>
+               </div>
+               <div class="col-md-12">
+                 <h4 style="margin-bottom:20px; font-weight: bold;">Member's Information</h4>
+               </div>
+               <div class="col-md-12">
+                     <div class="row">
+                       <div class="form-group col-md-8">
+                           <div class="col-md-2">
+                               <label class="control-label">Date of Birth</label>
+                           </div>
+                           <div class="col-md-6">
+                                {% render_field form.dob class="form-control" placeholder="Please click here to view members" readonly=True id="dob" %}
+<!--                              <input type="date" id="dobid" class="form-control"  />-->
+                           </div>
+                       </div>
+                     </div>
+               </div>
+               <div class="col-md-12">
+                 <div class="form-group col-md-4">
+                   <div class="col-md-4">
+                     <label class="control-label"><span></span>Last Name</label>
+                   </div>
+                   <div class="col-md-8">
+                       {% render_field form.last_name class="form-control" id="last_name" required=True %}
+<!--                     <input maxlength="100" type="text" name="firstname" required="required" class="form-control" value="">-->
+                   </div>
+                 </div>
+                 <div class="form-group col-md-4">
+                   <div class="col-md-4">
+                     <label class="control-label">First Name</label>
+                   </div>
+                   <div class="col-md-8">
+                       {% render_field form.first_name class="form-control" id="first_name" required=True %}
+<!--                     <input type="text" name="middlename" class="form-control" value="" >-->
+                   </div>
+                 </div>
+                 <div class="form-group col-md-4">
+                   <div class="col-md-4">
+                     <label class="control-label"><span></span>Last 4 digit of SSN</label>
+                   </div>
+                   <div class="col-md-8">
+                       {% render_field form.ssn class="form-control" required=True id="ssn" %}
+<!--                     <input type="text" name="lastname" required="required" class="form-control" value="" >-->
+                   </div>
+                  </div>
+               </div>
+               <div class="col-md-12">
+                 <div class="form-group col-md-4">
+                   <div class="col-md-4">
+                     <label class="control-label"><span></span>Sex</label>
+                   </div>
+                   <div class="col-md-8">
+                       {% render_field form.sex class="form-control" id="sex" required=True %}
+<!--                     <input maxlength="100" type="text" name="sex" required="required" class="form-control" value="">-->
+                   </div>
+                 </div>
+                 <div class="form-group col-md-4">
+                   <div class="col-md-4">
+                     <label class="control-label">Age</label>
+                   </div>
+                   <div class="col-md-8">
+                       {% render_field form.age class="form-control" id="age" required=True %}
+<!--                     <input type="text" name="middlename" class="form-control" value="" >-->
+                   </div>
+                 </div>
+                 <div class="form-group col-md-4">
+                   <div class="col-md-4">
+                     <label class="control-label"><span></span>Email</label>
+                   </div>
+                   <div class="col-md-8">
+                       {% render_field form.email type="email" id="email" class="form-control" %}
+<!--                     <input type="email" name="lastname" required="required" class="form-control" value="" >-->
+                   </div>
+                  </div>
+               </div>
+               <div class="col-md-12">
+                 <h4 style="margin-bottom:20px; font-weight: bold;">Emergency Contact Details</h4>
+               </div>
+               <div class="col-md-12">
+                 <div class="form-group col-md-4">
+                   <div class="col-md-4">
+                     <label class="control-label"><span></span>Contact Name</label>
+                   </div>
+                   <div class="col-md-8">
+                       {% render_field form.emg_name class="form-control" id="emg_name" %}
+<!--                     <input maxlength="100" type="text" name="sex" required="required" class="form-control" value="">-->
+                   </div>
+                 </div>
+                 <div class="form-group col-md-4">
+                   <div class="col-md-4">
+                     <label class="control-label">Email Address</label>
+                   </div>
+                   <div class="col-md-8">
+                       {% render_field form.emg_email class="form-control" id="emg_email" %}
+<!--                     <input type="text" name="middlename" class="form-control" value="" >-->
+                   </div>
+                 </div>
+                 <div class="form-group col-md-4">
+                   <div class="col-md-8">
+                     <label class="control-label"><span></span>Authorized Representative</label>
+                   </div>
+                   <div class="col-md-4">
+                         {% render_field form.emg_auth_rep type='radio' id="emg_auth_rep"  %}
+<!--                     <input type="email" name="lastname" required="required" class="form-control" value="" >-->
+                   </div>
+                  </div>
+               </div>
+                <div class="col-md-12">
+                 <h4 style="margin-bottom:20px; font-weight: bold;">Diagnosis</h4>
+               </div>
+                 <div class="col-md-12">
+                    <div class="form-group col-md-6">
+                   <div class="col-md-4">
+                     <label class="control-label"><span></span>Code Type</label>
+                   </div>
+                   <div class="col-md-8">
+                       {% render_field form.code_type class="form-control" id="code_type" %}
+<!--                     <input maxlength="100" type="text" name="sex" required="required" class="form-control" value="">-->
+                   </div>
+                 </div>
+                    <div class="form-group col-md-6">
+                   <div class="col-md-4">
+                     <label class="control-label"><span></span>Diagnosis Code</label>
+                   </div>
+                   <div class="col-md-8">
+                       {% render_field form.diagnosis_code class="form-control" id="diagnosis_code" %}
+<!--                     <input maxlength="100" type="text" name="sex" required="required" class="form-control" value="">-->
+                   </div>
+                 </div>
+                    <div class="form-group col-md-6">
+                   <div class="col-md-4">
+                     <label class="control-label"><span></span>Diagnosis Description</label>
+                   </div>
+                   <div class="col-md-8">
+                       {% render_field form.diagnosis_description class="form-control" id="diagnosis_description" %}
+<!--                     <input maxlength="100" type="text" name="sex" required="required" class="form-control" value="">-->
+                   </div>
+                 </div>
+                </div>
+           </div>
+
+           <div class="row">
+           <div class="col-md-12 text-center mt-40">
+           <div class="add_remove_submit">
+             <input type="submit" name="submit" class="btn-submit" value="Submit and Proceed" />
+             <!-- <input type="submit" class="btn-cancel" value="Cancel" /> -->
+             </div>
+           </div>
+           </div>
+
+           </div>
+         </form>
+         </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </section>
+<!--Modal pop up-->
+<div class="modal" id="myModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h1 class="modal-title">Search Patient</h1>
+      </div>
+      <div class="modal-body">
+           <div>
+                <input type="text" id="search" value="" onkeyup="myFunction();" placeholder="Search Patient" class="form-control"/>
+              </div>
+          <table class="table table-striped" id="mytable">
+              <thead>
+                <tr>
+                  <th scope="col">First Name</th>
+                  <th scope="col">Last Name</th>
+                  <th scope="col">DOB</th>
+                  <th scope="col">SSN</th>
+                </tr>
+              </thead>
+              <tbody>
+
+              {% for row in patient_data %}
+                <tr style="cursor:pointer;" onclick='get_patient_data({"first_name": "{{row.first_name}}",
+                                                                        "last_name": "{{row.last_name}}",
+                                                                        "sex": "{{row.sex}}",
+                                                                        "email": "{{row.email}}",
+                                                                        "dob": "{{row.dob}}",
+                                                                        "ssn": "{{row.ssn}}",
+                                                                        "idx": "{{row.idx}}"});'>
+                      <td>{{row.first_name}}</td>
+                      <td>{{row.last_name}}</td>
+                      <td>{{row.dob}}</td>
+                      <td>{{row.ssn|slice:"-4:"}}</td>
+                </tr>
+              {% endfor %}
+              </tbody>
+          </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    var btn = document.getElementById('dob');
+    btn.addEventListener('click', function(){
+        $('#myModal').modal('show');
+    });
+
+    function get_patient_data(data){
+        $('#first_name').val(data['first_name']);
+        $('#last_name').val(data['last_name']);
+        $('#sex').val(data['sex']);
+        $('#email').val(data['email']);
+        $('#ssn').val(data['ssn'].slice(-4));
+        $('#dob').val(data['dob']);
+          $.ajax({
+              type: 'post',
+              url: "/get-patient-data",
+              headers: {'X-CSRFToken': getCookie('csrftoken')},
+              data: {'user_idx': data['idx'] },
+              dataType: 'json',
+              success: function(resp){
+                if (resp.success){
+                    var emp = resp.success;
+                    $('#emg_name').val(emp['first_name'] +" "+ emp['last_name']);
+                    $('#emg_email').val(emp['email']);
+                    $('#emg_auth_rep').val(emp['auth_rep']);
+                    $('#myModal').modal('hide');
+                }
+              }
+            });
+    }
+
+      function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+function myFunction() {
+  // Declare variables
+  var input = document.getElementById("search");
+  var filter = input.value.toUpperCase();
+  var table = document.getElementById("mytable");
+  var trs = table.tBodies[0].getElementsByTagName("tr");
+
+  // Loop through first tbody's rows
+  for (var i = 0; i < trs.length; i++) {
+
+    // define the row's cells
+    var tds = trs[i].getElementsByTagName("td");
+
+    // hide the row
+    trs[i].style.display = "none";
+
+    // loop through row cells
+    for (var i2 = 0; i2 < tds.length; i2++) {
+
+      // if there's a match
+      if (tds[i2].innerHTML.toUpperCase().indexOf(filter) > -1) {
+
+        // show the row
+        trs[i].style.display = "";
+
+        // skip to the next row
+        continue;
+
+      }
+    }
+  }
+  }
+
+</script>
+
+
+
+<!--End Modal pop up-->
+{% endblock %}

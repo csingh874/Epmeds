@@ -1,0 +1,227 @@
+{# HTML5 declaration #}
+{% load static %}
+{% load widget_tweaks %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ePMeds</title>
+    <link href="{% static 'login/login_css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'login/login_css/font-awesome.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'login/login_css/epmeds.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'login/login_images/favicon.png' %}" rel="icon" />
+    <script src="{% static '/js/jquery-3.0.0.js' %}"></script>
+</head>
+
+<body style="background-image: url(/static/login/login_images/bg.jpg); background-position:center; background-repeat:no-repeat;background-size: cover;">
+    <style>
+    #register .short {
+        font-weight: bold;
+        color: #FF0000;
+        font-size: larger;
+    }
+
+    #register .weak {
+        font-weight: bold;
+        color: orange;
+        font-size: larger;
+    }
+
+    #register .good {
+        font-weight: bold;
+        color: #2D98F3;
+        font-size: larger;
+    }
+
+    #register .strong {
+        font-weight: bold;
+        color: limegreen;
+        font-size: larger;
+    }
+
+    .ftrnav.navbar-nav>li>a {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        color: black;
+    }
+
+    .ftrnav.nav>li>a:focus,
+    .ftrnav.nav>li>a:hover {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        background-color: #eee0;
+    }
+    </style>
+    <section class="home_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="welcome_user_2">
+                        <h2 class="text-center">Welcome to the <strong><span class="smclogo">e</span><span
+                                    class="rplogo">PMeds</span></strong> <span>(Personal Health Record)</span></h2>
+                    </div>
+                </div>
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="box-form home_user_forms">
+                        <div class="form-box-inner">
+                            <div class="row">
+                                <div class="two_form">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="colbox">
+                                                {% if messages %}
+                                                    {% for msg in messages %}
+                                                        {% if msg.extra_tags == "login" %}
+                                                        <div class="alert alert-danger alert-dismissible" role="alert">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                            <strong>{{msg}}</strong>
+                                                        </div>
+                                                        {% endif %}
+                                                         {% if msg.extra_tags == "password" %}
+                                                        <div class="alert alert-success alert-dismissible" role="alert">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                            <strong>{{msg}}</strong>
+                                                        </div>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                                <div>
+                                                    <h2>Are you an <strong>existing</strong><span> {{user_type|title}}?</span> </h2>
+                                                </div>
+                                                <form class="login_form" method="post" action="{% url 'custom:user_login' user_type %}">
+                                                    {% csrf_token %}
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label for="username">Username</label>
+                                                                <input type="text" class="form-control" name="username" id="username" placeholder="Enter Username" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label for="password">Password</label>
+                                                                <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <a href="/forgot_password">Forgot Password?</a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="send_detail">
+                                                                <input type="submit" class="btn btn-success" name="login" value="login">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="colbox">
+                                                <div>
+                                                    <h2>Are you a <span style="font-weight:bold">new</span><span> {{user_type|title}}?</span></h2>
+                                                    <p style="font-size: 16px;">To create a <span class="accent light bold">new</span> account,please complete the form below:</p>
+                                                </div>
+                                                {% if messages %}
+                                                    {% for msg in messages %}
+                                                        {% if msg.extra_tags == "signup" %}
+                                                        <div class="alert alert-success alert-dismissible" role="alert">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                            <ul><li>{{msg}}</li></ul>
+                                                        </div>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                                <form method="post" action="{% url 'custom:user_signup' user_type%}" id="register">
+                                                    {% csrf_token %}
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label for="username">Username</label>
+                                                                {% render_field form.username class='form-control' name='username' id='username' placeholder="Enter Username" %}
+                                                                {% if form.username.errors %}
+                                                                    <small class="text-danger">{{form.username.errors}}</small>
+                                                                {% else %}
+                                                                    <small>{{form.username.help}}</small>
+                                                                {% endif %}
+<!--                                                                <input type="text" class="form-control" name="username" id="username"-->
+<!--                                                                    placeholder="Enter Username" required>-->
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label for="">Email address:</label>
+                                                                {% render_field form.email class='form-control' name='email' type='email' id='email' placeholder="Email" %}
+                                                                {% if form.email.errors %}
+                                                                    <small class="text-danger">{{form.email.errors}}</small>
+                                                                {% else %}
+                                                                    <small>{{form.email.help}}</small>
+                                                                {% endif %}
+<!--                                                                <input type="email" class="form-control" name="email" placeholder="Email" required>-->
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="password">Password</label>
+                                                                {% render_field form.password1 type="password" class="form-control" id="password" name="password" placeholder="Enter Password" minlength="8" %}
+                                                                {% if form.password1.errors %}
+                                                                    <small class="text-danger">{{form.password1.errors}}</small>
+                                                                {% else %}
+                                                                    <small>{{form.password1.help}}</small>
+                                                                {% endif %}
+<!--                                                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" minlength="8" required>-->
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="confirm_password">Re-type Password:</label>
+                                                                {% render_field form.password2 type="password" class="form-control" id="password" name="password" placeholder="Enter Password" minlength="8" %}
+                                                                {% if form.password2.errors %}
+                                                                    <small class="text-danger">{{form.password2.errors}}</small>
+                                                                {% else %}
+                                                                    <small>{{form.password2.help}}</small>
+                                                                {% endif %}
+<!--                                                                <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Re-Enter Password" required minlength="8">-->
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="send_detail">
+                                                                <input type="submit" name="submit" class="btn btn-success" value="Create Account">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-offset-1 col-md-11 text-center">
+                        <ul class="nav navbar-nav ftrnav">
+                            <li><a href="/">Home Page</a></li>
+                            <li><a href="/what_we_do">What We Do</a></li>
+                            <li><a href="/become_member">Become a Member</a></li>
+                            <li><a href="/career">Career</a></li>
+                            <li><a href="/contact_us">Contact Us</a></li>
+                        </ul>
+                        <div class="f_copyright">
+                            <p style="margin: 0 0 0px;">Copyright<a href="/">ePMEDS.com</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </section>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

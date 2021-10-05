@@ -1,0 +1,130 @@
+{% extends "member/base_member.html" %}
+{% block content %}
+{% load static %}
+{% load widget_tweaks %}
+<!-- <script>
+alert("updated Successfully");
+window.location.href="emergencycontact.php?member_id=<?php echo $db->encrypt_decrypt('encrypt',$memid); ?>&admem=<?php echo $db->encrypt_decrypt("encrypt",1); ?>";
+</script>
+<script>
+alert("updated Successfully");
+    window.location.href="advancedirectives.php?member_id=<?php echo $db->encrypt_decrypt("encrypt",$memid); ?>&log=no";
+</script> -->
+
+<style>
+    ul{
+  display: flex;
+}
+ ul li label{
+        margin-left: 10px;
+    }
+</style>
+<section class="form-sec">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="parent_of_form">
+            {% include 'member/tab_header.html' %}
+          <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+            <div class="form-box registration-form mt-40">
+              <p class="form-head"><strong> Advance Care Documents</strong></p>
+              <div class="row mt-20">
+                    <div class="form-group col-md-6">
+                      <div class="col-md-9">
+                        <label class="control-label">Have an advance directive been completed yet?</label>
+                      </div>
+                      <div class="col-md-3">
+                          {% render_field form.advance_dir name='completedirective' type='radio' %}
+<!--                          <input class="form-check-input" name="completedirective" type="radio" value="y"  <?php echo $memdata['completedirective']=='y'?"checked":"" ?>  >-->
+<!--                          <label class="form-check-label" for="inlineCheckbox1">Yes</label>-->
+                      </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <div class="col-md-9">
+                        <label class="control-label">Uploaded to State’s Advance Directive Registry?</label>
+                      </div>
+                      <div class="col-md-3">
+
+                          {% render_field form.state_advance_dir name='ustateadvdr' type='radio' %}
+<!--                          <input class="form-check-input" name="ustateadvdr" type="radio" value="y" <?php echo $memdata['ustateadvdr']=='y'?"checked":"" ?>   >-->
+<!--                          <label class="form-check-label" for="inlineCheckbox1">Yes</label>-->
+                      </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <div class="col-md-9">
+                        <label class="control-label">Uploaded a copy to your Personal Health Record at ePMeds?</label>
+                      </div>
+                      <div class="col-md-3">
+
+                          {% render_field form.personal_health name='upcopyepmeds' type='radio' %}
+<!--                          <input class="form-check-input" name="upcopyepmeds" type="radio" value="y" <?php echo $memdata['upcopyepmeds']=='y'?"checked":"" ?>  >-->
+<!--                          <label class="form-check-label" for="inlineCheckbox1">Yes</label>-->
+
+                      </div>
+                    </div>
+                    <div class="form-group col-md-6" >
+                      <div class="col-md-9">
+                        <label class="control-label">Do you want to upload to your ePMeds Personal Health Record now?</label>
+                        <div class="file-upload">
+                            <div class="form-group shfile" style="display:none;">
+                              <label>Upload Record</label>
+
+                              {% render_field form.doc_file class='form-control' type='file' id="upfil" name="uploadFile" %}
+<!--                              <input type="file" class="form-control"  placeholder="">-->
+                            </div>
+
+
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                          {% render_field form.upload_personal_health name='wupepmeds' type='radio' onchange="shideupfield()" %}
+<!--                          <input class="form-check-input" name="wupepmeds" type="radio" value="y" onchange="shideupfield()"  <?php //echo $memdata['wupepmeds']=='y'?"checked":"" ?> >-->
+<!--                          <label class="form-check-label" for="inlineCheckbox1">Yes</label>-->
+                        </div>
+                      </div>
+              </div>
+              <div class="col-md-12 text-center mt-40">
+                        <div class="add_remove_submit">
+                            <input type="submit" name="submit" class="btn-submit" value="Save" />
+                            <button type="button" class="btn-submit buttonNext"><a style="color:white;" href="{% url 'patients:emergency_contact' idx %}">Next Screen</a></button>
+                        </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+td .selected {
+    border: 2px solid black;
+    padding: 2px;
+}
+</style>
+<script>
+
+function shideupfield(){
+  if(jQuery(".shfile").is(':visible')){
+    jQuery(".shfile").hide();
+  }else {
+    jQuery(".shfile").show();
+  }
+}
+//file type validation
+    $("#upfil").change(function() {
+        var file=$(this).val();
+        if(file!=""){
+        var ext = file.split(".");
+        ext = ext[ext.length-1].toLowerCase();
+        var arrayExtensions = ["jpg","jpeg","png"];
+        if (arrayExtensions.lastIndexOf(ext) == -1) {
+             alert("Only JPEG,JPG is allowed.");
+        $(this).val("");
+         }
+     }
+    });
+</script>
+
+{% endblock %}

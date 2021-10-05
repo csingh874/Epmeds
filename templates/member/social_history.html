@@ -1,0 +1,97 @@
+{% extends "member/base_member.html" %}
+{% block content %}
+{% load static %}
+{% load widget_tweaks %}
+<style>
+    ul {
+        display: flex;
+    }
+
+    ul li label{
+        margin-left: 10px;
+    }
+</style>
+<section class="form-sec">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+
+      	<div class="parent_of_form">
+         {% include "member/tab_header.html" %}
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-box registration-form mt-40">
+                    <p class="form-head"><img src="{% static 'provider/images/registration.png' %}"/> <strong> Social History</strong></p>
+                    <div class="row mt-20">
+                 	<div class="col-md-12 form-group">
+                 	   <label><strong>Smoking:</strong> </label>
+                        {% render_field form.smoking %}
+
+<!--             		   <label class="radio-inline"><input type="radio" name="smoking" value="ceds" <?php echo (isset($smoking) && $smoking=="ceds") ? "checked":"checked"; ?>>Current every day smoker <b>?</b> </label>-->
+<!-- 					   <label class="radio-inline"><input type="radio" name="smoking" value="csds" <?php echo (isset($smoking) && $smoking=="csds") ? "checked":""; ?> >Current some day smoker <b>?</b> </label>-->
+<!--                       <label class="radio-inline"><input type="radio" name="smoking" value="fs" <?php echo (isset($smoking) && $smoking=="fs") ? "checked":""; ?> >Former smoker <b>?</b> </label>-->
+<!--                       <label class="radio-inline"><input type="radio" name="smoking" value="ns" <?php echo (isset($smoking) && $smoking=="ns") ? "checked":""; ?> >Never smoker  <b>?</b> </label>-->
+<!--                       <label class="radio-inline"><input type="radio" name="smoking" value="hts" <?php echo (isset($smoking) && $smoking=="hts") ? "checked":""; ?> >Heavy tobacco smoker <b>?</b> </label>-->
+<!--                       <label class="radio-inline"><input type="radio" name="smoking" value="lts" <?php echo (isset($smoking) && $smoking=="lts") ? "checked":""; ?> >Light tobacco smoker <b>?</b></label>-->
+                    </div>
+                 <div class="col-md-3 form-group">
+                    	 <label><strong>Alcohol:</strong> </label>
+                            {% render_field form.alcohol %}
+<!--                		   <label class="radio-inline"><input type="radio" name="alcohal" value="y" <?php echo (isset($alcohol) && $alcohol=="y") ? "checked":"checked"; ?>>Yes<b>?</b> </label>-->
+<!--    					   <label class="radio-inline"><input type="radio" name="alcohal" value="n" <?php echo (isset($alcohol) && $alcohol=="n") ? "checked":""; ?>  >No<b>?</b> </label>-->
+<!--                           <label class="radio-inline"><input type="radio" name="alcohal"  value="sm" <?php echo (isset($alcohol) && $alcohol=="sm") ? "checked":""; ?> >Sometimes<b>?</b> </label>-->
+                  </div>
+                  <div class="col-md-3 form-group">
+
+                     	 <label><strong>Caffeine:</strong> </label>
+                                {% render_field form.caffeine %}
+<!--                 		   <label class="radio-inline"><input type="radio" name="caffine" value="y" <?php echo (isset($caffeine) && $caffeine=="y") ? "checked":"checked"; ?>>Yes<b>?</b> </label>-->
+
+<!--     					          <label class="radio-inline"><input type="radio" name="caffine" value="n" <?php echo (isset($caffeine) && $caffeine=="n") ? "checked":""; ?> >No<b>?</b> </label>-->
+                   </div>
+                   <div class="col-md-3 form-group">
+                      	 <label><strong>Drug Use:</strong> </label>
+                        {% render_field form.drug %}
+<!--                  		   <label class="radio-inline"><input type="radio" name="drug" value="y" <?php echo (isset($druguse) && $druguse=="y") ? "checked":""; ?> >Yes<b>?</b> </label>-->
+<!--      					          <label class="radio-inline"><input type="radio" name="drug" value="n" <?php echo (isset($druguse) && $druguse=="n") ? "checked":"checked"; ?>>No<b>?</b> </label>-->
+                    </div>
+                    <div class="col-md-3 form-group">
+
+                       	 <label><strong>Exercises:</strong> </label>
+                                {% render_field form.exercise %}
+<!--                   		   <label class="radio-inline"><input type="radio" name="exercise" value="y" <?php echo (isset($exercises) && $exercises=="y") ? "checked":"checked"; ?>>Yes <b>?</b> </label>-->
+
+<!--       					          <label class="radio-inline"><input type="radio" name="exercise" value="n" <?php echo (isset($exercises) && $exercises=="n") ? "checked":""; ?> >No <b>?</b> </label>-->
+
+                     </div>
+                     <div class="col-md-6 form-group">
+                          <div class="col-md-4"><label class="control-label">Comments</label></div>
+                         {% render_field form.comments class='form-control'%}
+<!--                          <div class="col-md-8">-->
+<!--                              <textarea name="excomment" rows="1" class="form-control" ><?php  echo  isset($exercisescomment)?$exercisescomment:"" ?></textarea>-->
+<!--                          </div>-->
+
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <div class="col-md-4"><label class="control-label">Other Comments</label></div>
+                        {% render_field form.other_comments class='form-control' %}
+<!--                      <div class="col-md-8">-->
+<!--                          <textarea name="othercomment" class="form-control"><?php  echo  (isset($othercomments))?$othercomments:"" ?></textarea>-->
+<!--                      </div>-->
+                    </div>
+                     <div class="col-md-12 text-center mt-40">
+                    <div class="add_remove_submit">
+                       <input type="submit" class="btn-submit" name="submit" value="Save" />
+                        <button type="button" class="btn-submit buttonNext"><a style="color:white;" href="{% url 'patients:medical_note' idx %}">Next Screen</a></button>
+                    </div>
+                     </div>
+                     </div>
+         <!--end of form-box-->
+         </div>
+       </form>
+     </div>
+     </div>
+     </div>
+   </div>
+ </section>
+{% endblock %}

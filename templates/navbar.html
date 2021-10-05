@@ -1,0 +1,16 @@
+<style>
+    #home_nav1{
+        min-height: 15px !important;
+        height: 4vh;
+        background-color: #f8f8f8;
+    }
+</style>
+<div class="navbar navbar-inner navbar-dark bg-secondary" id='home_nav1'>
+    <div class="container" style="width: 100%;height: 10%; margin-bottom: 2%; position: relative; top: 0%;">
+        {% if user.is_authenticated %}
+            <span style="position: absolute; right: 15%;"><a href="{% url 'custom:user_logout' %}" class="text-decoration-none" style="color: #4c565c; font-weight: bold;">Logout</a></span>
+        {% else %}
+            <span style="position: absolute; right: 5%;"><a href="{% url 'custom:user_login' 'provider' %}" class="text-decoration-none" style="color:  #4c565c; font-weight: bold;">Sign Up/Sign In</a></span>
+        {% endif %}
+    </div>
+</div>

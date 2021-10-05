@@ -1,0 +1,160 @@
+{% extends "member/base_member.html" %}
+{% block content %}
+{% load static %}
+{% load widget_tweaks %}
+<style>
+    ul {
+        display:flex;
+    }
+    ul li label{
+        margin-left: 10px;
+    }
+</style>
+<section class="form-sec">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+
+      	<div class="parent_of_form">
+          {% include "member/tab_header.html" %}
+          <form action="" method="post">
+              {% csrf_token %}
+          <div class="form-box registration-form mt-40">
+           <p class="form-head"><img src="{% static 'provider/images/registration.png' %}"/> <strong>Vendor Dictionary</strong></p>
+           <div class="row mt-20">
+             <div class="col-md-12 form-group">
+                    <label class="radio-inline" style="padding-left:0px;"><strong>Active:</strong> </label>
+                 {% render_field form.active %}
+<!--              		   <label class="radio-inline"><input type="radio" name="active" value="y" <?php echo (isset($active) && $active=="y") ? "checked":"checked"; ?>>Yes </label>-->
+<!-- 					   <label class="radio-inline"><input type="radio" name="active" value="n" <?php echo (isset($active) && $active=="n") ? "checked":""; ?> >No </label>-->
+             </div>
+             <div class="col-md-4 form-group">
+                  <div class="row">
+                        <div class="col-md-4"><label class="control-label">Mnemonic</label></div>
+                        <div class="col-md-8">
+                            {% render_field form.mnemonic class='form-control' %}
+                            {% if form.mnemonic.errors %}
+                                <small class="text-danger">{{form.mnemonic.errors}}</small>
+                            {% endif %}
+<!--                            <input type="text" name="mnemonic" class="form-control" value="<?php echo (isset($mnemonic))?$mnemonic:""; ?>" >-->
+                        </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 form-group">
+                      <div class="row">
+                        <div class="col-md-4"><label class="control-label">Contact Name</label></div>
+                        <div class="col-md-8">
+                            {% render_field form.contact_name class='form-control' %}
+                            {% if form.contact_name.errors %}
+                                <small class="text-danger">{{form.contact_name.errors}}</small>
+                            {% endif %}
+<!--                            <input type="text" name="contactname" class="form-control" value="<?php echo (isset($contname))?$contname:""; ?>">-->
+                        </div>
+                        </div>
+                      </div>
+
+
+                  <div class="col-md-4 form-group">
+                  <div class="row">
+                    <div class="col-md-4"><label class="control-label">Vendor Name</label></div>
+                    <div class="col-md-8">
+                        {% render_field form.vendor_name class='form-control' %}
+                            {% if form.vendor_name.errors %}
+                                <small class="text-danger">{{form.vendor_name.errors}}</small>
+                            {% endif %}
+<!--                        <input type="text" name="vendorname" class="form-control" value="<?php echo (isset($vendorname))?$vendorname:"";  ?>" >-->
+                    </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 form-group">
+                  <div class="row">
+                    <div class="col-md-4"><label class="control-label">Telephone</label></div>
+                    <div class="col-md-8">
+                        {% render_field form.telephone class='form-control' name='telephone' %}
+                            {% if form.telephone.errors %}
+                                <small class="text-danger">{{form.telephone.errors}}</small>
+                            {% endif %}
+<!--                        <input type="text" name="telephone" class="form-control" value="<?php echo (isset($telephone))?$telephone:"";  ?>" >-->
+                        </div>
+                    </div>
+                  </div>
+                        <div class="col-md-4 form-group">
+                        <div class="row">
+                          <div class="col-md-4"><label class="control-label">City</label></div>
+                          <div class="col-md-8">
+                              {% render_field form.city class='form-control' %}
+                              {% if form.city.errors %}
+                                 <small class="text-danger">{{form.city.errors}}</small>
+                              {% endif %}
+<!--                              <input type="text" name="city" class="form-control" value="<?php echo (isset($city))?$city:""; ?>">-->
+                          </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4 form-group">
+                        <div class="row">
+                          <div class="col-md-4"><label class="control-label">State</label></div>
+                          <div class="col-md-8">
+                              {% render_field form.state class='form-control' %}
+                              {% if form.state.errors %}
+                                 <small class="text-danger">{{form.state.errors}}</small>
+                              {% endif %}
+<!--                              <input type="text" name="state" class="form-control" value="<?php echo (isset($state))?$state:""; ?>">-->
+                          </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4 form-group">
+                        <div class="row">
+                          <div class="col-md-4"><label class="control-label">Country</label></div>
+                          <div class="col-md-8">
+                              {% render_field form.country class='form-control' %}
+                              {% if form.country.errors %}
+                                 <small class="text-danger">{{form.country.errors}}</small>
+                              {% endif %}
+<!--                              <input type="text" name="country" class="form-control" value="<?php echo (isset($country))?$country:"";  ?>" >-->
+                          </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4 form-group">
+                  <div class="row">
+                  <div class="col-md-4"><label class="control-label">Address</label></div>
+                  <div class="col-md-8">
+                      {% render_field form.address class='form-control' %}
+                      {% if form.address.errors %}
+                          <small class="text-danger">{{form.address.errors}}</small>
+                      {% endif %}
+<!--                     <textarea name="address" class="form-control"><?php echo (isset($address))?$address:"";  ?></textarea>-->
+                  </div>
+                  </div>
+                    </div>
+                        <div class="col-md-4 form-group">
+                        <div class="row">
+                          <div class="col-md-4"><label class="control-label">Zipcode</label></div>
+                          <div class="col-md-8">
+                              {% render_field form.zip_code class='form-control' %}
+                              {% if form.zip_code.errors %}
+                                 <small class="text-danger">{{form.zip_code.errors}}</small>
+                              {% endif %}
+<!--                              <input type="text" name="zipcode" class="form-control" value="<?php echo (isset($zipcode))?$zipcode:"";   ?>" >-->
+                          </div>
+                          </div>
+                        </div>
+                        <div class="col-md-12 text-center mt-40">
+                          <div class="add_remove_submit">
+                                 <input type="submit" class="btn-submit" name="submit" value="Save" />
+                                 <button type="button" class="btn-submit buttonNext">Finished</button>
+                          </div>
+                        </div>
+                    </div>
+                    <!--end of form-box-->
+         </div>
+         </div>
+       </form>
+     </div>
+     </div>
+     </div>
+   </div>
+ </section>
+
+
+{% endblock %}

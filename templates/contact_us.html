@@ -1,0 +1,47 @@
+{% extends "base_2.html" %}
+{% block content %}
+{% load static %}
+<div class="content-area contact-us">
+    <h2 class="head-content">Contact Us</h2><br>
+    <div class="row">
+        <div class="col-sm-4">
+            <p>Email: <a href="#">info@ePMeds.com</a> <br>Telephone : 831-444-7271<br>Fax : 831-442-9011</p>
+        </div>
+        <div class="col-sm-8">
+            <form>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="">Name * </label>
+                            <input type="text" class="form-control" name="" id="" placeholder="">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Email * </label>
+                            <input type="email" class="form-control" id="" placeholder="">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Phone * </label>
+                            <input type="text" class="form-control" name="" id="" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="">Subject * </label>
+                            <input type="text" class="form-control" name="" id="" placeholder="">
+                        </div>
+                        <label for="">Message * </label>
+                        <textarea class="form-control" rows="3"></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-default">Send</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

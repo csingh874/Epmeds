@@ -1,0 +1,279 @@
+{% extends "member/base_member.html" %}
+{% block content %}
+{% load static %}
+{% load widget_tweaks %}
+<style>
+    ul {
+        display: flex;
+    }
+
+     ul li label{
+        margin-left: 10px;
+    }
+</style>
+<section class="form-sec">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="parent_of_form">
+            {% include 'member/tab_header.html' %}
+          <form method="post">
+            {% csrf_token %}
+            <div class="form-box registration-form mt-40">
+              <p class="form-head"><img src="{% static 'provider/images/Medical_History_Conditions_32_w.jpg' %}"/><strong> Emergency Contact Info</strong></p>
+              <p><strong>NOTE:</strong> If you select “Yes”, the person listed below will automatically be sent a notification via email every time you are prescribed new medication or a Doctor appointment has been scheduled.</p>
+              <div class="row mt-20">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="form-group col-md-8">
+                      <div class="col-md-4">
+                        <label class="control-label"> Authorized Representative  (Y/N)</label>
+                      </div>
+                      <div class="col-md-8">
+
+                          {% render_field form.auth_rep class='form-check-input' %}
+<!--                          <input class="form-check-input" id="representative1" type="radio" name="emgauthrep"  value="y"   >-->
+<!--                          <label class="form-check-label" for="representative1">Yes</label>-->
+<!--                        <div class="radio-inline">-->
+<!--                          <input class="form-check-input" id="representative" type="radio" name="emgauthrep"  value="n" checked >-->
+<!--                          <label class="form-check-label" for="representative">No</label>-->
+<!--                        </div>-->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-md-4">
+                      <div class="col-md-4">
+                        <label class="control-label"> Date</label>
+                      </div>
+                      
+                      <div class="col-md-8">
+                          {% render_field form.emg_date class='form-control' id='dateid' type='date' %}
+                          {% if form.emg_date.errors %}
+                            <small class="text-danger">{{form.emg_date.errors}}</small>
+                          {% endif %}
+<!--                        <input  type="date" name="date" id="dateid"  class="form-control"  >-->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-md-4">
+                      <div class="col-md-4">
+                        <label class="control-label">First Name</label>
+                      </div>
+                      <div class="col-md-8">
+                            {% render_field form.first_name class='form-control'  id="firstnameid" name="emgcontactfirst_name" %}
+                            {% if form.first_name.errors %}
+                              <small class="text-danger">{{form.first_name.errors}}</small>
+                            {% endif %}
+<!--                        <input  type="text" name="emgcontactfirst_name" id="firstnameid"  class="form-control"  >-->
+                      </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <div class="col-md-4">
+                        <label class="control-label">Last Name</label>
+                      </div>
+                      <div class="col-md-8">
+                        {% render_field form.last_name name="emgcontactlast_name" id="lastnameid"  class="form-control" %}
+                        {% if form.last_name.errors %}
+                              <small class="text-danger">{{form.last_name.errors}}</small>
+                        {% endif %}
+<!--                        <input  type="text" name="emgcontactlast_name" id="lastnameid"  class="form-control"  >-->
+                      </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <div class="col-md-4">
+                        <label class="control-label"> Relationship</label>
+                      </div>
+                      <div class="col-md-8">
+                        {% render_field form.relation name="emgcontactrelation" id="relspid"  class="form-control" %}
+                        {% if form.relation.errors %}
+                              <small class="text-danger">{{form.relation.errors}}</small>
+                        {% endif %}
+<!--                        <input  type="text" name="emgcontactrelation" id="relspid"  class="form-control"  >-->
+                      </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <div class="col-md-4">
+                        <label class="control-label"> Telephone No</label>
+                      </div>
+                      <div class="col-md-8">
+                        {% render_field form.telephone name="emgcontact1" id="telid" class="form-control" %}
+                        {% if form.telephone.errors %}
+                              <small class="text-danger">{{form.telephone.errors}}</small>
+                        {% endif %}
+<!--                        <input type="text" name="emgcontact1" id="telid" class="form-control"  >-->
+                      </div>
+                    </div>
+                    <div class="form-group col-md-4" >
+                      <div class="col-md-4">
+                        <label class="control-label"> Address </label>
+                      </div>
+                      <div class="col-md-8">
+                        {% render_field form.address name="emgcontactaddress" id="addrid"  class="form-control" %}
+                        {% if form.address.errors %}
+                              <small class="text-danger">{{form.address.errors}}</small>
+                        {% endif %}
+<!--                        <input type="text" name="emgcontactaddress" id="addrid"  class="form-control"  >-->
+                      </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <div class="col-md-4">
+                        <label class="control-label">City</label>
+                      </div>
+                      <div class="col-md-8">
+                        {% render_field form.city name="emgcontactcity" id="cityid"  class="form-control" %}
+                        {% if form.city.errors %}
+                              <small class="text-danger">{{form.city.errors}}</small>
+                        {% endif %}
+<!--                        <input type="text" name="emgcontactcity" id="cityid"  class="form-control"  >-->
+                      </div>
+                    </div>
+                    <div class="form-group col-md-4" >
+                      <div class="col-md-4">
+                        <label class="control-label">State</label>
+                      </div>
+                      <div class="col-md-8">
+                        {% render_field form.state name="emgcontactstate" id="stateid"  class="form-control" %}
+                        {% if form.state.errors %}
+                              <small class="text-danger">{{form.state.errors}}</small>
+                        {% endif %}
+<!--                        <input type="text" name="emgcontactstate" id="stateid"  class="form-control"  >-->
+                      </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <div class="col-md-4">
+                        <label class="control-label">ZIP Code</label>
+                      </div>
+                      <div class="col-md-8">
+                            {% render_field form.zip_code name="emgcontactzip" id="zipid"  class="form-control" %}
+                            {% if form.zip_code.errors %}
+                              <small class="text-danger">{{form.zip_code.errors}}</small>
+                             {% endif %}
+<!--                        <input type="text" name="emgcontactzip" id="zipid"  class="form-control"  >-->
+                      </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <div class="col-md-4">
+                        <label class="control-label">Email</label>
+                      </div>
+                      <div class="col-md-8">
+                        {% render_field form.email name="emgcontactemail" id="emailid"  class="form-control" %}
+                        {% if form.email.errors %}
+                              <small class="text-danger">{{form.email.errors}}</small>
+                        {% endif %}
+<!--                        <input type="text" name="emgcontactemail" id="emailid" class="form-control"  >-->
+                      </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <div class="col-md-4">
+                        <label class="control-label">Add</label>
+                      </div>
+                      
+                    </div>
+                      <div class="col-md-12">
+                          {% if data %}
+                        <table class="table table-bordered tabdata">
+                              <thead>
+                              <tr>
+                                <th> AR (Y/N)</th>
+                                <th>Date</th>
+                                <th>Name</th>
+                                <th>Relationship</th>
+                                <th>Telephone No</th>
+                                <th>Address</th>
+                                <th>City</th>
+                                <th>State</th>
+                                <th>ZIP Code</th>
+                                <th>Email</th>
+                                <th>Action</th>
+                              </tr></thead>
+                              <tbody class="exprow">
+                                  {% for row_data in data %}
+                                    <tr>
+                                        <td>{% if row_data.auth_rep == True %} Y {% else %} N {% endif %}</td>
+                                        <td>{{row_data.emg_date}}</td>
+                                        <td>{{row_data.first_name}} {{row_date.last_name}}</td>
+                                        <td>{{row_data.relation}}</td>
+                                        <td>{{row_data.telephone}}</td>
+                                        <td>{{row_data.address}}</td>
+                                        <td>{{row_data.city}}</td>
+                                        <td>{{row_data.state}}</td>
+                                        <td>{{row_data.zip_code}}</td>
+                                        <td>{{row_data.email}}</td>
+                                        <td><button type="button" class="btn btn-sm btn-danger" onclick="ajax_call({{row_data.id}})">Delete</button></td>
+                                    </tr>
+                                  {% endfor %}
+                              </tbody>
+                        </table>
+                          {% endif %}
+                      </div>
+                      
+                    <div class="col-md-12 text-center mt-40">
+                    <div class="add_remove_submit">
+<!--                      <input type="hidden" name="parent_id" value="<?php echo $_SESSION['login_id']; ?>">-->
+                      <input type="hidden" value="0" id="DeleteRecordData"/>
+                      <!-- <a href="editaddmember.php?id=<?php //echo  $member_id; ?>"></a> -->
+                      <div class="col-md-12">
+                        <input type="submit" id="addid" class="btn-submit" value="Save"/>
+                        <button type="button" class="btn-submit buttonNext text-white"><a style="color:white;" href="{% url 'patients:medical_provider' idx %}" class="text-white text-decoration-none">Next Screen</a></button>
+                      </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.1.62/jquery.inputmask.bundle.js"></script>
+
+<script>
+
+    var phones = [{ "mask": "(###) ###-####"}];
+    $('#telid').inputmask({ 
+        mask: phones, 
+        greedy: false, 
+        definitions: { '#': { validator: "[0-9]", cardinality: 1}}
+        });
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% if data %}
+<script>
+    function ajax_call(id){
+         $.ajax({
+              type: 'post',
+              url: "/emergency-contact-delete",
+              headers: {'X-CSRFToken': getCookie('csrftoken')},
+              data: {'user_idx': id},
+              dataType: 'json',
+              success: function(resp){
+                if (resp.success){
+                    window.location = window.location.href;
+                }
+              }
+            });
+    }
+    function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
+{% endif %}
+{% endblock %}

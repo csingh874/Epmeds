@@ -1,0 +1,225 @@
+{% extends "member/base_member.html" %}
+{% block content %}
+{% load static %}
+{% load widget_tweaks %}
+<style>
+ul{
+  display: flex;
+}
+
+</style>
+<section class="form-sec">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="parent_of_form">
+            {% include 'member/tab_header.html' %}
+            <form method="post">
+              {% csrf_token %}
+              <div class="form-box registration-form mt-40">
+                <p class="form-head"><img src="{% static 'provider/images/Employment_32_w.jpg' %}"/><strong>Employment Info</strong></p>
+                <div class="row mt-20">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-6">
+                          <div class="row">
+                            <div class="col-md-3">
+                              <label class="control-label">Work status </label>
+                            </div>
+                            <div class="col-md-9 pl-0">
+                                {% render_field form.work_status class='form-check-input' name='workstatus' type='radio'  %}
+<!--                                <input <?php if($memdata['workstatus']=="ft"){echo "checked";} ?> class="form-check-input" name="workstatus" type="radio" value="ft">-->
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="row mt-20">
+                      <div class="form-group col-md-4">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label"><span>*</span>Occupation</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.occupation class='form-control' %}
+                          {% if form.occupation.errors %}
+                            <small class="text-danger">{{ form.occupation.errors }}</small>
+                          {% endif %}
+<!--                          <input  type="text" name="occupation" required="required" class="form-control" value="<?php echo $memdata['occupation']; ?>" >-->
+                        </div>
+  
+                        </div>
+                      </div>
+  
+                      <div class="form-group col-md-4">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label">Name of Employer</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.employer_name name='empname' class='form-control' %}
+                          {% if form.employer_name.errors %}
+                            <small class="text_danger">{{form.employer_name.errors}}</small>
+                          {% endif %}
+<!--                          <input type="text" name="empname" class="form-control" value="<?php echo $memdata['empname']; ?>" >-->
+                        </div>
+                        </div>
+                      </div>
+  
+                      <div class="form-group col-md-4" >
+  
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label"><span>*</span>Telephone</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.telephone name='workphone' class='form-control telephone' %}
+                          {% if form.telephone.errors %}
+                            <small class="text-danger">{{form.telephone.errors}}</small>
+                          {% endif %}
+<!--                          <input type="text" name="workphone" required="required" class="form-control telephone" value="<?php echo $memdata['workphone']; ?>" >-->
+                        </div>
+                        </div>
+                      </div>
+  
+                      <div class="form-group col-md-4">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label"> Address 1</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.address1 name='empadd' class='form-control' %}
+                          {% if form.address1.errors %}
+                            <small class="text-danger">{{form.address1.errors}}</small>
+                          {% endif %}
+<!--                          <input type="text" name="empadd"  class="form-control" value="<?php echo $memdata['empaddress1']; ?>" >-->
+                        </div>
+                        </div>
+                      </div>
+  
+                      <div class="form-group col-md-4">
+  
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label"> Address 2</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.address2 name='empadd2' class='form-control' %}
+                          {% if form.address2.errors %}
+                            <small class="text-danger">{{form.address2.errors}}</small>
+                          {% endif %}
+<!--                          <input type="text" name="empadd2" class="form-control" value="<?php echo $memdata['empaddress2']; ?>" >-->
+                        </div>
+                        </div>
+                      </div>
+  
+                      <div class="form-group col-md-4">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label">City</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.city name='empcity' class='form-control' %}
+                          {% if form.city.errors %}
+                            <small class="text-danger">{{form.city.errors}}</small>
+                          {% endif %}
+<!--                          <input type="text" name="empcity"  class="form-control" value="<?php echo $memdata['empcity']; ?>" >-->
+                        </div>
+                        </div>
+                      </div>
+  
+                      <div class="form-group col-md-4">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label">State</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.state name='empstate' class='form-control' %}
+                          {% if form.state.errors %}
+                            <small class="text-danger">{{form.state.errors}}</small>
+                          {% endif %}
+<!--                          <input type="text" name="empstate"  class="form-control" value="<?php echo $memdata['empstate']; ?>" >-->
+                        </div>
+                        </div>
+                      </div>
+  
+                      <div class="form-group col-md-4">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label">ZIP Code</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.zip_code name='empzip' class='form-control' %}
+                          {% if form.zip_code.errors %}
+                            <small class="text-danger">{{form.zip_code.errors}}</small>
+                          {% endif %}
+<!--                          <input type="text" name="empzip"  class="form-control" value="<?php echo $memdata['empzipcode'];  ?>"  >-->
+                        </div>
+                        </div>
+                      </div>
+  
+                      <div class="form-group col-md-4">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label">Country</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.country name='empcountry' class='form-control' %}
+                          {% if form.country.errors %}
+                            <small class="text-danger">{{form.country.errors}}</small>
+                          {% endif %}
+<!--                          <input type="text" name="empcountry"  class="form-control" value="<?php echo $memdata['empcountry']; ?>" >-->
+                        </div>
+                        </div>
+                      </div>
+                      <div class="col-md-12 text-center mt-40">
+                        <div class="add_remove_submit">
+<!--                            <a href="editaddmember.php?id=<?php echo  $member_id; ?>"></a>-->
+                            <input type="submit" name="submit" class="btn-submit" value="Save" />
+                            <button type="button" class="btn-submit buttonNext"><a style="color:white;" href="{% url 'patients:advance_directive' idx %}">Next Screen</a></button>
+                        </div>
+                  </div>
+              </div>
+                  </div>
+  
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.1.62/jquery.inputmask.bundle.js"></script>
+<script>
+ function nextFunction(url){
+        window.location = url;
+      }
+  var phones = [{ "mask": "(###) ###-####"}];
+    $('.telephone').inputmask({ 
+        mask: phones, 
+        greedy: false, 
+        definitions: { '#': { validator: "[0-9]", cardinality: 1}} });
+$("input[name='workphone']").each(function(){
+  $(this).on("change keyup paste", function (e) {
+    var output,
+      $this = $(this),
+      input = $this.val();
+    if(e.keyCode != 8) {
+      input = input.replace(/[^0-9]/g, '');
+      var area = input.substr(0, 3);
+      var pre = input.substr(3, 3);
+      var tel = input.substr(6, 4);
+      if (area.length < 3) {
+        output = "(" + area;
+      } else if (area.length == 3 && pre.length < 3) {
+        output = "(" + area + ")" + " " + pre;
+      } else if (area.length == 3 && pre.length == 3) {
+        output = "(" + area + ")" + " " + pre + "-" + tel;
+      }
+      $this.val(output);
+    }
+  });
+});
+</script>
+
+{% endblock %}

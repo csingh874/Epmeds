@@ -1,0 +1,183 @@
+{% extends "base_1.html" %}
+{% block content %}
+{% load static %}
+<div class="latest" style=" border-bottom:1px  dashed #999;">
+    <div class="container">
+
+        <div class="latest-top">
+
+            <div class="col-md-7 trailer">
+                <h3 style="text-align:center; line-height:55px; padding-top:15%;"><b>
+                        <font size="+6">Safety </font>
+                    </b>
+                    <font style="font-family: 'News Cycle', sans-serif; font-size:50px;"> you need,</font><br>
+                    <font style="font-family: 'News Cycle', sans-serif; font-size:50px;">service provided at</font>
+                    <br><b>
+                        <font size="+6">lower cost.</font>
+                    </b>
+                </h3>
+            </div>
+            <div class="col-md-5 trailer-text">
+                <div class="sub-trailer">
+                    <div class="col-md-4 sub-img">
+                        <img src="{% static 'images/image1.png' %}" alt="img07" />
+                    </div>
+                    <div class="col-md-8 sub-text">
+                        <a href="#" style="font-size:24px; font-weight:bold;">Refill Prescriptions</a>
+                        <p>Refill from account ›
+                            <br>
+                            Refill with Rx number ›
+                            <br>
+                            View Rx status </p>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="sub-trailer">
+                    <div class="col-md-4 sub-img">
+                        <img src="{% static 'images/image2.png' %}" alt="img07" />
+                    </div>
+                    <div class="col-md-8 sub-text">
+                        <a href="#" style="font-size:24px; font-weight:bold;"> Manage your Health</a>
+                        <p>Rlancuh your dashboard</p>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="sub-trailer">
+                    <div class="col-md-4 sub-img">
+                        <img src="{% static 'images/image3.png' %}" alt="img07" />
+                    </div>
+                    <div class="col-md-8 sub-text">
+                        <a href="#" style="font-size:24px; font-weight:bold;">Explore – Physician's desktop</a>
+                        <p>Learn more..</p>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+<div class="content" style="background:#EAE9EE;">
+    <div class="container">
+
+        <div class="top-game-grids">
+            <ul id="flexiselDemo1">
+                <li>
+                    <div class="game-grid">
+
+                        <img src="{% static 'images/cr1.jpg' %}" class="img-responsive" alt="" />
+                    </div>
+                </li>
+                <li>
+                    <div class="game-grid">
+
+                        <img src="{% static 'images/cr2.jpg' %}" class="img-responsive" alt="" />
+                    </div>
+                </li>
+                <li>
+                    <div class="game-grid">
+
+                        <img src="{% static 'images/cr3.jpg' %}" class="img-responsive" alt="" />
+                    </div>
+                </li>
+                <li>
+                    <div class="game-grid">
+                        <!-- <h4>Text text</h4>
+         <p>Nulla elementum nunc tempus.</p>-->
+                        <img src="{% static 'images/cr4.jpg' %}" class="img-responsive" alt="" />
+                    </div>
+                </li>
+            </ul>
+
+            <script type="text/javascript">
+            $(window).load(function() {
+                $("#flexiselDemo1").flexisel({
+                    visibleItems: 4,
+                    animationSpeed: 1000,
+                    autoPlay: true,
+                    autoPlaySpeed: 3000,
+                    pauseOnHover: true,
+                    enableResponsiveBreakpoints: true,
+                    responsiveBreakpoints: {
+                        portrait: {
+                            changePoint: 480,
+                            visibleItems: 1
+                        },
+                        landscape: {
+                            changePoint: 640,
+                            visibleItems: 2
+                        },
+                        tablet: {
+                            changePoint: 768,
+                            visibleItems: 3
+                        }
+                    }
+                });
+            });
+            </script>
+            <script type="text/javascript" src="{% static 'js/jquery.flexisel.js' %}"></script>
+        </div>
+    </div>
+</div>
+<div class="list1" style="background:#56acff; padding-top:1%; padding-bottom:1%;">
+    <div class="container">
+        <div class="">
+            <div class="col-md-3 ftr-grid" style="background:#EAE9EE; padding:1%;">
+                <h3 style="color:#000;">Allergy Relief is
+                    a Click Away</h3>
+
+                <ul class="ftr-list">
+                    <li><a href="#" style="color:#000;">Get details ›</a></li>
+
+
+                </ul>
+            </div>
+            <div class="col-md-3 ftr-grid">
+                <h3 style="color:#fff;">Get Immunization
+                    Recommendations</h3>
+                <ul class="ftr-list">
+                    <li><a href="#">Get details ›</a></li>
+
+
+                </ul>
+            </div>
+            <div class="col-md-3 ftr-grid">
+                <h3 style="color:#fff;">Travel
+                    Immunizations</h3>
+                <ul class="ftr-list">
+                    <li><a href="#">Get details ›</a></li>
+
+
+
+                </ul>
+            </div>
+            <div class="col-md-3 ftr-grid">
+                <h3 style="color:#fff;">Health Tips Sent
+                    Straight to Your Inbox</h3>
+                <ul class="ftr-list">
+                    <li><a href="#">Get details ›</a></li>
+
+
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<!-- poster -->
+<div class="poster">
+    <div class="container">
+        <div class="poster-info">
+
+            <form>
+                <div>
+                    <input type="text" style="line-height:36px; border:none; width:50%;"
+                        value="Enter your email adress "> <a class="hvr-bounce-to-bottom"><input type="submit"
+                            value="Sign Up" style="background:transparent; border:none;"> </a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

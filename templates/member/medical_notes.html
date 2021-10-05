@@ -1,0 +1,396 @@
+{% extends "member/base_member.html" %}
+{% block content %}
+{% load static %}
+{% load widget_tweaks %}
+  <section class="form-sec">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+
+      	<div class="parent_of_form">
+         {% include "member/tab_header.html" %}
+          <form method="post">
+            {% csrf_token %}
+         <div class="form-box registration-form mt-40">
+
+
+           <p class="form-head"><img src="{% static 'provider/images/registration.png' %}"/> <strong>Medical Notes</strong></p>
+
+           <div class="row mt-20">
+
+             <div class="col-md-12">
+                <div class="row">
+                <div class="col-md-2"><label class="control-label">Visits</label></div>
+                  <div class="col-md-6 form-group">
+                    {% render_field form.visits %}
+<!--                    <label class="radio-inline"><strong>Internal</strong> </label>-->
+<!--                    <label class="radio-inline"><input type="checkbox" name="form_type_i"> </label>-->
+<!--                    <label class="radio-inline"><strong>External</strong> </label>-->
+<!--            		<label class="radio-inline"><input type="checkbox" name="form_type_e"></label>-->
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <div class="col-md-4"><label class="control-label">Depart Date</label></div>
+                    <div class="col-md-8">
+                        {% render_field form.depart_date type='date' name='depart_date' class='form-control' %}
+                        {% if form.depart_date.errors %}
+                          <small class="text-danger">{{form.depart_date.errors}}</small>
+                        {% endif %}
+<!--                        <input type="date" name="depart_date" class="form-control" >-->
+                    </div>
+                  </div>
+
+                  <div class="col-md-2 form-group">
+                    <div class="col-md-4"><label class="control-label">Time Out</label></div>
+                    <div class="col-md-8">
+                       {% render_field form.time_out name='time_out' class='form-control time_out' %}
+                        {% if form.time_out.errors %}
+                          <small class="text-danger">{{form.time_out.errors}}</small>
+                        {% endif %}
+<!--                        <input type="text" name="time_out"  class="form-control time_out"  required>-->
+                    </div>
+                  </div>
+
+                  <div class="col-md-2 form-group">
+                    <div class="col-md-4"><label class="control-label">Time In</label></div>
+                    <div class="col-md-8">
+                      {% render_field form.time_in name='time_in' class='form-control time_in' %}
+                        {% if form.time_in.errors %}
+                          <small class="text-danger">{{form.time_in.errors}}</small>
+                        {% endif %}
+<!--                        <input type="text" name="time_in" class="form-control time_in" required>-->
+                    </div>
+                  </div>
+
+                  <div class="col-md-2 form-group">
+                    <div class="col-md-4"><label class="control-label">Total Hours</label></div>
+                    <div class="col-md-8">
+                      {% render_field form.total_time name='total_hour' class='form-control total_hour' readonly=True %}
+                        {% if form.total_time.errors %}
+                          <small class="text-danger">{{form.total_time.errors}}</small>
+                        {% endif %}
+<!--                        <input type="text" name="total_hour" class="form-control total_hour"  readonly>-->
+                    </div>
+                  </div>
+
+                </div>
+
+
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <div class="col-md-4"><label class="control-label">Name of Facility Caretaker</label></div>
+                    <div class="col-md-8">
+                      {% render_field form.caretaker_name name='care_taker_name' class='form-control' %}
+                        {% if form.caretaker_name.errors %}
+                          <small class="text-danger">{{form.caretaker_name.errors}}</small>
+                        {% endif %}
+<!--                        <input type="text" name="care_taker_name" class="form-control"  required>-->
+                    </div>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <div class="col-md-4"><label class="control-label">Purpose</label></div>
+                    <div class="col-md-8">
+                      {% render_field form.purpose name='purpose' class='form-control' %}
+                        {% if form.purpose.errors %}
+                          <small class="text-danger">{{form.purpose.errors}}</small>
+                        {% endif %}
+<!--                        <input type="text" name="purpose" class="form-control" >-->
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <div class="col-md-4"><label class="control-label">Name of Provider</label></div>
+                    <div class="col-md-8">
+                      {% render_field form.provider_name name='provider_name' class='form-control' %}
+                        {% if form.provider_name.errors %}
+                          <small class="text-danger">{{form.provider_name.errors}}</small>
+                        {% endif %}
+<!--                        <input type="text" name="provider_name" class="form-control"  >-->
+                    </div>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <div class="col-md-4"><label class="control-label">Telephone</label></div>
+                    <div class="col-md-8">
+                      {% render_field form.telephone name='telephone' class='form-control' %}
+                        {% if form.telephone.errors %}
+                          <small class="text-danger">{{form.telephone.errors}}</small>
+                        {% endif %}
+<!--                        <input type="text" name="telephone" class="form-control telephone"  >-->
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <div class="col-md-4"><label class="control-label">Address</label></div>
+                    <div class="col-md-8">
+                      {% render_field form.address name='address' class='form-control' %}
+                        {% if form.address.errors %}
+                          <small class="text-danger">{{form.address.errors}}</small>
+                        {% endif %}
+<!--                        <textarea  name="address" class="form-control" ></textarea>-->
+                    </div>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <div class="col-md-4"><label class="control-label">City</label></div>
+                    <div class="col-md-8">
+                      {% render_field form.city name='city' class='form-control' %}
+                        {% if form.city.errors %}
+                          <small class="text-danger">{{form.city.errors}}</small>
+                        {% endif %}
+<!--                        <input type="text" name="city" class="form-control"  >-->
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <div class="col-md-4"><label class="control-label">State</label></div>
+                    <div class="col-md-8">
+                      {% render_field form.state name='state' class='form-control' %}
+                        {% if form.state.errors %}
+                          <small class="text-danger">{{form.state.errors}}</small>
+                        {% endif %}
+<!--                    <input type="text" name="state" class="form-control" />-->
+                    </div>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <div class="col-md-4"><label class="control-label">Zip Code</label></div>
+                    <div class="col-md-8">
+                      {% render_field form.zip_code name='zip_code' class='form-control' %}
+                        {% if form.zip_code.errors %}
+                          <small class="text-danger">{{form.zip_code.errors}}</small>
+                        {% endif %}
+<!--                        <input type="text" name="zip" class="form-control"  >-->
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <div class="col-md-4"><label class="control-label">Result</label></div>
+                    <div class="col-md-8">
+                      {% render_field form.result name='result' class='form-control' %}
+                        {% if form.result.errors %}
+                          <small class="text-danger">{{form.result.errors}}</small>
+                        {% endif %}
+<!--                        <input type="text" name="result" class="form-control" />-->
+                    </div>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <div class="col-md-4"><label class="control-label">Follow Up</label></div>
+                    <div class="col-md-8">
+                      {% render_field form.follow_up name='follow_up' class='form-control' %}
+                        {% if form.follow_up.errors %}
+                          <small class="text-danger">{{form.follow_up.errors}}</small>
+                        {% endif %}
+<!--                        <input type="text" name="follow_up" class="form-control"  >-->
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <div class="col-md-4"><label class="control-label">Notes 1</label></div>
+                    <div class="col-md-8">
+                      {% render_field form.notes_1 name='note' class='form-control' %}
+                        {% if form.notes_1.errors %}
+                          <small class="text-danger">{{form.notes_1.errors}}</small>
+                        {% endif %}
+<!--                      <input type="text" name="note" class="form-control" />-->
+                    </div>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <div class="col-md-4"><label class="control-label">Notes 2</label></div>
+                    <div class="col-md-8">
+                      {% render_field form.notes_2 name='note2' class='form-control' %}
+                        {% if form.notes_2.errors %}
+                          <small class="text-danger">{{form.note2.errors}}</small>
+                        {% endif %}
+<!--                      <input type="text" name="note2" class="form-control" />-->
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="radio-inline"><strong>Email notice sent to Authorized Representative</strong> </label>
+                    <label class="radio-inline">{% render_field form.send_email name='auth_email' id="auth_email" %}</label>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label class="radio-inline"><strong>Text notice sent to Authorized Representative</strong> </label>
+              	   <label class="radio-inline">{% render_field form.send_text name="auth_text" id="auth_text" %}</label>
+                  </div>
+                </div>
+                 {% if medical_data %}
+                <div class="col-md-12 table-responsive">
+                 <table class="table datashowmedpr table-bordered table-hover">
+                   <thead>
+                     <tr>
+                       <th>Depart Date</th>
+                       <th>Visits</th>
+                       <th>Total Hours</th>
+                       <th>Name of Caretaker</th>
+                       <th>Purpose</th>
+                       <th>Name of Provider</th>
+                       <th>Telephone</th>
+                       <th>Email Sent</th>
+                       <th>Text Sent</th>
+                       <th>Action</th>
+                     </tr>
+                   </thead>
+                   <tbody id="rowaddmedpr">
+                    {% for row in medical_data %}
+                        <tr>
+                          <td>{{row.depart_date}}</td>
+                          <td>{{row.visits}}</td>
+                          <td>{{row.total_hours}}</td>
+                          <td>{{row.caretaker_name}}</td>
+                          <td>{{row.purpose}}</td>
+                          <td>{{row.provider_name}}</td>
+                          <td>{{row.telephone}}</td>
+                          <td>{{row.send_email}}</td>
+                          <td>{{row.send_text}}</td>
+                          <td><button type="button" class="btn btn-sm btn-danger" onclick="ajax_call({{row.id}})">Delete</button> </td>
+                        </tr>
+                   {% endfor %}
+                   </tbody>
+                 </table>
+             </div>
+                {% endif %}
+             <div class="col-md-12 text-center mt-40">
+              <div class="add_remove_submit">
+                <input type="submit" class="btn-submit" name="submit" value="Save" />
+                <button type="button" class="btn-submit buttonNext"><a style="color:white;" href="{% url 'patients:mar' idx %}">Next Screen</a></button>
+           </div>
+         </div>
+                </div>
+         </div>
+         </div>
+         <!--end of form-box-->
+         </div>
+
+       </form>
+
+     </div>
+     </div>
+     </div>
+
+   </div>
+
+ </section>
+
+<?php include "includes/footer.php" ?>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.1.62/jquery.inputmask.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script>
+ function nextFunction(url){
+        window.location = url;
+  }
+    var phones = [{ "mask": "(###) ###-####"}];
+    $('.telephone').inputmask({
+        mask: phones,
+        greedy: false,
+        definitions: { '#': { validator: "[0-9]", cardinality: 1}} });
+    $('.time_in').inputmask(
+      "hh:mm", {
+        placeholder: "hh:mm",
+        insertMode: false,
+        showMaskOnHover: false,
+        hourFormat: 12
+      }
+    );
+    $('.time_out').inputmask(
+      "hh:mm", {
+        placeholder: "hh:mm",
+        insertMode: false,
+        showMaskOnHover: false,
+        hourFormat: 12
+      }
+    );
+
+$(document).ready(function(){
+  $(".time_in").keyup(function(){
+    var time_in = ($(".time_in").val() != '') ? $(".time_in").val() : 0 ;
+    var time_out = ($(".time_out").val() != '') ? $(".time_out").val() : 0;
+    var total_time = 0;
+    myStart = time_in;
+    myEnd = time_out;
+    if(time_in != '' || time_out != ''){
+      total_time = parseFloat(time_in) - parseFloat(time_out);
+      diff = getTimeDiff(myStart, myEnd)
+      $(".total_hour").val(Math.abs(diff.hours())+":"+Math.abs(diff.minutes()));
+      $("#auth_email").attr('checked', "checked");
+      $("#auth_text").attr('checked', "checked");
+    }else{
+      $(".total_hour").val(0);
+    }
+
+
+  });
+  $(".time_out").keyup(function(){
+    var time_in = ($(".time_in").val() != '') ? $(".time_in").val() : 0 ;
+    var time_out = ($(".time_out").val() != '') ? $(".time_out").val() : 0;
+    var total_time = 0;
+    myStart = time_in;
+    myEnd = time_out;
+    if(time_in != '' || time_out != ''){
+      total_time = parseFloat(time_in) - parseFloat(time_out);
+      diff = getTimeDiff(myStart, myEnd)
+      $(".total_hour").val(Math.abs(diff.hours())+":"+Math.abs(diff.minutes()));
+      //$("#auth_email").attr('checked', "checked");
+    }else{
+      $(".total_hour").val(0);
+    }
+  });
+});
+
+myStart = "01:30 am";
+myEnd = "3:45 am";
+
+function getTimeDiff(start, end) {
+
+  return moment.duration(moment(end, "HH:mm:ss a").diff(moment(start, "HH:mm:ss a")));
+}
+
+diff = getTimeDiff(myStart, myEnd)
+console.log(`${diff.hours()} Hour ${diff.minutes()} minutes`);
+
+</script>
+{% if medical_data %}
+<script>
+    function ajax_call(id){
+         $.ajax({
+              type: 'post',
+              url: "/delete-medical-note",
+              headers: {'X-CSRFToken': getCookie('csrftoken')},
+              data: {'user_idx': id},
+              dataType: 'json',
+              success: function(resp){
+                if (resp.success){
+                    window.location = window.location.href;
+                }
+              }
+            });
+    }
+    function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,135 @@
+{% extends "member/base_member.html" %}
+{% block content %}
+{% load static %}
+{% load widget_tweaks %}
+<section class="form-sec">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+
+      	<div class="parent_of_form">
+         {% include "member/tab_header.html" %}
+
+       <form  method="post">
+         {% csrf_token %}
+         <div class="form-box registration-form mt-40">
+
+           <p class="form-head"><img src="{% static 'provider/images/registration.png' %}"/><strong>Family Medical History</strong></p>
+           <div class="row mt-20">
+
+
+                 <div class="col-md-3 form-group">
+                   <label class="heading-color">Medical Problem</label>
+                   {% render_field form.medical_problem class='form-control' %}
+                     {% if form.medical_problem.errors %}
+                        <small class="text-danger">{{form.medical_problem.errors}}</small>
+                     {% endif  %}
+<!--                   <input type="text" id="medicalprobid" class="form-control"  />-->
+                 </div>
+               <div class="col-md-3 form-group">
+                 <label class="heading-color">Age Started</label>
+                 {% render_field form.age_started class='form-control' %}
+                     {% if form.age_started.errors %}
+                        <small class="text-danger">{{form.age_started.errors}}</small>
+                     {% endif  %}
+<!--                 <input type="text" id="agestartedid" class="form-control"  />-->
+               </div>
+
+         			<div class="col-md-3 form-group">
+         			<label class="heading-color">Relative with Similar Problem</label>
+                      {% render_field form.relative class='form-control' %}
+                      {% if form.relative.errors %}
+                        <small class="text-danger">{{form.relative.errors}}</small>
+                       {% endif  %}
+<!--              <input type="text"  id="relativeid" class="form-control">-->
+
+         			</div>
+                    <div class="col-md-2 form-group">
+         			<label class="heading-color">Relationship</label>
+                      {% render_field form.relationship class='form-control' %}
+                     {% if form.relationship.errors %}
+                        <small class="text-danger">{{form.relationship.errors}}</small>
+                     {% endif  %}
+<!--         			<input type="text" id="relationshipid" class="form-control" />-->
+         			</div>
+            </div>
+
+
+
+         <div class="row">
+             {% if family_data %}
+             <div class="col-md-12 table-responsive">
+                 <table class="table datashowfhs table-bordered table-hover">
+                   <thead>
+                     <tr>
+                       <th>Medical Problem</th>
+                       <th>Age Started</th>
+                       <th>Relative with Similar Problem</th>
+                       <th>Relationship</th>
+                       <th>Delete</th>
+                     </tr>
+                   </thead>
+                   <tbody id="rowaddfhs">
+                    {% for row in family_data %}
+                      <tr>
+                        <td>{{row.medical_problem}}</td>
+                        <td>{{row.age_started}}</td>
+                        <td>{{row.relative}}</td>
+                        <td>{{row.relationship}}</td>
+                        <td><button type="button" class="btn btn-sm btn-danger" onclick="ajax_call({{row.id}})">Delete</button> </td>
+                      </tr>
+                    {% endfor %}
+                   </tbody>
+                 </table>
+             </div>
+             {% endif %}
+         <div class="col-md-12 text-center mt-40">
+          <button type="submit" class="btn-submit">Save</button>
+           <button type="button" class="btn-submit buttonNext"><a style="color:white" href="{% url 'patients:social_history' idx %}">Next Screen</a></button>
+          <!-- <img id="addid" src="images/add.jpg" /> -->
+         </div>
+         </div>
+
+         <!--end of form-box-->
+
+         </div>
+       </form>
+       </div>
+       </div>
+     </div>
+   </div>
+ </section>
+{% if family_data %}
+<script>
+    function ajax_call(id){
+         $.ajax({
+              type: 'post',
+              url: "/delete-family-history",
+              headers: {'X-CSRFToken': getCookie('csrftoken')},
+              data: {'user_idx': id},
+              dataType: 'json',
+              success: function(resp){
+                if (resp.success){
+                    window.location = window.location.href;
+                }
+              }
+            });
+    }
+    function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
+{% endif %}
+{% endblock %}

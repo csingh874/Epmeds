@@ -1,0 +1,48 @@
+{% extends "provider/base_provider.html" %}
+{% block content %}
+{% load static %}
+<style>
+.main_page{
+min-height:713px;
+}
+</style>
+<div class="fix-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="main_sec">
+                    <!-- <div class="welcome_user"><h2>Welcome nametest</h2></div> -->
+                    <div class="main_table table-responsive">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form class="form-inline" method="GET">
+                                    <input type="text" required name="uniqueid" placeholder="Enter Unique id" class="form-control" value="<?php echo (isset($_GET['uniqueid']))?$_GET['uniqueid']:""; ?>">
+                                    <input type="submit" value="Search" class="btn btn-success">
+                                </form>
+                            </div>
+                        </div>
+                    
+                        <table class="table table-bordered pro-doc">
+                            <thead>
+                                <tr>
+                                <th scope="col">Username</th>
+                                <th scope="col">Unique ID</th>
+                                <th scope="col">View</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                <td><?php echo $singledata['username']; ?></td><td><?php echo $singledata['unique_id']; ?></td><td><a class="btn btn-info" href="view.php?member_id=<?php echo $db->encrypt_decrypt("encrypt",$singledata['id']); ?>">View page </a></td>
+                                </tr>
+                                <tr>
+                                <td colspan="3">No Data available !!</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

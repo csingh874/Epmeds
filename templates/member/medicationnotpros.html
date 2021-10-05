@@ -1,0 +1,148 @@
+{% extends "member/base_member.html" %}
+{% block content %}
+{% load static %}
+{% load widget_tweaks %}
+
+<section class="form-sec">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+      	<div class="parent_of_form">
+            {% include "member/tab_header.html" %}
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-box registration-form mt-40">
+                    <p class="form-head"><img src="{% static 'provider/images/registration.png' %}"/><strong>Medications(Not To Be Prescribed)</strong></p>
+                        <div class="row mt-20">
+                        <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-2 form-group">
+                                <label class="heading-color">Date</label>
+                                {% render_field form.drug_date type='date' class='form-control' %}
+                                {% if form.drug_date.errors %}
+                                    <small class="text-danger">{{form.drug_date.errors}}</small>
+                                {% endif %}
+<!--                                <input type="date" id="dateid" class="form-control"  />-->
+                            </div>
+                            <div class="col-md-3">
+                                <label class="heading-color">Drug ID</label>
+                                {% render_field form.drug_id class='form-control' %}
+                                {% if form.drug_id.errors %}
+                                    <small class="text-danger">{{form.drug_id.errors}}</small>
+                                {% endif %}
+                                <!-- <input type="text" id="mnemonicid" class="form-control"  /> -->
+<!--                                <input type="text" id="automplete-3" class="mnemonicid form-control" placeholder="Enter first four characters of drug"/>-->
+<!--                                <img src="images/loading.gif" width="20" alt="Loading Image" id="loadingImage" style="display:none;"/>-->
+                            </div>
+                            <div class="col-md-2 form-group" >
+                                <label class="heading-color">Drug Name</label>
+                                {% render_field form.drug_name class='form-control' %}
+                                {% if form.drug_name.errors %}
+                                    <small class="text-danger">{{form.drug_name.errors}}</small>
+                                {% endif %}
+<!--                                <input type="text" id="brandid" class="form-control" />-->
+                            </div>
+                              <div class="col-md-2 form-group">
+                                  <label class="heading-color">Generic Name</label>
+                                  {% render_field form.generic class='form-control' %}
+                                  {% if form.generic.errors %}
+                                    <small class="text-danger">{{form.generic.errors}}</small>
+                                  {% endif %}
+<!--                                  <input type="text" id="genericnameid" class="form-control" />-->
+                              </div>
+                            <div class="col-md-2 form-group">
+                                <label class="heading-color">Form & Strength</label>
+                                {% render_field form.form_strength class='form-control' %}
+                                  {% if form.form_strength.errors %}
+                                    <small class="text-danger">{{form.form_strength.errors}}</small>
+                                  {% endif %}
+<!--                                <input type="text" id="formstid" class="form-control" />-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           <div class="row">
+               {% if medicine_data %}
+             <div class="col-md-12 table-responsive">
+                 <table class="table datashowmednotpr table-bordered table-hover">
+                   <thead>
+                     <tr>
+                       <th>Date</th>
+                       <th>Drug ID</th>
+                       <th>Drug Name</th>
+                       <th>Generic Name</th>
+                       <th>Form & Strength</th>
+                         <th>Delete</th>
+                     </tr>
+                   </thead>
+                   <tbody id="rowaddmednotpr">
+                    {% for row in medicine_data %}
+                        <tr>
+                            <td>{{row.drug_date}}</td>
+                            <td>{{row.drug_id}}</td>
+                            <td>{{row.drug_name}}</td>
+                            <td>{{row.generic}}</td>
+                            <td>{{row.form_strength}}</td>
+                            <td><button type="button" class="btn btn-sm btn-danger" onclick="ajax_call({{row.id}})">Delete</button></td>
+                        </tr>
+                   {% endfor %}
+                   </tbody>
+                 </table>
+             </div>
+               {% endif %}
+         <input type="hidden" value="0" id="DeleteRecordData"/>
+         <div class="col-md-12 text-center mt-40">
+          <input type="submit" class="btn-submit" value="Save" />
+             <button type="button" class="btn-submit buttonNext"><a style="color:white;" href="{% url 'patients:lab' idx %}">Next Screen</a></button>
+          <!-- <img id="addid" src="images/add.jpg" /> -->
+        </div>
+           </div>
+
+
+         </div>
+
+         <!--end of form-box-->
+
+       </form>
+     </div>
+     </div>
+     </div>
+     </div>
+     </section>
+   </div>
+</section>
+{% if medicine_data %}
+<script>
+    function ajax_call(id){
+         $.ajax({
+              type: 'post',
+              url: "/delete-not-prescribe-med",
+              headers: {'X-CSRFToken': getCookie('csrftoken')},
+              data: {'user_idx': id},
+              dataType: 'json',
+              success: function(resp){
+                if (resp.success){
+                    window.location = window.location.href;
+                }
+              }
+            });
+    }
+    function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
+{% endif %}
+
+{% endblock %}

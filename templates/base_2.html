@@ -1,0 +1,43 @@
+{# HTML5 declaration #}
+{% load static %}
+<!DOCTYPE html>
+<html>
+    {# Make modifiable head elements #}
+    <head>
+        <title>{% block title %}Home {% endblock title %}</title>
+        <link href="{% static 'css/bootstrap.css' %}" rel='stylesheet' type='text/css' />
+        <link href="{% static 'css/style.css' %}" rel='stylesheet' type='text/css' />
+        <link href="{% static 'images/favicon.png' %}" rel="icon" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="" />
+        <script type="application/x-javascript">
+            addEventListener("load", function() {
+                setTimeout(hideURLbar, 0);
+            }, false);
+
+          function hideURLbar() {
+                window.scrollTo(0, 1);
+          }
+         </script>
+
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.js' %}"></script>
+        <link href='http://fonts.googleapis.com/css?family=News+Cycle' rel='stylesheet' type='text/css'>
+    </head>
+    <body>
+        <!-- Navbar-->
+        {%include 'navbar.html'%}
+        <!--Banner-->
+        {%include 'top_banner.html'%}
+        <!--Slider-->
+        {%include 'slider_2.html'%}
+
+        <div>
+            {% block content%} {%endblock%}
+        </div>
+
+        <!--Footer-->
+        {%include 'footer.html'%}
+    </body>
+</html>

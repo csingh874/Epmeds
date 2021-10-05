@@ -1,0 +1,182 @@
+{% extends "member/base_member.html" %}
+{% block content %}
+{% load static %}
+{% load widget_tweaks %}
+
+ <style>
+   .ui-autocomplete {
+            max-height: 200px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+            /* add padding to account for vertical scrollbar */
+            padding-right: 20px;
+        }
+ </style>
+    <section class="form-sec">
+        <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+      	    <div class="parent_of_form">
+            {% include "member/tab_header.html" %}
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-box registration-form mt-40">
+                    <p class="form-head"><img src="{% static 'provider/images/registration.png' %}"/><strong>Diagnosis</strong></p>
+           <div class="row mt-20">
+             <div class="col-md-12">
+             <!-- <div class="col-md-12 form-group">
+                 <label class="checkbox-inline"><input type="checkbox" value="">No Medications</label>
+              </div> -->
+               <div class="row">
+                 <div class="col-md-2 form-group">
+                   <label class="heading-color">Admit/Visit Date</label>
+                       {% render_field form.admit_date type='date' class="form-control" %}
+                            {% if form.admit_date.errors %}
+                                <small class="text-danger">{{form.admit_date.errors}}</small>
+                            {% endif %}
+<!--                   <input type="date" name="visitdate" id="visitdateid" class="form-control"  />-->
+                 </div>
+                 <div class="col-md-2 form-group">
+                   <label class="heading-color">Code Type</label>
+                       {% render_field form.code_type class="form-control" %}
+                            {% if form.code_type.errors %}
+                                <small class="text-danger">{{form.code_type.errors}}</small>
+                            {% endif %}
+<!--                   <select name="code_type" class="form-control" id="code_type">-->
+<!--                    <option value="icdnine">ICD9</option>-->
+<!--                    <option value="icdten">ICD10</option>-->
+<!--                   </select>-->
+                 </div>
+                 <div class="col-md-2 form-group">
+                   <label class="heading-color">Provider</label>
+                       {% render_field form.provider class="form-control" %}
+                            {% if form.provider.errors %}
+                                <small class="text-danger">{{form.provider.errors}}</small>
+                            {% endif %}
+<!--                   <select name="assign_provider" class="form-control" id="assign_provider">-->
+<!--                    <option value="">&#45;&#45; Select Provider &#45;&#45;</option>-->
+<!--                    <?php-->
+<!--                      foreach($providerData as $proData){-->
+<!--                    ?>-->
+<!--                      <option value="<?php echo $proData['id']; ?>"><?php echo $proData['username']; ?></option>-->
+<!--                    <?php } ?>-->
+<!--                   </select>-->
+<!--                   <input type="hidden" name="provider_name" id="provider_name"/>-->
+                 </div>
+               <div class="col-md-3 form-group">
+                 <label class="heading-color">Diagnosis Code</label>
+                 <!-- <input type="text" id="digncodeid" class="form-control automplete-3" autocomplete="off" /> -->
+                     {% render_field form.diagnosis_code class="form-control" %}
+                            {% if form.diagnosis_code.errors %}
+                                <small class="text-danger">{{form.diagnosis_code.errors}}</small>
+                            {% endif %}
+<!--                 <input type="text" id="digncodeid" name="digncode" class="form-control automplete-3"  />-->
+               </div>
+
+         			<div class="col-md-3">
+         			<label class="heading-color">Description</label>
+                          {% render_field form.description class="form-control" %}
+                            {% if form.description.errors %}
+                                <small class="text-danger">{{form.description.errors}}</small>
+                            {% endif %}
+<!--              <textarea name="description" id="descriptionid" class="form-control code_desc" cols="6" rows="6"></textarea>-->
+         			<!-- <input type="text" id="testnameid" class="form-control" /> -->
+         			</div>
+              <div class="col-md-3">
+                <label class="heading-color">Facility</label>
+                    {% render_field form.facility class="form-control" %}
+                            {% if form.facility.errors %}
+                                <small class="text-danger">{{form.facility.errors}}</small>
+                            {% endif %}
+<!--              <input type="text" class="form-control" id="facilityid" name="facility" value="">-->
+              </div>
+              <!-- <div class="col-md-1">
+              <label class="heading-color">Add</label>
+              <a class="add-link" href="javascript:void(0)" onclick="adddignosis();"><img src="images/add.jpg" /></a>
+              </div> -->
+              <br> <br> <br> <br> <br> <br> <br>
+              <div class="row">
+                <br>
+                  {% if diagnosis_data %}
+             <div class="col-md-12 table-responsive">
+                 <table class="table datashowdign table-bordered table-hover">
+                   <thead>
+                     <tr>
+                       <th>Admit/Visit Date</th>
+                       <th>Provider Name</th>
+                       <th>Code Type</th>
+                       <th>Diagnosis Code</th>
+                       <th>Description</th>
+                       <th>Facility</th>
+                       <th>Delete</th>
+                     </tr>
+                   </thead>
+                   <tbody>
+                    {% for row in diagnosis_data %}
+                        <tr>
+                            <td>{{row.admit_date}}</td>
+                            <td>{{row.provider}}</td>
+                            <td>{{row.code_type}}</td>
+                            <td>{{row.diagnosis_code}}</td>
+                            <td>{{row.description}}</td>
+                            <td>{{row.facility}}</td>
+                            <td><button type="button" class="btn btn-sm btn-danger" onclick="ajax_call({{row.id}})">Delete</button></td>
+                        </tr>
+                   {% endfor %}
+                   </tbody>
+                 </table>
+             </div>
+            {% endif %}
+         <div class="col-md-12 text-center mt-40">
+          <button type="submit"  class="btn-submit">Save</button>
+             <button type="button" class="btn-submit buttonNext"><a style="color:white;" href="{% url 'patients:vaccination_procedure' idx %}">Next Screen</a></button>
+          <!-- <img id="addid" src="images/add.jpg" /> -->
+        </div>
+           </div>
+            </div>
+           </div>
+         </div>
+         <!--end of form-box-->
+         </div>
+       </form>
+       </div>
+       </div>
+     </div>
+   </div>
+ </section>
+
+{% if diagnosis_data %}
+<script>
+    function ajax_call(id){
+         $.ajax({
+              type: 'post',
+              url: "/delete-diagnosis",
+              headers: {'X-CSRFToken': getCookie('csrftoken')},
+              data: {'user_idx': id},
+              dataType: 'json',
+              success: function(resp){
+                if (resp.success){
+                    window.location = window.location.href;
+                }
+              }
+            });
+    }
+    function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
+{% endif %}
+{% endblock %}

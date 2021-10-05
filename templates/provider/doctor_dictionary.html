@@ -1,0 +1,338 @@
+{% extends "provider/base_provider.html" %}
+{% block content %}
+{% load static %}
+{% load widget_tweaks %}
+<section class="form-sec">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+            <div class="parent_of_form">
+            <div class="form_body">
+            <form method="POST">{% csrf_token %}
+            <div class="form-box registration-form mt-20">
+              <p class="form-head"><img src="{% static '/provider/images/registration.png' %}"/><strong>Doctor's Dictionary</strong></p>
+              <!-- <p><img src="../images/edit.png" class="edit-img" /><a href="#">Click here to autofill the main fields below with your default account data.</a></p>
+              <p><strong>Note:</strong> As the account owner, we will continue to send secure communications regarding all members of your account to the email address provided when you set up your account. To change your account settings, <a href="#">please click here.</a></p>
+              <p>Registration information specific to each member you add to your account will only appear in association with their individual patient profiles.</p>-->
+              <div class="row mt-20">
+                <div class="col-md-12">
+                    <div class="custom_control">
+                    <div class="row">
+                    <div class="form-group col-md-4">
+                        <div class="col-md-4">
+                          <label for=""><span></span>Date</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.rec_date type="date" class="form-control" name="date" %}
+                          {% if form.rec_date.errors %}
+                            <small class="text-danger">{{form.rec_date.errors}}</small>
+                          {% endif %}
+<!--                          <input type="date" class="form-control" id="" name="date" value="{{form.rec_date}}">-->
+                        </div>
+                    </div>
+                  <div class="form-group col-md-4">
+                    <div class="col-md-4">
+                      <label class="control-label"><span>#</span> Account</label>
+                    </div>
+                    <div class="col-md-8">
+                          {% render_field form.account readonly=True class="form-control"%}
+                          {% if form.account.errors %}
+                            <small class="text-danger">{{form.account.errors}}</small>
+                          {% endif %}
+<!--                      <input type="text" name="account" required="required" class="form-control" value="{{form.account}}" >-->
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                  </div>
+                  </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                <div class="custom_control">
+                    <div class="row">
+                  <div class="form-group col-md-4">
+                    <div class="col-md-4">
+                      <label class="control-label"><span>*</span>Last Name</label>
+                    </div>
+                    <div class="col-md-8">
+                      {% render_field form.last_name class="form-control"%}
+                          {% if form.last_name.errors %}
+                            <small class="text-danger">{{form.last_name.errors}}</small>
+                          {% endif %}
+<!--                      <input type="text" name="lastname" required="required" class="form-control" value="{{provider_data.last_name}}" >-->
+                    </div>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <div class="col-md-4">
+                      <label class="control-label">First Name</label>
+                    </div>
+                    <div class="col-md-8">
+                      {% render_field form.first_name class="form-control"%}
+                          {% if form.first_name.errors %}
+                            <small class="text-danger">{{form.first_name.errors}}</small>
+                          {% endif %}
+<!--                      <input type="text" name="firstname" class="form-control" value="{{provider_data.first_name}}" >-->
+                    </div>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <div class="col-md-4">
+                      <label class="control-label"><span>*</span>Middle Initiative</label>
+                    </div>
+                    <div class="col-md-8">
+                        {% render_field form.middle_initiative class="form-control"%}
+                          {% if form.middle_initiative.errors %}
+                            <small class="text-danger">{{form.middle_initiative.errors}}</small>
+                          {% endif %}
+<!--                      <input type="text" name="middle" required="required" class="form-control" value="{{provider_data.middle_name}}">-->
+                    </div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                  <div class="col-md-12">
+                      <div class="custom_control">
+                        <div class="row">
+                          <div class="form-group col-md-8">
+                              <div class="col-md-2">
+                                  <label class="control-label">Address</label>
+                              </div>
+                              <div class="col-md-10">
+                                {% render_field form.address class="form-control"%}
+                          {% if form.address.errors %}
+                            <small class="text-danger">{{form.address.errors}}</small>
+                          {% endif %}
+<!--                                  <textarea name="address" class="form-control">{{provider_data.address}}</textarea>-->
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                <div class="col-md-12">
+                <div class="custom_control">
+                    <div class="row">
+                  <div class="form-group col-md-4" >
+                    <div class="col-md-4">
+                      <label class="control-label">City</label>
+                    </div>
+                    <div class="col-md-8">
+                      {% render_field form.city class="form-control"%}
+                          {% if form.city.errors %}
+                            <small class="text-danger">{{form.city.errors}}</small>
+                          {% endif %}
+<!--                      <input type="text" name="city" class="form-control" value="{{provider_data.city}}" >-->
+                    </div>
+                  </div>
+                  <div class="form-group col-md-4" >
+                    <div class="col-md-4">
+                      <label class="control-label">State</label>
+                    </div>
+                    <div class="col-md-8">
+                          {% render_field form.state class="form-control"%}
+                          {% if form.state.errors %}
+                            <small class="text-danger">{{form.state.errors}}</small>
+                          {% endif %}
+<!--                      <input type="text" name="state" class="form-control" value="{{provider_data.state}}" >-->
+                    </div>
+                  </div>
+                  <div class="form-group col-md-4" >
+                    <div class="col-md-4">
+                      <label class="control-label">Zip Code</label>
+                    </div>
+                    <div class="col-md-8">
+                          {% render_field form.zip_code class="form-control"%}
+                          {% if form.zip_code.errors %}
+                            <small class="text-danger">{{form.zip_code.errors}}</small>
+                          {% endif %}
+<!--                      <input type="text" name="zip" class="form-control" value="{{provider_data.zip_code}}" >-->
+                    </div>
+  
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                <div class="custom_control">
+                    <div class="row">
+                  <div class="form-group col-md-4" >
+                    <div class="col-md-4">
+                      <label class="control-label">Email Address</label>
+                    </div>
+                    <div class="col-md-8">
+                      {% render_field form.email type="email" class="form-control"%}
+                          {% if form.email.errors %}
+                            <small class="text-danger">{{form.email.errors}}</small>
+                          {% endif %}
+<!--                      <input type="text" name="email"  class="form-control" value="{{provider_data.email}}" >-->
+                    </div>
+                  </div>
+                  <div class="form-group col-md-4" >
+                    <div class="col-md-4">
+                      <label class="control-label">Telephone No.</label>
+                    </div>
+                    <div class="col-md-8">
+                      {% render_field form.telephone class="form-control telephone" %}
+                          {% if form.telephone.errors %}
+                            <small class="text-danger">{{form.telephone.errors}}</small>
+                          {% endif %}
+<!--                      <input type="text" name="telephone" class="form-control telephone" value="{{provider_data.phone}}" >-->
+                    </div>
+                  </div>
+                  <div class="form-group col-md-4" >
+                    </div>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-md-12">
+                <div class="custom_control">
+                    <div class="row">
+                  <div class="form-group col-md-4">
+                    <div class="col-md-4">
+                      <label class="control-label"><span>*</span>Specialty</label>
+                    </div>
+                    <div class="col-md-8">
+                      {% render_field form.speciality class="form-control"%}
+                          {% if form.speciality.errors %}
+                            <small class="text-danger">{{form.speciality.errors}}</small>
+                          {% endif %}
+<!--                      <select name="speciality" class="form-control" required>-->
+<!--                        <option>{{provider_data.speciality}}</option>-->
+<!--                        <option value="Physician">Physician</option>-->
+<!--                        <option value="Dentist">Dentist</option>-->
+<!--                      </select>-->
+                    </div>
+                  </div>
+                  <div class="form-group col-md-4" >
+                  </div>
+                  <div class="form-group col-md-4" >
+                    </div>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-md-12">
+                <div class="custom_control">
+                    <div class="row">
+                  <div class="form-group col-md-8" >
+                    <div class="col-md-2">
+                      <label class="control-label"><span>*</span>Name of Doctor’s Group</label>
+                    </div>
+                    <div class="col-md-10">
+                      {% render_field form.dr_grp class="form-control" %}
+                          {% if form.dr_grp.errors %}
+                            <small class="text-danger">{{form.dr_grp.errors}}</small>
+                          {% endif %}
+<!--                      <input type="text" class="form-control" name="doctorgroup" value="{{provider_data.name_of_doctors_group}}"  />-->
+                    </div>
+                  </div>
+                  <div class="form-group col-md-4" >
+                    <div class="col-md-4">
+                      <label class="control-label"> Telephone No.</label>
+                    </div>
+                    <div class="col-md-8">
+                       {% render_field form.telephone2 class="form-control telephone" %}
+                          {% if form.telephone2.errors %}
+                            <small class="text-danger">{{form.telephone2.errors}}</small>
+                          {% endif %}
+<!--                      <input name="dgtelephone" maxlength="100" type="text"  class="form-control telephone_no" value="{{provider_data.phone_2}}"  >-->
+                    </div>
+                  </div>
+  
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-md-12">
+                <div class="custom_control">
+                    <div class="row">
+                  <div class="form-group col-md-8" >
+                    <div class="col-md-2">
+                      <label class="control-label">Address</label>
+                    </div>
+                    <div class="col-md-10">
+                         {% render_field form.address2 class="form-control" %}
+                          {% if form.address2.errors %}
+                            <small class="text-danger">{{form.address2.errors}}</small>
+                          {% endif %}
+<!--                      <textarea name="dgaddress" class="form-control">{{provider_data.address_2}}</textarea>-->
+                    </div>
+                  </div>
+                  <div class="form-group col-md-4" >
+  
+                  </div>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-md-12">
+                <div class="custom_control">
+                    <div class="row">
+                  <div class="form-group col-md-4">
+                    <div class="col-md-4">
+                      <label class="control-label">City</label>
+                    </div>
+                    <div class="col-md-8">
+                        {% render_field form.city2 class="form-control" %}
+                          {% if form.city2.errors %}
+                            <small class="text-danger">{{form.city2.errors}}</small>
+                          {% endif %}
+<!--                      <input name="dgcity" type="text" class="form-control" value="{{provider_data.city_2}}" >-->
+                    </div>
+                  </div>
+                  <div class="form-group col-md-4" >
+                    <div class="col-md-4">
+                      <label class="control-label">State</label>
+                    </div>
+                    <div class="col-md-8">
+                        {% render_field form.state2 class="form-control" %}
+                          {% if form.state2.errors %}
+                            <small class="text-danger">{{form.state2.errors}}</small>
+                          {% endif %}
+<!--                      <input type="text" name="dgstate" class="form-control" value="{{provider_data.state_2}}" >-->
+                    </div>
+  
+                  </div>
+                  <div class="form-group col-md-4" >
+                    <div class="col-md-4">
+                      <label class="control-label">Zip Code</label>
+                    </div>
+                    <div class="col-md-8">
+                        {% render_field form.zip_code2 class="form-control" %}
+                          {% if form.zip_code2.errors %}
+                            <small class="text-danger">{{form.zip_code2.errors}}</small>
+                          {% endif %}
+<!--                      <input type="text" name="dgzipcode" class="form-control" value="{{provider_data.zip_code_2}}"  >-->
+                    </div>
+                    </div></div>
+                  </div>
+                </div>
+            </div>
+            <div class="row">
+            <div class="col-md-12 text-center mt-40">
+            <div class="add_remove_submit">
+              <input type="submit" name="submit" class="btn-submit" value="Submit and Proceed" />
+              <!-- <input type="submit" class="btn-cancel" value="Cancel" /> -->
+            </div>
+            </div>
+            </div>
+            </div>
+          </form>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.1.62/jquery.inputmask.bundle.js"></script>
+<script>
+  var phones = [{ "mask": "(###) ###-####"}];
+    $('.telephone').inputmask({ 
+        mask: phones, 
+        greedy: false, 
+        definitions: { '#': { validator: "[0-9]", cardinality: 1}} });
+    $('.telephone_no').inputmask({ 
+        mask: phones, 
+        greedy: false, 
+        definitions: { '#': { validator: "[0-9]", cardinality: 1}} });
+</script>
+{% endblock %}

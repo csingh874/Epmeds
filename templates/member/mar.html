@@ -1,0 +1,411 @@
+{% extends "member/base_member.html" %}
+{% block content %}
+{% load static %}
+{% load widget_tweaks %}
+ <style>
+
+   .ui-autocomplete {
+            max-height: 200px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+            /* add padding to account for vertical scrollbar */
+            padding-right: 20px;
+        }
+
+ </style>
+ <link rel="stylesheet" href="laravel/public/css/jquery-ui.css">
+<section class="form-sec">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+
+      	<div class="parent_of_form">
+         {% include "member/tab_header.html" %}
+       <form action="" method="post">
+         {% csrf_token %}
+
+         <div class="form-box registration-form mt-40">
+           <p class="form-head"><img src="{% static 'provider/images/registration.png' %}"/> <strong>MAR</strong></p>
+           <div class="row mt-20">
+             <div class="col-md-12">
+                <div class="row">
+                <div class="col-md-6 form-group">
+                    <div class="col-md-4"><label class="control-label">Date</label></div>
+                    <div class="col-md-8">
+                        {% render_field form.rec_date type='date' class='form-control' %}
+<!--                        <input type="date" name="date" class="form-control" required>-->
+                    </div>
+                </div>
+
+
+                  <div class="col-md-6 form-group">
+                    <div class="col-md-4"><label class="control-label">Name of Caregiver</label></div>
+                    <div class="col-md-8">
+                        {% render_field form.caregiver_name class='form-control' %}
+                        {% if form.caregiver_name.errors %}
+                            <small class="text-danger">{{form.caregiver_name.errors}}</small>
+                        {% endif %}
+<!--                        <input type="text" name="before_bed" class="form-control"  placeholder="Lastname, Firstname">-->
+                    </div>
+                  </div>
+
+        </div>
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <div class="col-md-4"><label class="control-label">Drug ID</label></div>
+                    <div class="col-md-8">
+                        {% render_field form.drug_id class='form-control' %}
+                        {% if form.drug_id.errors %}
+                            <small class="text-danger">{{form.drug_id.errors}}</small>
+                        {% endif %}
+<!--                        <input type="text" name="drug_id" class="form-control" id="automplete-3" placeholder="Enter first four characters of drug">-->
+<!--                        <img src="images/loading.gif" width="20" alt="Loading Image" id="loadingImage" style="display:none;"/>-->
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 form-group">
+                    <div class="col-md-4"><label class="control-label">Drug Name</label></div>
+                    <div class="col-md-8">
+                        {% render_field form.drug_name class='form-control' %}
+                        {% if form.drug_name.errors %}
+                            <small class="text-danger">{{form.drug_name.errors}}</small>
+                        {% endif %}
+<!--                        <input type="text" name="medication" id="drugnameid" class="form-control"  required>-->
+                    </div>
+                  </div>
+
+                </div>
+
+                <table class="table datashowmedpr table-bordered table-hover" >
+                 <thead>
+                     <tr>
+                       <th>Dispensing</th>
+                       <th>Morning</th>
+                       <th>Afternoon</th>
+                       <th>Evening</th>
+                     </tr>
+                   </thead>
+                   <thead>
+                     <tr>
+                       <td>With Food</td>
+                       <td>
+                          <div class="col-md-12">
+                              {% render_field form.with_food_morning name="m_w_food" id="m_w_food" class="form-control" placeholder="hh:mm" %}
+                                {% if form.with_food_morning.errors %}
+                                    <small class="text-danger">{{form.with_food_morning.errors}}</small>
+                                {% endif %}
+<!--                              <input type="text" name="m_w_food" id="m_w_food" class="form-control" placeholder="hh:mm" autocomplete="true">-->
+                          </div>
+                       </td>
+                       <td>
+                          <div class="col-md-12">
+                              {% render_field form.with_food_afternoon name="a_w_food" id="a_w_food" class="form-control"  placeholder="hh:mm" %}
+                                {% if form.with_food_afternoon.errors %}
+                                    <small class="text-danger">{{form.with_food_afternoon.errors}}</small>
+                                {% endif %}
+<!--                              <input type="text" name="a_w_food" id="a_w_food" class="form-control"  placeholder="hh:mm">-->
+                          </div>
+                       </td>
+                       <td>
+                          <div class="col-md-12">
+<!--                              <input type="text" name="e_w_food" id="e_w_food" class="form-control" placeholder="hh:mm" >-->
+                              {% render_field form.with_food_evening name="e_w_food" id="e_w_food" class="form-control" placeholder="hh:mm" %}
+                                {% if form.with_food_evening.errors %}
+                                    <small class="text-danger">{{form.with_food_evening.errors}}</small>
+                                {% endif %}
+                          </div>
+                       </td>
+                     </tr>
+                     <tr>
+                       <td>W/O Food</td>
+                       <td>
+                          <div class="col-md-12">
+                              {% render_field form.without_food_morning name="m_food" id="m_food" class="form-control"  placeholder="hh:mm" %}
+                                {% if form.without_food_morning.errors %}
+                                    <small class="text-danger">{{form.without_food_morning.errors}}</small>
+                                {% endif %}
+<!--                              <input type="text" name="m_food" id="m_food" class="form-control" placeholder="hh:mm">-->
+                          </div>
+                       </td>
+                       <td>
+                          <div class="col-md-12">
+                              {% render_field form.without_food_afternoon name="a_food" id="a_food" class="form-control"  placeholder="hh:mm" %}
+                                {% if form.without_food_afternoon.errors %}
+                                    <small class="text-danger">{{form.without_food_afternoon.errors}}</small>
+                                {% endif %}
+<!--                              <input type="text" name="a_food" id="a_food" class="form-control"  placeholder="hh:mm">-->
+                          </div>
+                       </td>
+                       <td>
+                          <div class="col-md-12">
+                              {% render_field form.without_food_evening name="e_food" id="e_food" class="form-control"  placeholder="hh:mm" %}
+                                {% if form.without_food_evening.errors %}
+                                    <small class="text-danger">{{form.without_food_evening.errors}}</small>
+                                {% endif %}
+<!--                              <input type="text" name="e_food" id="e_food" class="form-control"  placeholder="hh:mm">-->
+                          </div>
+                       </td>
+                     </tr>
+                   </thead>
+                </table>
+
+
+                <!-- <div class="row">
+                <div class="col-md-12"><label class="control-label">Morning</label></div>
+
+                  <div class="col-md-6 form-group">
+                    <div class="col-md-4"><label class="control-label">W/Food</label></div>
+                    <div class="col-md-8">
+                        <input type="text" name="m_w_food" id="m_w_food" class="form-control"  required autocomplete="true">
+                    </div>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <div class="col-md-4"><label class="control-label">w/o Food</label></div>
+                    <div class="col-md-8">
+                        <input type="text" name="m_food" id="m_food" class="form-control" >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                <div class="col-md-12"><label class="control-label">Afternoon</label></div>
+                  <div class="col-md-6 form-group">
+                    <div class="col-md-4"><label class="control-label">W/Food</label></div>
+                    <div class="col-md-8">
+                        <input type="text" name="a_w_food" id="a_w_food" class="form-control"  >
+                    </div>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <div class="col-md-4"><label class="control-label">w/o Food</label></div>
+                    <div class="col-md-8">
+                        <input type="text" name="a_food" id="a_food" class="form-control telephone"  >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                <div class="col-md-12"><label class="control-label">Evening</label></div>
+                  <div class="col-md-6 form-group">
+                    <div class="col-md-4"><label class="control-label">W/Food</label></div>
+                    <div class="col-md-8">
+                        <input type="text" name="e_w_food" id="e_w_food" class="form-control"  >
+                    </div>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <div class="col-md-4"><label class="control-label">w/o Food</label></div>
+                    <div class="col-md-8">
+                        <input type="text" name="e_food" id="e_food" class="form-control"  >
+                    </div>
+                  </div>
+                </div> -->
+
+                {% if mar_data %}
+                <div class="col-md-12 table-responsive">
+                 <table class="table datashowmedpr table-bordered table-hover">
+                 <thead>
+                     <tr>
+                       <th colspan="4"></th>
+                       <th colspan="2" style="text-align:center;">---Morning---</th>
+                       <th colspan="2" style="text-align:center;">---Afternoon---</th>
+                       <th colspan="2" style="text-align:center;">---Evening---</th>
+                       <th colspan="2"></th>
+                     </tr>
+                   </thead>
+                   <thead>
+                     <tr>
+                       <th>Date</th>
+                       <th>Caregiver</th>
+                       <th>Drug ID</th>
+                       <th>Drug Name</th>
+                       <th>W/Food</th>
+                       <th>w/o Food</th>
+                       <th>W/Food</th>
+                       <th>w/o Food</th>
+                       <th>W/Food</th>
+                       <th>w/o Food</th>
+                       <th>Action</th>
+                     </tr>
+                   </thead>
+
+                   <tbody id="rowaddmedpr">
+                   {% for row in mar_data %}
+                        <tr>
+                          <td>{{row.rec_date}}</td>
+                          <td>{{row.caregiver_name}}</td>
+                          <td>{{row.drug_id}}</td>
+                          <td>{{row.drug_name}}</td>
+                          <td>{{row.with_food_morning}}</td>
+                          <td>{{row.with_food_afternoon}}</td>
+                          <td>{{row.with_food_evening}}</td>
+                          <td>{{row.without_food_morning}}</td>
+                          <td>{{row.without_food_afternoon}}</td>
+                          <td>{{row.without_food_evening}}</td>
+                          <td><button type="button" class="btn btn-sm btn-danger" onclick="ajax_call({{row.id}})">Delete</button></td>
+                          </tr>
+                  {% endfor %}
+                   </tbody>
+                 </table>
+             </div>
+                 {% endif %}
+                        <div class="col-md-12 text-center mt-40">
+                            <div class="add_remove_submit">
+                                       <input type="submit" class="btn-submit" name="submit" value="Save" />
+                                       <button type="button" class="btn-submit buttonNext"><a style="color:white;" href="{% url 'patients:communication_log' idx %}">Next Screen</a></button>
+                            </div>
+                        </div>
+                </div>
+             </div>
+         </div>
+
+         <!--end of form-box-->
+
+
+
+         </div>
+
+       </form>
+
+     </div>
+     </div>
+     </div>
+
+   </div>
+
+ </section>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.1.62/jquery.inputmask.bundle.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script>
+ function nextFunction(url){
+        window.location = url;
+  }
+    $(document).ready(function(){
+
+      $('#m_w_food').inputmask(
+      "hh:mm", {
+        placeholder: "00:00",
+        insertMode: false,
+        showMaskOnHover: false,
+        hourFormat: 12
+      }
+    );
+    $('#m_food').inputmask(
+      "hh:mm", {
+        placeholder: "00:00",
+        insertMode: false,
+        showMaskOnHover: false,
+        hourFormat: 12
+      }
+    );
+    $('#a_w_food').inputmask(
+      "hh:mm", {
+        placeholder: "00:00",
+        insertMode: false,
+        showMaskOnHover: false,
+        hourFormat: 12
+      }
+    );
+    $('#a_food').inputmask(
+      "hh:mm", {
+        placeholder: "00:00",
+        insertMode: false,
+        showMaskOnHover: false,
+        hourFormat: 12
+      }
+    );
+
+$('#e_w_food').inputmask(
+      "hh:mm", {
+        placeholder: "00:00",
+        insertMode: false,
+        showMaskOnHover: false,
+        hourFormat: 12
+      }
+    );
+    $('#e_food').inputmask(
+      "hh:mm", {
+        placeholder: "00:00",
+        insertMode: false,
+        showMaskOnHover: false,
+        hourFormat: 12
+      }
+    );
+
+
+            $( "#automplete-3" ).autocomplete({
+              source: function (request, response) {
+                var datas = [];
+                $("#loadingImage").fadeIn();
+                $.ajax({
+                      async :true,
+                    crossDomain : true,
+                    type: 'GET',
+                    url: 'FDBAPI.php',
+                    dataType: 'json',
+                    data: { name : request.term, functionCall : 'getMedician'},
+                    success: function (result) {
+                        var methodresults = result;
+                        console.log(methodresults.Items);
+                        if(methodresults.status != "500")
+                        {
+                          $("#loadingImage").fadeOut();
+                          response($.map(methodresults.Items, function (item) {
+                              return { label: item.DispensableDrugDesc , value: item.GenericDispensableDrugID };
+                              //return { label: item.DrugNameID +" - "+  item.DrugNameDesc , value: item.DrugNameDesc };
+                          }));
+                        }  else{
+                          response({label: "Server Error" , value: "No Data Found" });
+                        }
+                    }
+                });
+              },
+              minLength: 4
+            }).on('autocompleteselect', function (e, ui) {
+                var t = $(this),
+                    details = $('#drugnameid'),
+                    label = (e.type == 'autocompleteresponse' ? ui.content[0].label : ui.item.label),
+                    value = (e.type == 'autocompleteresponse' ? ui.content[0].value : ui.item.value);
+                //var name = label.split('-')[0].trim();
+                t.val(value);
+                details.val(label);
+
+                return false;
+            });
+    });
+</script>
+{% if mar_data %}
+<script>
+    function ajax_call(id){
+         $.ajax({
+              type: 'post',
+              url: "/delete-mar",
+              headers: {'X-CSRFToken': getCookie('csrftoken')},
+              data: {'user_idx': id},
+              dataType: 'json',
+              success: function(resp){
+                if (resp.success){
+                    window.location = window.location.href;
+                }
+              }
+            });
+    }
+    function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
+{% endif %}
+
+{% endblock %}

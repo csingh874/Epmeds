@@ -1,0 +1,179 @@
+{% extends "member/base_member.html" %}
+{% block content %}
+{% load static %}
+{% load widget_tweaks %}
+<section class="form-sec">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+      	<div class="parent_of_form">
+            {% include "member/tab_header.html" %}
+            <form  method="post">
+                {% csrf_token %}
+                <div class="form-box registration-form mt-40">
+                    <p class="form-head"><img src="{% static 'provider/images/registration.png' %}" /><strong>Insaurance Plans</strong></p>
+                    <div class="row mt-20">
+                        <div class="col-md-4 form-group">
+                            <label class="heading-color">Insurance Company</label>
+                            {% render_field form.insurance_company class="form-control" id="insurcompid" %}
+                            {% if form.insurance_company.errors %}
+                            <small class="text-danger">{{form.insurance_company.errors}}</small>
+                            {% endif %}
+<!--                            <input type="text" class="form-control" id="insurcompid"/>-->
+                        </div>
+                        <div class="col-md-4 form-group selat">
+                            <label class="heading-color">Policyholder Info</label>
+                                {% render_field form.policy_holder id="polholinid" class="form-control" %}
+                                     {% if form.policy_holder.errors %}
+                                    <small class="text-danger">{{form.policy_holder.errors}}</small>
+                                    {% endif %}
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label class="heading-color">Holder's Relationship to Member</label>
+                                {% render_field form.relationship id="holrlmemid" class="form-control" %}
+                            {% if form.relationship.errors %}
+                                    <small class="text-danger">{{form.relationship.errors}}</small>
+                                    {% endif %}
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label class="heading-color">Group #</label>
+                            {% render_field form.group_name class='form-control' %}
+                            {% if form.group_name.errors %}
+                                    <small class="text-danger">{{form.group_name.errors}}</small>
+                                    {% endif %}
+<!--                            <input type="text"  id="groupid"  class="form-control" />-->
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label class="heading-color">Policy #</label>
+                            {% render_field form.policy class='form-control' id='polid' %}
+                            {% if form.policy.errors %}
+                                    <small class="text-danger">{{form.policy.errors}}</small>
+                            {% endif %}
+
+<!--                            <input type="text" id="polid" class="form-control" />-->
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label class="heading-color">	Telephone</label>
+                            {% render_field form.telephone class='form-control telephone' id='polprid' %}
+                            {% if form.telephone.errors %}
+                                    <small class="text-danger">{{form.telephone.errors}}</small>
+                            {% endif %}
+<!--                            <input type="text" id="polprid" class="form-control telephone" />-->
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label class="heading-color">	Policy Start Date</label>
+                            {% render_field form.policy_start_date class='form-control' type="date" id='polstartid' %}
+                            {% if form.policy_start_date.errors %}
+                                    <small class="text-danger">{{form.policy_start_date.errors}}</small>
+                            {% endif %}
+<!--                            <input type="date" id="polstartid" class="form-control" />-->
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label class="heading-color">Policy End Date</label>
+                            {% render_field form.policy_end_date class='form-control' type="date" id='polendid' %}
+                            {% if form.policy_end_date.errors %}
+                                    <small class="text-danger">{{form.policy_end_date.errors}}</small>
+                            {% endif %}
+<!--                            <input type="date" id="polendid" class="form-control" />-->
+                        </div>
+                        <div class="col-md-3">
+                            <label class="heading-color">Comments</label>
+                            {% render_field form.comments class='form-control' id='commentid' %}
+                            {% if form.comments.errors %}
+                                    <small class="text-danger">{{form.comments.errors}}</small>
+                            {% endif %}
+<!--                            <input type="text" id="commentid" class="form-control" />-->
+                        </div>
+                    </div>
+                    <div class="row">
+                        {% if policy_data %}
+                      <div class="col-md-12 table-responsive">
+                          <table class="table datashowpol table-bordered table-hover">
+                            <thead>
+                              <tr>
+                                <th>Insurance Company</th>
+                                <th>Policyholder Info</th>
+                                <th>Holder's Relationship to Member</th>
+                                <th>Group #</th>
+                                <th>Policy #</th>
+                                <th>Policy Priority</th>
+                                <th>Policy Start Date</th>
+                                <th>Policy End Date</th>
+                                <th>Comments</th>
+                                <th>Delete</th>
+                              </tr>
+                            </thead>
+                            <tbody id="rowaddpol">
+                                {% for row in policy_data %}
+                                <tr>
+                                    <td>{{ row.insurance_company }}</td>
+                                    <td>{{ row.policy_holder }}</td>
+                                    <td>{{ row.relationship }}</td>
+                                    <td>{{ row.group_name }}</td>
+                                    <td>{{ row.policy }}</td>
+                                    <td>{{ row.telephone }}</td>
+                                    <td>{{ row.policy_start_date }}</td>
+                                    <td>{{ row.policy_end_date }}</td>
+                                    <td>{{ row.comments }}</td>
+                                    <td><button type="button" class="btn btn-sm btn-danger" onclick="ajax_call({{row.id}})">Delete</button> </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                          </table>
+                    </div>
+                        {% endif %}
+        <div class="col-md-12 text-center mt-40">
+          <input type="submit"  class="btn-submit" value="Save">
+          <button type="button" class="btn-submit buttonNext"><a style="color:white;" href="{% url 'patients:allergy' idx %}">Next Screen</a></button>
+        </div>
+    </div>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+</div>
+</section>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.1.62/jquery.inputmask.bundle.js"></script>
+<script>
+  var phones = [{ "mask": "(###) ###-####"}];
+    $('.telephone').inputmask({
+        mask: phones,
+        greedy: false,
+        definitions: { '#': { validator: "[0-9]", cardinality: 1}} });
+</script>
+{% if policy_data %}
+<script>
+    function ajax_call(id){
+         $.ajax({
+              type: 'post',
+              url: "/insurance-delete",
+              headers: {'X-CSRFToken': getCookie('csrftoken')},
+              data: {'user_idx': id },
+              dataType: 'json',
+              success: function(resp){
+                if (resp.success){
+                    window.location = window.location.href;
+                }
+              }
+            });
+    }
+
+    function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "member/base_member.html" %}
+{% block content %}
+{% load static %}
+<style>
+.ui-autocomplete {
+    max-height: 200px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+    /* add padding to account for vertical scrollbar */
+    padding-right: 20px;
+}
+</style>
+
+<section class="form-sec">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="parent_of_form">
+                    <div class="form-box registration-form mt-40">
+                        <p class="form-head"><img src="{% static 'provider/images/registration.png' %}"/> <strong>Who View My Record</strong>
+                        </p>
+                        <div>
+                            <table class="table table-stripped" id="mytable">
+                                <thead>
+                                    <tr>
+                                        <th> # </th>
+                                        <th> Access By </th>
+                                        <th> Date Viewed </th>
+                                        <th> Action Done </th>
+                                        <th> Data Accessed </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for row in data %}
+                                    <tr>
+                                        <td> {{forloop.counter}} </td>
+                                        <td>{{row.access_by}} </td>
+                                        <td>{{row.create_date}} </td>
+                                        <td>{{row.action}} </td>
+                                        <td>{{row.data_access}} </td>
+
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+<script src="{% static 'provider/js/jquery.dataTables.min.js' %}" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#mytable').dataTable({
+        "lengthMenu": [
+            [20, 45, 100, -1],
+            [20, 45, 100, "All"]
+        ],
+        "aaSorting": [
+            [2, "desc"]
+        ]
+    });
+});
+</script>
+{% endblock %}

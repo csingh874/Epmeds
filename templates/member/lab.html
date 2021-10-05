@@ -1,0 +1,173 @@
+{% extends "member/base_member.html" %}
+{% block content %}
+{% load static %}
+{% load widget_tweaks %}
+<section class="form-sec">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+      	<div class="parent_of_form">
+        {% include "member/tab_header.html" %}
+        <form method="post">
+            {% csrf_token %}
+             <div class="form-box registration-form mt-40">
+                <p class="form-head"><img src="{% static 'provider/images/registration.png' %}"/><strong>Laboratory</strong></p>
+                <div class="row mt-20">
+                     <div class="row">
+                         <div class="col-md-3 form-group">
+                            <label class="heading-color">Date</label>
+                             {% render_field form.rec_date class="form-control" type='date' %}
+                             {% if form.rec_date.errors %}
+                                <small class="text-danger">{{form.rec_date.errors}}</small>
+                             {% endif %}
+<!--                            <input type="date" id="dateid" class="form-control"  />-->
+                         </div>
+                         <div class="col-md-3 form-group">
+                             <label class="heading-color">CPT Code</label>
+                             {% render_field form.cpt_code class="form-control" %}
+                             {% if form.cpt_code.errors %}
+                                <small class="text-danger">{{form.cpt_code.errors}}</small>
+                             {% endif %}
+<!--                             <input type="text" id="cptcodeid" class="form-control"  />-->
+                         </div>
+                         <div class="col-md-3 form-group">
+                            <label class="heading-color">Name of Test</label>
+                             {% render_field form.test_name class="form-control" %}
+                             {% if form.test_name.errors %}
+                                <small class="text-danger">{{form.test_name.errors}}</small>
+                             {% endif %}
+<!--                            <input type="text" id="testnameid" class="form-control" />-->
+                         </div>
+                          <div class="col-md-3 form-group">
+                              <label class="heading-color">Result</label>
+                              {% render_field form.result class="form-control" %}
+                             {% if form.result.errors %}
+                                <small class="text-danger">{{form.result.errors}}</small>
+                             {% endif %}
+<!--                              <input type="text" id="resultid" class="form-control" />-->
+                          </div>
+                          <div class="col-md-3 form-group">
+                            <label class="heading-color">Out-of-Range</label>
+                            {% render_field form.out_of_range class="form-control" %}
+                            {% if form.out_of_range.errors %}
+                                <small class="text-danger">{{form.out_of_range.errors}}</small>
+                            {% endif %}
+<!--                                <input type="text" id="outofrangeid" class="form-control" />-->
+                          </div>
+                          <div class="col-md-3 form-group">
+                            <label class="heading-color">In-Range</label>
+                            {% render_field form.in_range class="form-control" %}
+                            {% if form.in_range.errors %}
+                                <small class="text-danger">{{form.in_range.errors}}</small>
+                            {% endif %}
+<!--                            <input type="text" id="inrangeid" class="form-control" />-->
+                          </div>
+                          <div class="col-md-3 form-group">
+                            <label class="heading-color">Expected</label>
+                            {% render_field form.expected class="form-control" %}
+                            {% if form.expected.errors %}
+                                <small class="text-danger">{{form.expected.errors}}</small>
+                            {% endif %}
+<!--                            <input type="text" id="expectedid" class="form-control" />-->
+                          </div>
+                          <div class="col-md-2 form-group">
+                            <label class="heading-color">Flag</label>
+                            {% render_field form.flag class="form-control" %}
+                            {% if form.flag.errors %}
+                                <small class="text-danger">{{form.flag.errors}}</small>
+                            {% endif %}
+<!--                            <input type="text" id="flagid" class="form-control" />-->
+                          </div>
+                    </div>
+            <div class="row">
+                {% if lab_data %}
+             <div class="col-md-12 table-responsive">
+                 <table class="table datashowlab table-bordered table-hover">
+                   <thead>
+                     <tr>
+                       <th>Date</th>
+                       <th>CPT Code</th>
+                       <th>Name of Test</th>
+                       <th>Result</th>
+                       <th>Out-of-Range</th>
+                       <th>In-Range</th>
+                       <th>Expected</th>
+                       <th>Flag</th>
+                         <th>Delete</th>
+                     </tr>
+                   </thead>
+                   <tbody id="rowaddlab">
+                        {% for row in lab_data %}
+                        <tr>
+                            <td>{{row.rec_date}}</td>
+                            <td>{{row.cpt_code}}</td>
+                            <td>{{row.test_name}}</td>
+                            <td>{{row.result}}</td>
+                            <td>{{row.out_of_range}}</td>
+                            <td>{{row.in_range}}</td>
+                            <td>{{row.expected}}</td>
+                            <td>{{row.flag}}</td>
+                            <td><button type="button" class="btn btn-sm btn-danger" onclick="ajax_call({{row.id}})">Delete</button></td>
+                        </tr>
+                        {% endfor %}
+                   </tbody>
+                 </table>
+             </div>
+                {% endif %}
+         <div class="col-md-12 text-center mt-40">
+          <button type="submit" class="btn-submit">Save</button>
+             <button type="button" class="btn-submit buttonNext"><a style="color:white;" href="{% url 'patients:diagnosis' idx %}">Next Screen</a></button>
+          <!-- <img id="addid" src="images/add.jpg" /> -->
+        </div>
+           </div>
+
+           </div>
+
+
+         </div>
+
+         <!--end of form-box-->
+
+         </div>
+       </form>
+     </div>
+     </div>
+     </div>
+   </div>
+ </section>
+{% if lab_data %}
+<script>
+    function ajax_call(id){
+         $.ajax({
+              type: 'post',
+              url: "/delete-lab",
+              headers: {'X-CSRFToken': getCookie('csrftoken')},
+              data: {'user_idx': id},
+              dataType: 'json',
+              success: function(resp){
+                if (resp.success){
+                    window.location = window.location.href;
+                }
+              }
+            });
+    }
+    function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
+{% endif %}
+
+
+{% endblock %}

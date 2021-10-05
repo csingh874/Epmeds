@@ -1,0 +1,273 @@
+{% extends "member/base_member.html" %}
+{% block content %}
+{% load static %}
+{% load widget_tweaks %}
+<style>
+.ui-autocomplete {
+    max-height: 200px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+    /* add padding to account for vertical scrollbar */
+    padding-right: 20px;
+}
+ul {
+    display: flex;
+}
+ ul li label{
+        margin-left: 10px;
+    }
+</style>
+<section class="form-sec">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="parent_of_form">
+                    {% include "member/tab_header.html" %}
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-box registration-form mt-40">
+                            <p class="form-head"><img src="{% static 'provider/images/registration.png' %}" /><strong>Medications Prescribed</strong></p>
+                            <div class="row mt-20">
+                                <div class="col-md-12 form-group">
+                                    <label class="checkbox-inline">{% render_field form.no_medication %} No Medications</label>
+                                </div>
+                                <div class="col-md-3 ">
+                                    <label class="heading-color">Drug ID</label>
+                                    {% render_field form.drug_id class="form-control" %}
+                                    {% if form.drug_id.errors %}
+                                    <small class="text-danger">{{form.drug_id.errors}}</small>
+                                    {% endif %}
+                                    <!-- <input type="text" id="mnemonicid " class="form-control select-state"  /> -->
+<!--                                    <input type="text" id="automplete-3" class="mnemonicid form-control"-->
+<!--                                        placeholder="Enter first four characters of drug" name="mnemonic" required>-->
+<!--                                    <img src="images/loading.gif" width="20" alt="Loading Image" id="loadingImage"-->
+<!--                                        style="display:none;" />-->
+                                    <!-- <select id="mnemonicid" multiple class="form-control demo-default select-states" placeholder="Select a state...">
+                    <option> Data</option>
+                    <option> Data</option>
+                    <option> Data</option>
+                 </select> -->
+                                    <!--<select name="example" placeholder="Choose some technologies..." id="mnemonicid" multiple="multiple" class="select-states">
+    <option value="front-end">Front End</option>
+    <option value="back-end">Back-End</option>
+    <option value="designer">Designer</option>
+
+  </select> -->
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label class="heading-color">Drug Name</label>
+                                    {% render_field form.drug_name class="form-control" %}
+                                    {% if form.drug_name.errors %}
+                                    <small class="text-danger">{{form.drug_name.errors}}</small>
+                                    {% endif %}
+<!--                                    <input type="text" id="drugnameid" class="form-control" name="drugname" required />-->
+
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label class="heading-color">Active (y/n)</label>
+                                    <div id="radivid" class="form-check form-check-inline">
+                                        {% render_field form.drug_active %}
+                                        {% if form.drug_active.errors %}
+                                            <small class="text-danger">{{form.drug_active.errors}}</small>
+                                        {% endif %}
+<!--                                        <input class="form-check-input" id="active1id" type="radio" name="active"-->
+<!--                                            checked value="y">-->
+<!--                                        <label class="form-check-label" for="inlineCheckbox1">Yes</label>-->
+<!--                                        <input class="form-check-input" id="active2id" type="radio" name="active"-->
+<!--                                            value="n">-->
+<!--                                        <label class="form-check-label" for="inlineCheckbox2">No</label>-->
+                                    </div>
+                                    <!-- <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="active" value="n">
+                    <label class="form-check-label" for="inlineCheckbox2">No</label>
+                  </div> -->
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label class="heading-color">Form</label>
+                                    {% render_field form.drug_form class="form-control" %}
+                                    {% if form.drug_form.errors %}
+                                    <small class="text-danger">{{form.drug_form.errors}}</small>
+                                    {% endif %}
+<!--                                    <input type="text" id="formstid" class="form-control" name="formstrength" />-->
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <label class="heading-color">strength</label>
+                                    {% render_field form.drug_strength class="form-control" %}
+                                    {% if form.drug_strength.errors %}
+                                    <small class="text-danger">{{form.drug_strength.errors}}</small>
+                                    {% endif %}
+<!--                                    <input type="text" id="strengthid" class="form-control" name="strength" />-->
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label class="heading-color">Directions</label>
+                                    {% render_field form.directions class="form-control" %}
+                                    {% if form.directions.errors %}
+                                    <small class="text-danger">{{form.directions.errors}}</small>
+                                    {% endif %}
+<!--                                    <input type="text" id="directionid" class="form-control" name="directions" />-->
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label class="heading-color">Date Started</label>
+                                    {% render_field form.start_date type='date' class="form-control" %}
+                                    {% if form.start_date.errors %}
+                                    <small class="text-danger">{{form.start_date.errors}}</small>
+                                    {% endif %}
+<!--                                    <input type="date" id="datesid" class="form-control" name="dates" required-->
+<!--                                        value="<?php echo date("Y-m-d"); ?>" />-->
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label class="heading-color">Date Stopped</label>
+                                    {% render_field form.stop_date type='date' class="form-control" %}
+                                    {% if form.stop_date.errors %}
+                                    <small class="text-danger">{{form.stop_date.errors}}</small>
+                                    {% endif %}
+<!--                                    <input type="date" id="datestid" class="form-control" name="datest" />-->
+                                </div>
+
+                                <div class="col-md-3 form-group">
+                                    <label class="heading-color">Prescribing Doctor
+                                        <span style="float: left;position: absolute; right:0px;">Search Doctor
+                                            <input type="checkbox" id="searchDoctor" />
+                                        </span>
+                                    </label>
+                                    {% render_field form.prescribing_doctor class="form-control" id="dr_name" %}
+                                    {% render_field form.dr_id class="form-control" id="dr_id" %}
+                                    {% if form.prescribing_doctor.errors %}
+                                        <small class="text-danger">{{form.prescribing_doctor.errors}}</small>
+                                    {% endif %}
+<!--                                    <input type="text" id="prescribid" class="form-control" name="prescribingdoctor"-->
+<!--                                        required>-->
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label class="heading-color">Trade/Generic Name (T/G)</label>
+                                    {% render_field form.trade_generic class="form-control" %}
+                                    {% if form.trade_generic.errors %}
+                                        <small class="text-danger">{{form.trade_generic.errors}}</small>
+                                    {% endif %}
+<!--                                    <input type="text" id="tradeid" class="form-control" name="trade">-->
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label class="heading-color">Comments</label>
+                                    {% render_field form.comments class="form-control" %}
+                                    {% if form.comments.errors %}
+                                        <small class="text-danger">{{form.comments.errors}}</small>
+                                    {% endif %}
+<!--                                    <textarea name="comment" id="commentid" class="form-control"></textarea>-->
+                                </div>
+                                <!-- <div class="col-md-2 form-group">
+              <label class="heading-color">Add</label>
+              <a class="add-link" href="javascript:void(0)" onclick="addmedicine();"><img src="images/add.jpg" /></a>
+              </div> -->
+                            </div>
+
+                            <div class="row">
+                                {% if medicine_data %}
+                                <div class="col-md-12 table-responsive">
+                                    <table class="table datashowmedpr table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Drug ID</th>
+                                                <th>Drug Name</th>
+                                                <th>Active (y/n)</th>
+                                                <th>Form</th>
+                                                <th>Strenth</th>
+                                                <th>Directions</th>
+                                                <th>Date Started</th>
+                                                <th>Date Stopped</th>
+                                                <th>Comments</th>
+                                                <th>Prescribing Doctor</th>
+                                                <th>Trade/Generic Name (T/G)</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                {% for row in medicine_data %}
+                                                   <td>{{row.drug_id}}</td>
+                                                   <td>{{row.drug_name}}</td>
+                                                   <td>{{row.drug_active}}</td>
+                                                   <td>{{row.drug_form}}</td>
+                                                   <td>{{row.drug_strength}}</td>
+                                                   <td>{{row.directions}}</td>
+                                                   <td>{{row.start_date}}</td>
+                                                   <td>{{row.stop_date}}</td>
+                                                   <td>{{row.comments}}</td>
+                                                   <td>{% if row.prescribing_doctor %}{{row.prescribing_doctor}}{% else %}{{row.dr_id}}{% endif %}</td>
+                                                   <td>{{row.trade_generic}}</td>
+                                                   <td><button type="button" class="btn btn-sm btn-danger" onclick="ajax_call({{row.id}})">Delete</button></td>
+                                                {% endfor %}
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                {% endif %}
+                                <div class="col-md-12 text-center mt-40">
+                                    <!-- <button type="button" onclick="addmedicine();" class="btn-submit">Save</button> -->
+                                    <button type="submit" class="btn-submit">Save</button>
+                                    <button type="button" class="btn-submit buttonNext"><a style="color:white;" href="{% url 'patients:not_to_prescribe_medication' idx %}">Next Screen</a></button>
+                                    <!-- <img id="addid" src="images/add.jpg" /> -->
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    </div>
+    </div>
+</section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$('#dr_id').hide();
+  $('#searchDoctor').on('click', function(){
+      var check_box = $('#searchDoctor').is(':checked');
+      if(check_box == true){
+        $('#dr_id').show();
+        $('#dr_name').hide();
+      }
+      else{
+        $('#dr_id').hide();
+        $('#dr_name').show();
+      }
+  });
+ </script>
+{% if medicine_data %}
+<script>
+    function ajax_call(id){
+         $.ajax({
+              type: 'post',
+              url: "/delete-prescribe-med",
+              headers: {'X-CSRFToken': getCookie('csrftoken')},
+              data: {'user_idx': id},
+              dataType: 'json',
+              success: function(resp){
+                if (resp.success){
+                    window.location = window.location.href;
+                }
+              }
+            });
+    }
+    function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,409 @@
+{% extends "member/base_member.html" %}
+{% block content %}
+{% load static %}
+{% load widget_tweaks %}
+<section class="form-sec">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+      	<div class="parent_of_form">
+            {% include 'member/tab_header.html'%}
+          <div class="form_body">
+            <form method="post">
+              {% csrf_token %}
+              <div class="form-box registration-form mt-40">
+                <p class="form-head"><img src="{% static 'provider/images/registration.png' %}"/> <strong>Physicians/Other Medical Providers/Facilities</strong></p>
+                <p><strong>Note:</strong> Note: The names that are found in our auto-complete search come from a variety of third party sources, most notably the National Provider Identifier (NPI).<p>
+                <p>If you see any errors or misspellings, please contact our support staff. We always verify contact information before we send patient data to an office location for the first time.</p>
+                <div class="row mt-20 medical-provider">
+                  <div class="col-md-2 form-group">
+                    <label class="heading-color">Date</label>
+                    {% render_field form.rec_date type="date" name="mpdate" id="mpdateid" class="form-control" %}
+<!--                    <input type="date" name="mpdate" id="mpdateid" class="form-control"/>-->
+                  </div>
+              <!-- <div class="col-md-2 form-group">
+                <label class="heading-color">Medical Contact</label>
+                <input type="text" name="mpmcontact" id="mpmdcontactid" class="form-control"  />
+              </div> -->
+              <div class="col-md-3 form-group">
+                  <label class="heading-color">Last name 
+                    <span style="float: left;position: absolute; right:0px;">Search Doctor
+                    <input type="checkbox" id="searchDoctor"/>
+                      </span>
+                  </label>
+                    {% render_field form.last_name name="mplastname" class="form-control" id="mplastname" %}
+                    {% render_field form.doctor_id  class="form-control" id="searchDoctList"  %}
+<!--                  <input type="text" name="mplastname" class="form-control" id="mplastname" />-->
+<!--                  <?php-->
+<!--                    if(isset($allMember)){-->
+<!--                  ?>-->
+<!--                  <select id="searchDoctList" style="display: none;" class="form-control">-->
+<!--                  <option>&#45;&#45; Select Doctor&#45;&#45;</option>-->
+<!--                      <?php -->
+<!--                        foreach($allMember as $d){-->
+<!--                          ?>-->
+<!--                            <option value="<?= $d['lastname'].", ".$d['firstname'] ?>" data-value="<?= $d['firstname'] ?>" data-html="<?= $d['telephone'] ?>" data-address="<?= $d['address'] ?>" data-zipcode="<?= $d['zipcode'] ?>"><?= $d['lastname']. " ". $d['firstname']?></option>-->
+<!--                          <?php-->
+<!--                        }-->
+<!--                      ?>-->
+<!--                    -->
+<!--                  </select>-->
+<!--                    <?php } ?>-->
+              </div>
+              <div class="col-md-3 form-group">
+                  <label class="heading-color">First name</label>
+                {% render_field form.first_name name="mpfirstname" class="form-control" id="mpfirstname" %}
+<!--                  <input type="text" name="mpfirstname" class="form-control" id="mpfirstname" />-->
+              </div>
+              <div class="col-md-3 form-group">
+                <label class="heading-color">Holder's Relationship to Member</label>
+                  {% render_field form.holders_relationship class="form-control" %}
+<!--                <select class="form-control" name="mprole" id="mproleid" >-->
+<!--                  <option value="" selected="">Select Role</option>-->
+<!--                  <option value="262">Acupuncturist</option>-->
+<!--                  <option value="303">Addiction Counselor</option>-->
+<!--                  <option value="157">Addiction Medicine</option>-->
+<!--                  <option value="162">Adolescent Medicine</option>-->
+<!--                  <option value="139">Allergy &amp; Immunology</option>-->
+<!--                  <option value="163">Ambulatory Care</option>-->
+<!--                  <option value="101">Anesthesiologist</option>-->
+<!--                  <option value="304">Anesthesiology Assistant</option>-->
+<!--                  <option value="305">Art Therapy</option>-->
+<!--                  <option value="335">Athletic Trainer</option>-->
+<!--                  <option value="260">Audiologist</option>-->
+<!--                  <option value="308">Behavioral Analyst</option>-->
+<!--                  <option value="164">Behavioral Health</option>-->
+<!--                  <option value="165">Blood Banking</option>-->
+<!--                  <option value="102">Cardiology</option>-->
+<!--                  <option value="156">Cardiovascular Surgeon</option>-->
+<!--                  <option value="279">Care Manager</option>-->
+<!--                  <option value="271">Case Management</option>-->
+<!--                  <option value="103">Chiropractor</option>-->
+<!--                  <option value="309">Christian Science Practitioner/Nurse</option>-->
+<!--                  <option value="167">Clinic Physician</option>-->
+<!--                  <option value="270">Clinical Neurophysiology</option>-->
+<!--                  <option value="269">Clinical Neuropsychologist</option>-->
+<!--                  <option value="166">Clinical Nurse Specialist</option>-->
+<!--                  <option value="150">Colorectal Surgeon</option>-->
+<!--                  <option value="168">Community Health</option>-->
+<!--                  <option value="250">Counselor</option>-->
+<!--                  <option value="311">Critical Care Medicine</option>-->
+<!--                  <option value="306">Dance Therapy</option>-->
+<!--                  <option value="307">Dental Assistant</option>-->
+<!--                  <option value="268">Dental Hygienist</option>-->
+<!--                  <option value="132">Dentist</option>-->
+<!--                  <option value="312">Denturist</option>-->
+<!--                  <option value="104">Dermatology</option>-->
+<!--                  <option value="173">Development and Rehabilitative Services</option>-->
+<!--                  <option value="313">Developmental Therapy</option>-->
+<!--                  <option value="169">Diagnostic Services</option>-->
+<!--                  <option value="170">Dietician</option>-->
+<!--                  <option value="292">Emergency Medicine</option>-->
+<!--                  <option value="105">Emergency Physician</option>-->
+<!--                  <option value="106">Endocrinology</option>-->
+<!--                  <option value="133">Endodontics</option>-->
+<!--                  <option value="146">ER Physician</option>-->
+<!--                  <option value="171">Eye &amp; Vision Care</option>-->
+<!--                  <option value="295">Eye Bank</option>-->
+<!--                  <option value="4">Family Medicine</option>-->
+<!--                  <option value="172">Family Planning</option>-->
+<!--                  <option value="107">Family Practitioner</option>-->
+<!--                  <option value="263">Family Therapist</option>-->
+<!--                  <option value="108">Gastroenterology</option>-->
+<!--                  <option value="109">General Practice</option>-->
+<!--                  <option value="314">Genetic Counselor</option>-->
+<!--                  <option value="255">Geneticist</option>-->
+<!--                  <option value="110">Geriatric Medicine</option>-->
+<!--                  <option value="176">Gynecology</option>-->
+<!--                  <option value="177">Healthcare Provider</option>-->
+<!--                  <option value="400">Healthcare Provider Location</option>-->
+<!--                  <option value="111">Hematology</option>-->
+<!--                  <option value="175">Hematology &amp; Oncology</option>-->
+<!--                  <option value="315">Hepatology</option>-->
+<!--                  <option value="296">Home Health Aid</option>-->
+<!--                  <option value="316">Homeopath</option>-->
+<!--                  <option value="256">Hospice and Palliative Medicine</option>-->
+<!--                  <option value="174">Hospice Worker</option>-->
+<!--                  <option value="7">Hospital for pregnancy delivery</option>-->
+<!--                  <option value="178">Hospitalist</option>-->
+<!--                  <option value="112">Immunology</option>-->
+<!--                  <option value="182">Infectious Disease</option>-->
+<!--                  <option value="147">Intensivist</option>-->
+<!--                  <option value="113">Internal Medicine</option>-->
+<!--                  <option value="297">Interpreter</option>-->
+<!--                  <option value="317">Kinesiotherapist</option>-->
+<!--                  <option value="185">Legal Medicine</option>-->
+<!--                  <option value="5">Local Pharmacy</option>-->
+<!--                  <option value="318">Lodging Facility</option>-->
+<!--                  <option value="6">Mail-In Pharmacy</option>-->
+<!--                  <option value="181">Managed Care Organization</option>-->
+<!--                  <option value="194">Massage Therapy</option>-->
+<!--                  <option value="187">Maternal &amp; Fetal Medicine</option>-->
+<!--                  <option value="319">Mechanotherapist</option>-->
+<!--                  <option value="100">Medical Care Team</option>-->
+<!--                  <option value="114">Medical Genetics</option>-->
+<!--                  <option value="179">Mental Health</option>-->
+<!--                  <option value="180">Midwife</option>-->
+<!--                  <option value="321">Military Medical Technician</option>-->
+<!--                  <option value="320">Military Provider</option>-->
+<!--                  <option value="322">Music Therapy</option>-->
+<!--                  <option value="323">Naprapath</option>-->
+<!--                  <option value="278">Naturopath</option>-->
+<!--                  <option value="115">Nephrology</option>-->
+<!--                  <option value="116">Neurologist</option>-->
+<!--                  <option value="324">Neuromuscular Medicine</option>-->
+<!--                  <option value="325">Neuromusculoskeletal Medicine</option>-->
+<!--                  <option value="144">Neuropsychiatrist</option>-->
+<!--                  <option value="273">Neuropsychologist</option>-->
+<!--                  <option value="140">Neurosurgeon</option>-->
+<!--                  <option value="265">Nuclear Medicine</option>-->
+<!--                  <option value="159">Nurse</option>-->
+<!--                  <option value="184">Nurse Anesthetist</option>-->
+<!--                  <option value="153">Nurse Practitioner</option>-->
+<!--                  <option value="183">Nursing Service Providers</option>-->
+<!--                  <option value="326">Nutritionist</option>-->
+<!--                  <option value="117">OB/GYN</option>-->
+<!--                  <option value="186">Occupational Medicine</option>-->
+<!--                  <option value="143">Occupational Therapy</option>-->
+<!--                  <option value="258">Occupational Therapy Assistant</option>-->
+<!--                  <option value="118">Oncology</option>-->
+<!--                  <option value="119">Ophthalmology</option>-->
+<!--                  <option value="145">Optician</option>-->
+<!--                  <option value="121">Optometry</option>-->
+<!--                  <option value="158">Oral &amp; Maxillofacial Surgeon</option>-->
+<!--                  <option value="134">Oral Surgeon</option>-->
+<!--                  <option value="135">Orthodontics</option>-->
+<!--                  <option value="120">Orthopaedic Surgeon</option>-->
+<!--                  <option value="299">Orthotics &amp; Prosthetics</option>-->
+<!--                  <option value="148">Osteopathic Physician</option>-->
+<!--                  <option value="122">Otolaryngology</option>-->
+<!--                  <option value="154">Pain Management</option>-->
+<!--                  <option value="123">Pathologist</option>-->
+<!--                  <option value="136">Pediatric Dentist</option>-->
+<!--                  <option value="124">Pediatrics</option>-->
+<!--                  <option value="137">Periodontics</option>-->
+<!--                  <option value="275">Pharmacist</option>-->
+<!--                  <option value="310">Pharmacology</option>-->
+<!--                  <option value="300">Pharmacy</option>-->
+<!--                  <option value="302">Phlebology</option>-->
+<!--                  <option value="161">Physiatrist</option>-->
+<!--                  <option value="125">Physical Therapy</option>-->
+<!--                  <option value="149">Physical Therapy Assistant</option>-->
+<!--                  <option value="160">Physician Assistant</option>-->
+<!--                  <option value="126">Physician: Other</option>-->
+<!--                  <option value="127">Plastic/Reconstructive Surgeon</option>-->
+<!--                  <option value="141">Podiatrist</option>-->
+<!--                  <option value="327">Podiatry Assistant</option>-->
+<!--                  <option value="333">Poetry Therapy</option>-->
+<!--                  <option value="201">Preferred hospital for emergency visits</option>-->
+<!--                  <option value="200">Preferred hospital for planned procedures</option>-->
+<!--                  <option value="267">Preventative Medicine</option>-->
+<!--                  <option value="290">Primary Care Physician</option>-->
+<!--                  <option value="138">Prosthodontics</option>-->
+<!--                  <option value="128">Psychiatrist</option>-->
+<!--                  <option value="257">Psychiatry &amp; Neurology</option>-->
+<!--                  <option value="272">Psychoanalyst</option>-->
+<!--                  <option value="193">Psychologist</option>-->
+<!--                  <option value="195">Psychoterapist</option>-->
+<!--                  <option value="151">Pulmonary</option>-->
+<!--                  <option value="266">Radiologic Technologist</option>-->
+<!--                  <option value="129">Radiology</option>-->
+<!--                  <option value="328">Recreation Therapy</option>-->
+<!--                  <option value="334">Reflexologist</option>-->
+<!--                  <option value="329">Rehabilitation Counselor</option>-->
+<!--                  <option value="330">Rehabilitation Medicine</option>-->
+<!--                  <option value="331">Rehabilitation Practitioner</option>-->
+<!--                  <option value="188">Residential Care</option>-->
+<!--                  <option value="259">Respiratory Therapist</option>-->
+<!--                  <option value="142">Rheumatology</option>-->
+<!--                  <option value="277">Sleep Medicine</option>-->
+<!--                  <option value="192">Social Worker</option>-->
+<!--                  <option value="276">Specialist</option>-->
+<!--                  <option value="294">Specialist/Technologist</option>-->
+<!--                  <option value="261">Speech/Language Pathologist</option>-->
+<!--                  <option value="189">Sports Medicine</option>-->
+<!--                  <option value="301">Supplier</option>-->
+<!--                  <option value="190">Support Services</option>-->
+<!--                  <option value="130">Surgeon</option>-->
+<!--                  <option value="252">Technician/Technologist</option>-->
+<!--                  <option value="152">Thoracic Surgeon</option>-->
+<!--                  <option value="274">Thoracic Surgery</option>-->
+<!--                  <option value="191">Toxicology</option>-->
+<!--                  <option value="332">Transplant Surgeon</option>-->
+<!--                  <option value="291">Urgent Care Physician</option>-->
+<!--                  <option value="131">Urology</option>-->
+<!--                  <option value="155">Vascular Surgeon</option>-->
+<!--                  <option value="253">Veterinarian</option>-->
+<!--                </select>-->
+
+              </div>
+              <div class="col-md-2 form-group">
+
+                <label class="heading-color">Telephone</label>
+                    {% render_field form.telephone class="form-control telephone" id="telephone" %}
+<!--                <input type="text" name="mptelephone"  id="mpteleid" class="form-control telephone"  />-->
+
+              </div>
+              <div class="col-md-6 form-group">
+
+                <label class="heading-color">Address</label>
+                {% render_field form.address class="form-control" id="address" %}
+                <!-- <input type="text" name="address" class="form-control"  /> -->
+<!--                <textarea name="address" class="form-control" id="mpaddressid" ></textarea>-->
+
+              </div>
+              <div class="col-md-3 form-group">
+
+                <label class="heading-color">Zipcode</label>
+                {% render_field form.zip_code class="form-control" id="zip_code" %}
+<!--                <input type="text" name="mpzipcode" class="form-control" id="mpzipid"  />-->
+
+              </div>
+
+              <!-- <div class="col-md-1">
+
+                <label class="heading-color">Add</label>
+
+                <a class="add-link" href="javascript:void(0)" onclick="addcontact()"  ><img src="images/add.jpg" /></a> </div> -->
+
+
+
+          </div>
+            <div class="row">
+              {% if provider_data %}
+              <div class="col-md-12 table-responsive">
+                  <table class="table table-bordered table-hover datashow">
+                    <thead>
+                      <tr>
+                        <th>date</th>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Role</th>
+                        <th>Telephone</th>
+                        <th>Address</th>
+                        <th>Zip</th>
+                        <th>Delete</th>
+                      </tr>
+                    </thead>
+                    <tbody id="rowadd">
+                    {% for row in provider_data %}
+                      <td>{{row.rec_date}}</td>
+                      <td>{{row.first_name}}</td>
+                      <td>{{row.last_name}}</td>
+                      <td>{{row.holders_relationship}}</td>
+                      <td>{{row.telephone}}</td>
+                      <td>{{row.address}}</td>
+                      <td>{{row.zip_code}}</td>
+                      <td><button type="button" class="btn btn-sm btn-danger" onclick="ajax_call({{row.id}})">Delete</button></td>
+                    {% endfor %}
+                    <tr>
+
+                    </tr>
+                    </tbody>
+                  </table>
+              </div>
+              {% endif %}
+        <div class="col-md-12 text-center mt-40">
+        <!-- <div class="add_remove_submit">
+            <button type="button" class="btn-submit" onclick="addmp()"  name="button">Submit and Proceed</button>
+           <input type="submit" class="btn-submit" value="Submit and Proceed" /> 
+            <input type="submit" class="btn-cancel" value="Cancel" />
+        </div> -->
+        <input type="hidden" value="0" id="DeleteRecordData"/>
+        <div class="col-md-12">
+          <button type="submit" class="btn-submit">Save</button>
+          <button type="button" class="btn-submit"><a style="color:white;" href="{% url 'patients:insurance_policy' idx %}">Next Screen</a></button>
+          <!-- <button type="button" onclick="nextFunction('insurance.php?member_id=<?php echo $db->encrypt_decrypt('encrypt', $memid); ?>')" class="btn-submit buttonNext">Next Screen</s> -->
+          <!-- <img id="addid" src="images/add.jpg" /> -->
+        </div>
+            </div>
+            </div>
+        <!--end of form-box-->
+        </div>
+      </form>
+
+      </div>
+
+</div>
+
+</div>
+</div>
+</div>
+
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.1.62/jquery.inputmask.bundle.js"></script>
+<script>
+  $('#searchDoctList').hide();
+  $('#searchDoctor').on('click', function(){
+      var check_box = $('#searchDoctor').is(':checked');
+      if(check_box == true){
+        $('#searchDoctList').show();
+        $('#mplastname').hide();
+      }
+      else{
+        $('#searchDoctList').hide();
+        $('#mplastname').show();
+      }
+  });
+
+  $('#searchDoctList').change(function(){
+      idx = $(this).val();
+      $.ajax({
+          type: 'get',
+          url: "/send-data",
+          headers: {'X-CSRFToken': getCookie('csrftoken')},
+          data: {'idx': idx},
+          dataType: 'json',
+          success: function(resp){
+            if (resp){
+                $('#mplastname').val(resp.last_name);
+                $('#mpfirstname').val(resp.first_name);
+                $('#address').val(resp.address);
+                $('#telephone').val(resp.telephone);
+                $('#zip_code').val(resp.zip_code);
+                console.log(resp);
+            }
+          }
+        });
+  });
+
+  var phones = [{ "mask": "(###) ###-####"}];
+    $('.telephone').inputmask({
+        mask: phones, 
+        greedy: false, 
+        definitions: { '#': { validator: "[0-9]", cardinality: 1}} });
+
+  function ajax_call(id){
+    $.ajax({
+          type: 'post',
+          url: "/delete-provider",
+          headers: {'X-CSRFToken': getCookie('csrftoken')},
+          data: {'user_idx': id},
+          dataType: 'json',
+          success: function(resp){
+            if (resp.success){
+                window.location = window.location.href;
+            }
+          }
+        });
+    }
+    function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
+
+{% endblock %}

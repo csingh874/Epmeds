@@ -1,0 +1,37 @@
+[
+  {
+    "model": "patients.doctorrole",
+    "pk": 1,
+    "fields": {
+      "role_name": "Acupuncturist"
+    }
+  },
+  {
+    "model": "patients.doctorrole",
+    "pk": 2,
+    "fields": {
+      "role_name": "Addiction Counselor"
+    }
+  },
+  {
+    "model": "patients.doctorrole",
+    "pk": 3,
+    "fields": {
+      "role_name": "Addiction Medicine"
+    }
+  },
+  {
+    "model": "patients.doctorrole",
+    "pk": 4,
+    "fields": {
+      "role_name": "Adolescent Medicine"
+    }
+  },
+  {
+    "model": "patients.doctorrole",
+    "pk": 5,
+    "fields": {
+      "role_name": "Allergy Immunology"
+    }
+  }
+]

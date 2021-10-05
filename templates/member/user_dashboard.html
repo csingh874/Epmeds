@@ -1,0 +1,51 @@
+{% extends "member/base_member.html" %}
+{% block content %}
+{% load static %}
+
+<div class="fix-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="main_sec">
+                    <div class="welcome_user">
+                        <h2>Welcome {{user.username|title}}</h2>
+                    </div>
+                    {% if patient_data %}
+                    <div class="main_table table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Birth Date</th>
+                                    <th scope="col">Sex</th>
+                                    <th scope="col">Review Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for patient in patient_data %}
+                                <tr>
+                                    <td scope="row">{{ forloop.counter }} </td>
+                                    <td>{{patient.first_name}}</td>
+                                    <td>{{patient.dob}}</td>
+                                    <td>{{patient.sex}}</td>
+                                    <td> <a href="{% url 'patients:edit_member' patient.idx %}">Not Completed- Continue</a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                        <h1>No Data</h1>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function logoutcon() {
+        return confirm("Do You Really Want To Logout ?");
+    }
+    </script>
+{% endblock %}

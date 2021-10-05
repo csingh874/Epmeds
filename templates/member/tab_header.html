@@ -1,0 +1,57 @@
+{# HTML5 declaration #}
+{% load static %}
+<fieldset style="padding:0; margin:0;">
+    <legend class="dlgtitle"><span style="font-weight: bold; padding-right: 5px;">Member Review Progress</span></legend>
+    <div class="table-responsive">
+        <table style="width: 100%" class="tab_table table-bordered">
+            <tbody>
+              <tr>
+                <td valign="TOP" align="CENTER" class="unselected"><a {% if idx %} href="{% url 'patients:edit_member' idx %}" {% endif %} class="buttonlink"> <img src="/static/provider/images/Registration3_32_w.jpg" alt="Demographic Information" border="0"></a><br>
+                  <span>Demographics</span></td>
+                <td valign="TOP" align="CENTER" class="unselected" ><a {% if idx %} href="{% url 'patients:demographics_sec' idx %}" {% endif %} class="buttonlink"> <img src="/static/provider/images/caduceus_32_w.jpg" alt="Medical Contacts" border="0"> </a> <br>
+                  <span>Employment</span></td>
+                <td valign="TOP" align="CENTER" class="unselected" ><a {% if idx %} href="{% url 'patients:advance_directive' idx %}"  {% endif %} class="buttonlink"><img src="/static/provider/images/caduceus_32_w.jpg" alt="Medical Contacts" border="0"> </a> <br>
+                  <span>Advance Directives</span></td>
+                <td valign="TOP" align="CENTER" class="unselected" ><a {% if idx %} href="{% url 'patients:emergency_contact' idx %}"  {% endif %} class="buttonlink"><img src="/static/provider/images/caduceus_32_w.jpg" alt="Medical Contacts" border="0"> </a> <br>
+                  <span>Emergency Contacts</span></td>
+                <td valign="TOP" align="CENTER" class="unselected"><a {% if idx %} href="{% url 'patients:medical_provider' idx %}" {% endif %} class="buttonlink"> <img src="/static/provider/images/caduceus_32_w.jpg" alt="Medical Contacts" border="0"> </a> <br>
+                  <span>Medical Providers</span></td>
+                <td valign="TOP" align="CENTER" class="unselected"><a {% if idx %} href="{% url 'patients:insurance_policy' idx %}" {% endif %} class="buttonlink"> <img src="/static/provider/images/Insurance_32_w.jpg" alt="Insurance Information" border="0"> </a> <br>
+                  <span>Insurance</span></td>
+                <td valign="TOP" align="CENTER" class="unselected"><a {% if idx %} href="{% url 'patients:allergy' idx %}" {% endif %} class="buttonlink"> <img src="/static/provider/images/Allergies_32_w.jpg" alt="Allergy List" border="0"> </a> <br>
+                  <span>Allergies</span></td>
+                <td valign="TOP" align="CENTER" class="unselected"><a {% if idx %} href="{% url 'patients:medication_prescribed' idx %}" {% endif %} class="buttonlink"> <img src="/static/provider/images/Medications_32_w.jpg" alt="Medication List" border="0"> </a> <br>
+                  <span>Medications(Prescribed) </span></td>
+                <td valign="TOP" align="CENTER" class="unselected"><a {% if idx %} href="{% url 'patients:not_to_prescribe_medication' idx %}" {% endif %} class="buttonlink"> <img src="/static/provider/images/Medications_32_w.jpg" alt="Medication List" border="0"> </a> <br>
+                      <span>Medications(Not To Be Prescribed) </span></td>
+                </tr>
+                <tr>
+                <td valign="TOP" align="CENTER" class="unselected"><a {% if idx %} href="{% url 'patients:lab' idx %}" {% endif %} class="buttonlink"> <img src="/static/provider/images/Chief_Complaint_32_w.jpg" alt="Illnesses" border="0"></a><br>
+                  <span>Laboratory</span></td>
+                <td valign="TOP" align="CENTER" class="unselected"><a {% if idx %} href="{% url 'patients:diagnosis' idx %}" {% endif %} class="buttonlink"> <img src="/static/provider/images/Chief_Complaint_32_w.jpg" alt="Illnesses" border="0"></a><br>
+                  <span>Diagnosis</span></td>
+                <td valign="TOP" align="CENTER" class="unselected"><a {% if idx %} href="{% url 'patients:vaccination_procedure' idx %}" {% endif %} class="buttonlink"> <img src="/static/provider/images/Chief_Complaint_32_w.jpg" alt="Illnesses" border="0"></a><br>
+                  <span>Procedures</span></td>
+                <td valign="TOP" align="CENTER" class="unselected"><a {% if idx %} href="{% url 'patients:family_history' idx %}" {% endif %} class="buttonlink"> <img src="/static/provider/images/Family_History_Mixed_32_w.jpg" alt="Illnesses" border="0"></a><br>
+                  <span>Family History</span></td>
+                <td valign="TOP" align="CENTER" class="unselected"><a {% if idx %} href="{% url 'patients:social_history' idx %}" {% endif %} class="buttonlink"> <img src="/static/provider/images/Social_History_32_w.jpg" alt="Illnesses" border="0"></a><br>
+                  <span>Social History</span></td>
+                <td valign="TOP" align="CENTER" class="unselected"><a {% if idx %} href="{% url 'patients:medical_note' idx %}" {% endif %} class="buttonlink"> <img src="/static/provider/images/medical_notes.png" alt="Illnesses" border="0"></a><br>
+                  <span>Medical Notes</span></td>
+                <td valign="TOP" align="CENTER" class="unselected" >
+                  <a {% if idx %} href="{% url 'patients:mar' idx %}" {% endif %} class="buttonlink"> <img src="/static/provider/images/Chief_Complaint_32_w.jpg" alt="Illnesses" border="0"></a><br>
+                  <span>MAR</span>
+                </td>
+                <td valign="TOP" align="CENTER" class="unselected"><a {% if idx %} href="{% url 'patients:communication_log' idx %}" {% endif %} class="buttonlink"> <img src="/static/provider/images/Chief_Complaint_32_w.jpg" alt="Illnesses" border="0"></a><br>
+                  <span>Communication Log</span></td>
+                <td valign="TOP" align="CENTER" class="unselected"><a {% if idx %} href="{% url 'patients:drug_dictionary' idx %}" {% endif %} class="buttonlink"> <img src="/static/provider/images/Chief_Complaint_32_w.jpg" alt="Illnesses" border="0"></a><br>
+                  <span>Drug Dictionary</span></td>
+                <td valign="TOP" align="CENTER" class="unselected"><a {% if idx %} href="{% url 'patients:vendor_dictionary' idx %}" {% endif %} class="buttonlink"> <img src="/static/provider/images/Chief_Complaint_32_w.jpg" alt="Illnesses" border="0"></a><br>
+                  <span>Vendor Dictionary</span></td>
+                <!-- <td valign="TOP" align="CENTER" class="unselected"><a href="javascript:void(0)" class="buttonlink"> <img src="/static/provider/images/Ok_32_w.jpg" alt="Return to Member Summary" border="0"> </a> <br>
+                  <span>Finish</span></td> -->
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</fieldset>

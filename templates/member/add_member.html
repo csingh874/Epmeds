@@ -1,0 +1,453 @@
+{% extends "member/base_member.html" %}
+{% block content %}
+{% load static %}
+{% load widget_tweaks %}
+<section class="form-sec">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="parent_of_form">
+            {% include 'member/tab_header.html' %}
+            <div class="form_body">
+              <form method="post"  id="add_member_patient">
+                {% csrf_token %}
+                <div class="form-box registration-form mt-20">
+                  <p class="form-head"><img src="/static/provider/images/registration.png"  /><strong>Demographics</strong></p>
+                  <p><img src="/static/provider/images/edit.png" class="edit-img" /><a href="#">Click here to autofill the main fields below with your default account data.</a></p>
+                  <p><strong>Note:</strong> As the account owner, we will continue to send secure communications regarding all members of your account to the email address provided when you set up your account. To change your account settings, <a href="#">please click here.</a></p>
+                  <p>Registration information specific to each member you add to your account will only appear in association with their individual patient profiles.</p>
+                  <div class="row mt-20">
+                    <div class="col-md-12">
+                      <div class="form-group col-md-4">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label"><span>#</span> Account</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.account name="account" readonly=True class="form-control" %}
+<!--                          <input maxlength="100" type="text" name="acount" required="required" class="form-control" >-->
+                        </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4"></div>
+                      <div class="col-md-4"></div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group col-md-4">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label"><span>*</span> First Name</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.first_name name="firstname" required="required" class="form-control" %}
+<!--                          <input maxlength="100" type="text" name="firstname" required="required" class="form-control" >-->
+                        </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-4">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label">Middle Name</label>
+                        </div>
+                        <div class="col-md-8">
+                        {% render_field form.middle_name name="middlename" class="form-control" %}
+<!--                          <input type="text" name="middlename" class="form-control" >-->
+                        </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-4">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label"><span>*</span> Last Name</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.last_name name="lastname" required="required" class="form-control" %}
+                          {% if form.last_name.errors %}
+                          <small>{{form.last_name.errors}}</small>
+                          {% endif %}
+<!--                          <input type="text" name="lastname" required="required" class="form-control">-->
+                        </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-4" >
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label"> Address 1</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.address name="address" class="form-control" %}
+                          {% if form.address.errors %}
+                          <small>{{form.address.errors}}</small>
+                          {% endif %}
+<!--                          <input type="text" name="address" class="form-control" >-->
+                        </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-4" >
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label"> Address 2</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.address_2 name="address2" class="form-control" %}
+                          {% if form.address_2.errors %}
+                          <small>{{form.address_2.errors}}</small>
+                          {% endif %}
+<!--                          <input type="text" name="address2" class="form-control" >-->
+                        </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-4" >
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label"> City</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.city name="city" class="form-control" %}
+                          {% if form.city.errors %}
+                          <small class="text-danger fw-bolder">{{form.city.errors}}</small>
+                          {% endif %}
+<!--                          <input type="text" name="city" class="form-control" >-->
+                        </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-4" >
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label"> State/Province</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.state name="state" class="form-control" %}
+                          {% if form.state.errors %}
+                          <small>{{form.state.error}}</small>
+                          {% endif %}
+<!--                          <input type="text" name="state"  class="form-control" >-->
+                        </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-4" >
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label"> ZIP Code</label>
+                        </div>
+                        <div class="col-md-8">
+                              {% render_field form.zip_code name="zip" class="form-control" %}
+                              {% if form.zip_code.errors %}
+                                 <small>{{form.zip_code.errors}}</small>
+                              {% endif %}
+<!--                          <input type="text" name="zip" class="form-control" >-->
+                        </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-4" >
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label"> Country</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.country name="country" class="form-control" %}
+                          {% if form.country.errors %}
+                          <small>{{form.country.error}}</small>
+                          {% endif %}
+<!--                          <input type="text" name="country" class="form-control" >-->
+                        </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-4">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label"><span>*</span> Sex</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.sex name='sex' class="form-control" %}
+                          {% if form.sex.errors %}
+                          <small>{{form.sex.errors}}</small>
+                          {% endif %}
+<!--                          <select name="sex" class="form-control" required>-->
+<!--                            <option value="" selected="">Please select</option>-->
+<!--                            <option value="M">Male</option>-->
+<!--                            <option value="F">Female</option>-->
+<!--                            <option value="U">Unknown</option>-->
+<!--                          </select>-->
+                        </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-4" >
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label"> SSN</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.ssn name='ssn' class="form-control" %}
+                          {% if form.ssn.errors %}
+                          <small>{{form.ssn.errors}}</small>
+                          {% endif %}
+<!--                          <input type="text" name="ssn"  class="form-control" placeholder="000-00-000" >-->
+                        </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-4" >
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label"><span>*</span> Date of Birth</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.dob name='dob' type='date' class="form-control" %}
+                          {% if form.dob.errors %}
+                          <small class="text-danger fw-bolder">{{form.dob.errors}}</small>
+                          {% endif %}
+<!--                          <input type="date" name="dob" required="required" class="form-control" placeholder="000-00-000" >-->
+                        </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-4" >
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label"><span>*</span> Marital Status</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.marital_status name='maritalstatus' class="form-control" %}
+                          {% if form.marital_status.errors %}
+                          <small>{{form.marital_status.error}}</small>
+                          {% endif %}
+<!--                          <select name="maritalstatus" class="form-control">-->
+<!--                            <option>Please Select</option>-->
+<!--                            <option value="S">Single</option>-->
+<!--                            <option value="M">Married</option>-->
+<!--                            <option value="W">Widowed</option>-->
+<!--                            <option value="D">Divorced</option>-->
+<!--                            <option value="L">Legally Separated</option>-->
+<!--                            <option value="C">Common Law</option>-->
+<!--                          </select>-->
+                        </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-4" >
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label"> Home Phone</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.home_phone name='homephone' class="form-control" %}
+                          {% if form.home_phone.errors %}
+                          <small>{{form.home_phone.errors}}</small>
+                          {% endif %}
+<!--                          <input name="homephone" maxlength="100" type="text"  class="form-control" >-->
+                        </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-4" >
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label"> Cell phone</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.cell_phone name='cellphone' class="form-control" %}
+                          {% if form.cell_phone.errors %}
+                          <small>{{form.cell_phone.errors}}</small>
+                          {% endif %}
+<!--                          <input type="text" name="cellphone" class="form-control" >-->
+                        </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-4" >
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label"> Email Address</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.email name='email' type='email' class="form-control" %}
+                          {% if form.email.errors %}
+                          <small>{{form.email.errors}}</small>
+                          {% endif %}
+<!--                          <input type="text" name="email" class="form-control" >-->
+                        </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-4" >
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label">Race</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.race name='race' class="form-control" %}
+                          {% if form.race.errors %}
+                          <small>{{form.race.errors}}</small>
+                          {% endif %}
+<!--                          <select name="race" class="form-control">-->
+<!--                            <option>Please Select</option>-->
+<!--                            <option value="R1">White</option>-->
+<!--                            <option value="R2">African American</option>-->
+<!--                            <option value="R3">Asian</option>-->
+<!--                            <option value="R4">American Indian/Alaskan</option>-->
+<!--                            <option value="R5">Hawaiian/Pacific Islander</option>-->
+<!--                            <option value="R6">Other</option>-->
+<!--                          </select>-->
+                        </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-4" >
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label">Ethnicity</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.ethnicity name='ethnicity' class="form-control" %}
+                          {% if form.ethnicity.errors %}
+                          <small>{{form.ethnicity.errors}}</small>
+                          {% endif %}
+<!--                          <select name="ethnicity" class="form-control">-->
+<!--                            <option></option>-->
+<!--                            <option value="Y">Hispanic or Latino</option>-->
+<!--                            <option value="N">Not Hispanic or Latino</option>-->
+<!--                          </select>-->
+                        </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-4">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label"> Primary Language</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.primary_language name='planguage' class="form-control" %}
+                          {% if form.primary_language.errors %}
+                          <small>{{form.primary_language.errors}}</small>
+                          {% endif %}
+<!--                          <input name="planguage" type="text" class="form-control" >-->
+                        </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-4" >
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label"> Height</label>
+                        </div>
+                        <div class="col-md-6">
+                          {% render_field form.height name='height' class="form-control" %}
+                          {% if form.height.errors %}
+                          <small>{{form.height.errors}}</small>
+                          {% endif %}
+<!--                          <input type="text" name="height" class="form-control" >-->
+                        </div>
+                        <div class="col-md-2">
+                          <label class="control-label">in</label>
+                        </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-4" >
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label"> Current Weight</label>
+                        </div>
+                        <div class="col-md-6">
+                          {% render_field form.current_weight name='cweight' class="form-control" %}
+                          {% if form.current_weight.errors %}
+                          <small>{{form.current_weight.errors}}</small>
+                          {% endif %}
+<!--                          <input type="text" name="cweight" class="form-control" >-->
+                        </div>
+                        <div class="col-md-2">
+                          <label class="control-label"> lbs</label>
+                        </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-4" >
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label">Blood Type</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.blood_type name='btype' class="form-control" %}
+                          {% if form.blood_type.errors %}
+                          <small>{{form.blood_type.errors}}</small>
+                          {% endif %}
+<!--                          <select name="btype" class="form-control">-->
+<!--                            <option></option>-->
+<!--                            <option value="A neg" style="background-Color: #AB0000; color:#FBFFFC">A neg</option>-->
+<!--                            <option value="A pos">A pos</option>-->
+<!--                            <option value="AB neg" style="background-Color: #AB0000; color:#FBFFFC">AB neg</option>-->
+<!--                            <option value="AB pos">AB pos</option>-->
+<!--                            <option value="B neg" style="background-Color: #AB0000; color:#FBFFFC">B neg</option>-->
+<!--                            <option value="B pos">B pos</option>-->
+<!--                            <option value="O neg" style="background-Color: #AB0000; color:#FBFFFC">O neg</option>-->
+<!--                            <option value="O pos">O pos</option>-->
+<!--                          </select>-->
+                        </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-4" >
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label">Spouse Name</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.spouse_name name='spousename' class="form-control" %}
+                          {% if form.spouse_name.errors %}
+                          <small>{{form.spouse_name.errors}}</small>
+                          {% endif %}
+<!--                          <input name="spousename" type="text" class="form-control" />-->
+                        </div>
+                      </div>
+                      </div>
+                      <div class="form-group col-md-4" >
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label">Spouse Birthday</label>
+                        </div>
+                        <div class="col-md-8">
+                          {% render_field form.spouse_dob name='spousedob' type='date' class="form-control" %}
+                          {% if form.spouse_dob.errors %}
+                          <small>{{form.spouse_dob.errors}}</small>
+                          {% endif %}
+<!--                          <input name="spousedob" type="date" class="form-control" />-->
+                        </div>
+                        </div>
+                      </div>
+                      <div class="col-md-12 text-center mt-40">
+                        <div class="add_remove_submit">
+                          <input type="submit" name="submit" class="btn-submit" value="Submit and Proceed" />
+                          {% if idx %}
+                          <button class="btn-submit buttonNext" type="button"><a style="color: white;" href="{% url 'patients:demographics_sec' idx %}">Next Screen</a></button>
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+<script>
+    $("input[name='homephone']").each(function(){
+      $(this).on("change keyup paste", function (e) {
+        var output,
+          $this = $(this),
+          input = $this.val();
+        if(e.keyCode != 8) {
+          input = input.replace(/[^0-9]/g, '');
+          var area = input.substr(0, 3);
+          var pre = input.substr(3, 3);
+          var tel = input.substr(6, 4);
+          if (area.length < 3) {
+            output = "(" + area;
+          } else if (area.length == 3 && pre.length < 3) {
+            output = "(" + area + ")" + " " + pre;
+          } else if (area.length == 3 && pre.length == 3) {
+            output = "(" + area + ")" + " " + pre + "-" + tel;
+          }
+          $this.val(output);
+        }
+      });
+    });
+</script>
+<script>
+
+</script>
+{% endblock %}

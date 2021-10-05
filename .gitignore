@@ -1,0 +1,4 @@
+ENV
+cutom/__pycache__
+doctors/__pycache__
+patients/__pycache__

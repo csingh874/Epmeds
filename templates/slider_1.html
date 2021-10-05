@@ -1,0 +1,48 @@
+{% load static %}
+<!-- banner -->
+<!-- Slider-starts-Here -->
+<script src="{% static 'js/responsiveslides.min.js' %}"></script>
+<script>
+$(function() {
+    $("#slider").responsiveSlides({
+        auto: true,
+        nav: false,
+        speed: 500,
+        namespace: "callbacks",
+        pager: true,
+    });
+});
+</script>
+<div class="slider">
+    <div class="callbacks_container">
+        <ul class="rslides" id="slider">
+
+            <div class="slid banner1">
+                <div class="caption">
+                    <h3>We work for your health to be <br> changed as We work to safe<br> guard your health</h3>
+                    <p>We Provide our members an access to a health <br>
+                        care prevention systems </p>
+                </div>
+            </div>
+
+
+            <div class="slid banner2">
+                <div class="caption">
+                    <h3>We work for your health to be <br> changed as We work to safe <br>guard your health</h3>
+                    <p>We Provide our members an access to a health <br>
+                        care prevention systems </p>
+                </div>
+            </div>
+
+
+            <div class="slid banner3">
+                <div class="caption">
+                    <h3>We work for your health to be <br> changed as We work to safe<br> guard your health</h3>
+                    <p>We Provide our members an access to a health <br>
+                        care prevention systems </p>
+                </div>
+            </div>
+
+        </ul>
+    </div>
+</div>
