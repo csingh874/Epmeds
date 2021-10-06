@@ -294,7 +294,7 @@
         $('#dob').val(data['dob']);
           $.ajax({
               type: 'post',
-              url: "{% url 'get_patient_data' %}",
+              url: "{% url 'doctors:get_patient_data' %}",
               headers: {'X-CSRFToken': getCookie('csrftoken')},
               data: {'user_idx': data['idx'] },
               dataType: 'json',
