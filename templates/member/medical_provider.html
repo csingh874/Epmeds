@@ -352,7 +352,7 @@
       idx = $(this).val();
       $.ajax({
           type: 'get',
-          url: "/send-data",
+          url: "{% url 'patients:get_user_data' %}",
           headers: {'X-CSRFToken': getCookie('csrftoken')},
           data: {'idx': idx},
           dataType: 'json',
@@ -363,7 +363,6 @@
                 $('#address').val(resp.address);
                 $('#telephone').val(resp.telephone);
                 $('#zip_code').val(resp.zip_code);
-                console.log(resp);
             }
           }
         });
@@ -378,7 +377,7 @@
   function ajax_call(id){
     $.ajax({
           type: 'post',
-          url: "/delete-provider",
+          url: "{% url 'patients:delete_provider' %}",
           headers: {'X-CSRFToken': getCookie('csrftoken')},
           data: {'user_idx': id},
           dataType: 'json',

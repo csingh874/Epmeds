@@ -1,12 +1,13 @@
 from django.contrib import admin
-from .models import *
+# from .models import *
+from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
 # Register your models here.
 
 
-@admin.register(CustomUser)
+@admin.register(get_user_model())
 class CustomUserForm(UserAdmin):
-    model = CustomUser
+    model = get_user_model()
 
     list_display = ("id", "username",)
     readonly_fields = ("date_joined", "last_login")

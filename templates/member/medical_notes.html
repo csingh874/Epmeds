@@ -365,7 +365,7 @@ console.log(`${diff.hours()} Hour ${diff.minutes()} minutes`);
     function ajax_call(id){
          $.ajax({
               type: 'post',
-              url: "/delete-medical-note",
+              url: "{% url 'patients:delete_medical_note' %}",
               headers: {'X-CSRFToken': getCookie('csrftoken')},
               data: {'user_idx': id},
               dataType: 'json',

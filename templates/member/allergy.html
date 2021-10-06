@@ -130,7 +130,7 @@
     function ajax_call(id){
          $.ajax({
               type: 'post',
-              url: "/allergy-delete",
+              url: "{% url 'patients:delete_allergy' %}",
               headers: {'X-CSRFToken': getCookie('csrftoken')},
               data: {'user_idx': id },
               dataType: 'json',

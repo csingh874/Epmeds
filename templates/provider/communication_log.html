@@ -1,21 +1,18 @@
 {% extends "provider/base_provider.html" %}
 {% block content %}
 {% load static %}
+{% load widget_tweaks %}
 <div class="fix-section">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-10 col-md-offset-1">
+            <div class="col-md-12">
                 <div class="parent_of_form">
                     <div class="main_sec">
                         <div class="form-box registration-form mt-40">
-                            <p class="form-head"><img src="/static/provider/images/registration.png"/> <strong>Communication
+                            <p class="form-head"><img src="{% static 'provider/images/registration.png' %}"/> <strong>Communication
                                     Log</strong>
                             </p>
-                            <div>
-                                <div class="navbar-form navbar-right">
-                                    <label class="bolder">Search:</label>
-                                    <input type="text" name="search" id="search" onkeyup="myFunction();">
-                                </div>
+                        <div>
                                 <table class="table table-striped" id="mytable">
                                     <thead>
                                         <tr>

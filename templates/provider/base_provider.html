@@ -22,7 +22,7 @@
                 <div class="col-md-9">
                     <ul class="main-tab">
                         <li><a href="/"><img src="/static/provider/images/home.png" /><span>Home</span></a></li>
-                        <li><a href="/doctor_dictionary"><img src="/static/provider/images/account.png" /><span>Doctor
+                        <li><a href="{% url 'doctors:doctor_dictionary' %}"><img src="/static/provider/images/account.png" /><span>Doctor
                                     Dictionary</span></a></li>
                         <!-- <li><a href="#"><img src="images/member.png" /><span>Member Summary</span></a></li> -->
                         
@@ -37,7 +37,7 @@
                                     User</span></a></li>
 
                         <!-- <li><a href="#"><img src="../images/mailbox.png" /><span>Mailbox</span></a></li> -->
-                        <li><a href="/communication_log"><img src="/static/provider/images/mailbox.png" /><span>Communication
+                        <li><a href="{% url 'doctors:communication_log' %}"><img src="/static/provider/images/mailbox.png" /><span>Communication
                                     Log</span></a>
                         </li>
                         <li>

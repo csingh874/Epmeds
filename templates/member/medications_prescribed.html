@@ -242,7 +242,7 @@ $('#dr_id').hide();
     function ajax_call(id){
          $.ajax({
               type: 'post',
-              url: "/delete-prescribe-med",
+              url: "{% url 'patients:delete_prescribe_med' %}",
               headers: {'X-CSRFToken': getCookie('csrftoken')},
               data: {'user_idx': id},
               dataType: 'json',

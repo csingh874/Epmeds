@@ -147,7 +147,7 @@
     function ajax_call(id){
          $.ajax({
               type: 'post',
-              url: "/insurance-delete",
+              url: "{% url 'patients:delete_insurance' %}",
               headers: {'X-CSRFToken': getCookie('csrftoken')},
               data: {'user_idx': id },
               dataType: 'json',

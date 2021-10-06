@@ -24,7 +24,7 @@
                 <div class="col-md-9">
                     <ul class="main-tab">
                         <li><a href="/"><img src="{% static 'provider/images/home.png' %}" /><span>Home</span></a></li>
-                        <li><a href="/member-dashboard"><img src="{% static 'provider/images/account.png' %}"/><span>Account Summary</span></a>
+                        <li><a href="{% url 'patients:member_dashboard' %}"><img src="{% static 'provider/images/account.png' %}"/><span>Account Summary</span></a>
                         </li>
                         <li><a href="{% url 'patients:add_member' %}"><img src="{% static 'provider/images/member.png' %}"/><span>Add Member</span></a></li>
                         <li><a href="#"><img src="{% static 'provider/images/mailbox.png' %}"/><span>Mailbox</span></a></li>
