@@ -69,5 +69,6 @@ def chat_view(request, idx):
 def get_patient_data(request):
     if request.method == "POST":
         idx = request.POST.get('user_idx')
-        emp = EmergencyContact.objects.values("auth_rep", "first_name", "last_name", "email").filter(member_id__idx=idx)[0]
+        emp = EmergencyContact.objects.values("auth_rep", "first_name", "last_name", "email").filter(member_id__idx=idx)
+        emp = {'first_name': "", "last_name": ""} if not emp else emp[0]
         return JsonResponse({'success': emp})
