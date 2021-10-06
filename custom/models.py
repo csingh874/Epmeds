@@ -1,11 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth import get_user_model
 
 
 def get_default_id():
-    pass
-    # data = CustomUser.objects.order_by('-id')
-    # return data[0].id + 1 if data else 1
+    data = get_user_model().objects.order_by('-id')
+    return data[0].id + 1 if data else 1
 
 
 # Create your models here.
