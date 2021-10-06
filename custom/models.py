@@ -3,8 +3,9 @@ from django.contrib.auth.models import AbstractUser
 
 
 def get_default_id():
-    data = CustomUser.objects.order_by('-id')
-    return data[0].id + 1 if data else 1
+    pass
+    # data = CustomUser.objects.order_by('-id')
+    # return data[0].id + 1 if data else 1
 
 
 # Create your models here.
